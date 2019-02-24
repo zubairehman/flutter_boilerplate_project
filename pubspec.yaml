@@ -61,6 +61,5 @@ flutter:
     - asset: assets/fonts/Product-Sans-Bold.ttf
       weight: 700
 
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
