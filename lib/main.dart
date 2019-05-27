@@ -1,13 +1,18 @@
+import 'package:boilerplate/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_app/constants/app_theme.dart';
-import 'package:todo_app/constants/strings_const.dart';
-import 'package:todo_app/routes.dart';
-import 'package:todo_app/ui/splash/splash.dart';
+
+import 'constants/app_theme.dart';
+import 'constants/strings_const.dart';
+import 'ui/splash/splash.dart';
 
 void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+  ]).then((_) {
     runApp(MyApp());
   });
 }

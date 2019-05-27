@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:boilerplate/constants/preferences_const.dart';
+import 'package:boilerplate/routes.dart';
+import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/constants/preferences_const.dart';
-import 'package:todo_app/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,7 +12,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -21,14 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Center(
-        child: Text('Splash Screen'),
-      ),
+      child: Center(child: AppIconWidget(image: 'assets/icons/ic_appicon.png')),
     );
   }
 
   startTimer() {
-    var _duration = Duration(milliseconds: 2000);
+    var _duration = Duration(milliseconds: 5000);
     return Timer(_duration, navigate);
   }
 
@@ -36,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
     if (preferences.getBool(Preferences.is_logged_in) ?? false) {
-      Navigator.of(context).pushReplacementNamed(Routes.home);
+      Navigator.of(context).pushReplacementNamed(Routes.login);
     } else {
       Navigator.of(context).pushReplacementNamed(Routes.login);
     }

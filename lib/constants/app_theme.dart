@@ -27,15 +27,15 @@ final ThemeData themeData = new ThemeData(
     fontFamily: 'ProductSans',
     brightness: Brightness.light,
     primarySwatch: MaterialColor(
-        TodoAppColors.green[500].value, TodoAppColors.green),
-    primaryColor: TodoAppColors.green[500],
+        AppColors.green[500].value, AppColors.green),
+    primaryColor: AppColors.green[500],
     primaryColorBrightness: Brightness.light,
-    accentColor: TodoAppColors.green[500],
+    accentColor: AppColors.green[500],
     accentColorBrightness: Brightness.light
 );
 
-class TodoAppColors {
-  TodoAppColors._(); // this basically makes it so you can instantiate this class
+class AppColors {
+  AppColors._(); // this basically makes it so you can instantiate this class
 
   static const Map<int, Color> green = const <int, Color>{
     50: const Color(0xFFf2f8ef),
