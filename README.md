@@ -1,16 +1,60 @@
-# todo_app
+# Boilerplate Project
 
-Organize and prfioritize all your tasks and projects so you can live more stress less.
+A flutter boilerplate project created using MobX and Provider
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Folder Structure
+Here is the core folder structure which flutter provides.
 
-A few resources to get you started if this is your first Flutter project:
+```
+flutter-app/
+|- android
+|- build
+|- ios
+|- lib
+|- test
+```
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+Here is the folder structure we have been using in this project
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```
+lib/
+|- main.dart
+|- routes.dart
+|- ui/
+|- util/
+|- widgets/
+|- data/
+|- services/
+```
+
+Now, lets dive into the lib folder which has the main code for the application.
+
+1- screens — Contains the screens of your application. All files from here get imported into routes.dart.
+2- util — Contains the utilities/common functions of your application.
+3- widgets — Contains the common widgets for your applications. For example, Button , TextField etc.
+4- data - Contains the local database.
+5- services - Contains all network logic of your application.
+6- routes.dart — Contains the routes of your application and imports all screens.
+
+### UI
+Contains the screens of your application. All files from here get imported into `routes.dart`
+
+```
+ui/
+|- login
+   |- auth.dart
+   |- index.dart
+   |- widgets
+      |- loginForm
+        |- login_form.dart
+      |- loginButton
+        |- login_button.dart
+```
+
+### Util
+
+
+For help getting started with Flutter, view our online
+[documentation](https://flutter.io/).
