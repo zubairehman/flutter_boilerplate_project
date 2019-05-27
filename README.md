@@ -20,23 +20,24 @@ Here is the folder structure we have been using in this project
 
 ```
 lib/
+|- constants/
+|- data/
+|- stores/
+|- ui/
+|- utils/
+|- widgets/
 |- main.dart
 |- routes.dart
-|- ui/
-|- util/
-|- widgets/
-|- data/
-|- services/
 ```
 
 Now, lets dive into the lib folder which has the main code for the application.
 
-1- screens — Contains the screens of your application. All files from here get imported into routes.dart.
+1- ui — Contains the ui of your application. All files from here get imported into routes.dart.
 2- util — Contains the utilities/common functions of your application.
 3- widgets — Contains the common widgets for your applications. For example, Button , TextField etc.
-4- data - Contains the local database.
-5- services - Contains all network logic of your application.
-6- routes.dart — Contains the routes of your application and imports all screens.
+4- data - Contains the data layer of your application which includes local, network and shared pref packages.
+5- stores - Contains stores for state-management of your application.
+6- routes.dart — Contains the routes of your application.
 
 ### UI
 Contains the screens of your application. All files from here get imported into `routes.dart`
@@ -55,6 +56,3 @@ ui/
 
 ### Util
 
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
