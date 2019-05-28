@@ -1,5 +1,5 @@
-import 'package:boilerplate/constants/preferences_const.dart';
-import 'package:boilerplate/constants/strings_const.dart';
+import 'package:boilerplate/constants/preferences.dart';
+import 'package:boilerplate/constants/strings.dart';
 import 'package:boilerplate/stores/form_store.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:boilerplate/widgets/empty_app_bar.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'constants/app_theme.dart';
-import 'constants/strings_const.dart';
+import 'constants/strings.dart';
 import 'ui/splash/splash.dart';
 
 void main() {
