@@ -104,5 +104,91 @@ ui/
       |- login_button.dart
 ```
 
-### Util
+### Utils
 
+Contains the common file(s) and utilities used in a project. The folder structure is as follows: 
+
+```
+utils/
+|- encryption
+   |- xxtea.dart
+|- date
+  |- date_time.dart
+```
+
+### Widgets
+
+Contains the common widgets that are shared across multiple screens. For example, Button, TextField etc.
+
+```
+widgets/
+|- app_icon_widget.dart
+|- empty_app_bar.dart
+|- progress_indicator.dart
+```
+
+### Routes
+
+This file contains all the routes for your application.
+
+```
+import 'package:flutter/material.dart';
+
+import 'ui/home/home.dart';
+import 'ui/login/login.dart';
+import 'ui/splash/splash.dart';
+
+class Routes {
+  Routes._();
+
+  //static variables
+  static const String splash = '/splash';
+  static const String login = '/login';
+  static const String home = '/home';
+
+  static final routes = <String, WidgetBuilder>{
+    splash: (BuildContext context) => SplashScreen(),
+    login: (BuildContext context) => LoginScreen(),
+    home: (BuildContext context) => HomeScreen(),
+  };
+}
+```
+
+### Main
+
+This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
+
+```
+import 'package:boilerplate/routes.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'constants/app_theme.dart';
+import 'constants/strings.dart';
+import 'ui/splash/splash.dart';
+
+void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+  ]).then((_) {
+    runApp(MyApp());
+  });
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: Strings.appName,
+      theme: themeData,
+      routes: Routes.routes,
+      home: SplashScreen(),
+    );
+  }
+}
+```
