@@ -26,19 +26,20 @@ mixin _$FormStore on _FormStore, Store {
           Computed<bool>(() => super.canForgetPassword))
       .value;
 
-  final _$userIdAtom = Atom(name: '_FormStore.userId');
+  final _$userEmailAtom = Atom(name: '_FormStore.userEmail');
 
   @override
   String get userEmail {
-    _$userIdAtom.reportObserved();
+    _$userEmailAtom.reportObserved();
     return super.userEmail;
   }
 
   @override
   set userEmail(String value) {
-    _$userIdAtom.context.checkIfStateModificationsAreAllowed(_$userIdAtom);
+    _$userEmailAtom.context
+        .checkIfStateModificationsAreAllowed(_$userEmailAtom);
     super.userEmail = value;
-    _$userIdAtom.reportChanged();
+    _$userEmailAtom.reportChanged();
   }
 
   final _$passwordAtom = Atom(name: '_FormStore.password');
@@ -130,6 +131,13 @@ mixin _$FormStore on _FormStore, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
+  final _$getPostsAsyncAction = AsyncAction('getPosts');
+
+  @override
+  Future<dynamic> getPosts() {
+    return _$getPostsAsyncAction.run(() => super.getPosts());
+  }
+
   final _$_FormStoreActionController = ActionController(name: '_FormStore');
 
   @override
@@ -215,19 +223,20 @@ mixin _$FormErrorState on _FormErrorState, Store {
           Computed<bool>(() => super.hasErrorInForgotPassword))
       .value;
 
-  final _$userIdAtom = Atom(name: '_FormErrorState.userId');
+  final _$userEmailAtom = Atom(name: '_FormErrorState.userEmail');
 
   @override
   String get userEmail {
-    _$userIdAtom.reportObserved();
+    _$userEmailAtom.reportObserved();
     return super.userEmail;
   }
 
   @override
   set userEmail(String value) {
-    _$userIdAtom.context.checkIfStateModificationsAreAllowed(_$userIdAtom);
+    _$userEmailAtom.context
+        .checkIfStateModificationsAreAllowed(_$userEmailAtom);
     super.userEmail = value;
-    _$userIdAtom.reportChanged();
+    _$userEmailAtom.reportChanged();
   }
 
   final _$passwordAtom = Atom(name: '_FormErrorState.password');

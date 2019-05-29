@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/models/post/post.dart';
 
@@ -29,9 +28,8 @@ class Repository {
   static Repository get() => _repository;
 
   // Post: ---------------------------------------------------------------------
-  Future<Post> getPosts() => _postApi
+  Future<List<Post>> getPosts() => _postApi
       .getPosts()
-      .then((posts) =>
-          Post.fromJson(JsonDecoder().convert(posts)))
+      .then((posts) => posts)
       .catchError((error) => throw error);
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:boilerplate/data/network/exceptions/network_exceptions.dart';
 import 'package:boilerplate/data/network/rest_client.dart';
+import 'package:boilerplate/models/post/post.dart';
 
 class PostApi {
   // singleton object
@@ -18,11 +19,11 @@ class PostApi {
   final _restClient = RestClient();
 
   /// Returns list of post in response
-  Future<String> getPosts() {
+  Future<List<Post>> getPosts() {
 
     return _restClient
         .get(Endpoints.getPosts)
-        .then((dynamic res) => res)
+        .then((dynamic res) => res.map((post) => Post.fromJson(post)).toList())
         .catchError((error) => throw NetworkException(message: error));
   }
 

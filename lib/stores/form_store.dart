@@ -1,3 +1,4 @@
+import 'package:boilerplate/data/repository.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
@@ -6,7 +7,6 @@ part 'form_store.g.dart';
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore implements Store {
-
   // store for handling errors
   final FormErrorState error = FormErrorState();
 
@@ -44,13 +44,13 @@ abstract class _FormStore implements Store {
   @computed
   bool get canLogin =>
       !error.hasErrorsInLogin && userEmail.isNotEmpty && password.isNotEmpty;
-  
+
   @computed
   bool get canRegister =>
       !error.hasErrorsInRegister &&
-          userEmail.isNotEmpty &&
-          password.isNotEmpty &&
-          confirmPassword.isNotEmpty;
+      userEmail.isNotEmpty &&
+      password.isNotEmpty &&
+      confirmPassword.isNotEmpty;
 
   @computed
   bool get canForgetPassword =>
@@ -114,7 +114,7 @@ abstract class _FormStore implements Store {
   Future login() async {
     loading = true;
 
-    Future.delayed(Duration(milliseconds: 2000)).then((future){
+    Future.delayed(Duration(milliseconds: 2000)).then((future) {
       loading = false;
       success = true;
       error.showError = false;
@@ -139,6 +139,22 @@ abstract class _FormStore implements Store {
     loading = true;
   }
 
+  @action
+  Future getPosts() async {
+    Repository.get().getPosts().then((post) {
+      loading = false;
+      success = true;
+      error.showError = false;
+    }).catchError((e) {
+      loading = false;
+      success = false;
+      error.showError = true;
+      error.errorMessage =
+          "Something went wrong, please check your internet connection and try again";
+      print(e);
+    });
+  }
+
   // general methods:-----------------------------------------------------------
   void dispose() {
     for (final d in _disposers) {
@@ -150,7 +166,6 @@ abstract class _FormStore implements Store {
     validatePassword(password);
     validateUserEmail(userEmail);
   }
-
 }
 
 class FormErrorState = _FormErrorState with _$FormErrorState;

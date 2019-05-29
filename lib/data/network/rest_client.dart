@@ -26,6 +26,8 @@ class RestClient {
       if (statusCode < 200 || statusCode > 400 || json == null) {
         throw NetworkException(message:"Error fetching data from server", statusCode: statusCode);
       }
+
+//      print(res);
       return _decoder.convert(res);
     });
   }
