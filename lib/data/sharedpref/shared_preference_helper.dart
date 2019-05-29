@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'constants/preferences_const.dart';
+import 'constants/preferences.dart';
 
 class SharedPreferenceHelper {
   // singleton object
