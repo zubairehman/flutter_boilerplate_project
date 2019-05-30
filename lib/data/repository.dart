@@ -1,6 +1,7 @@
 import 'dart:async';
+
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
-import 'package:boilerplate/models/post/post.dart';
+import 'package:boilerplate/models/post/post_list.dart';
 
 import 'local/datasources/post/post_datasource.dart';
 import 'network/apis/posts/post_api.dart';
@@ -28,7 +29,7 @@ class Repository {
   static Repository get() => _repository;
 
   // Post: ---------------------------------------------------------------------
-  Future<List<Post>> getPosts() => _postApi
+  Future<PostsList> getPosts() => _postApi
       .getPosts()
       .then((posts) => posts)
       .catchError((error) => throw error);

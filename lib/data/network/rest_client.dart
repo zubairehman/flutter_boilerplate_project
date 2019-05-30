@@ -27,7 +27,7 @@ class RestClient {
         throw NetworkException(message:"Error fetching data from server", statusCode: statusCode);
       }
 
-//      print(res);
+      print(res);
       return _decoder.convert(res);
     });
   }
