@@ -6,18 +6,22 @@ import 'exceptions/network_exceptions.dart';
 
 class RestClient {
   // singleton object
-  static final RestClient _restClient = RestClient._internal();
+  static final RestClient _singleton = RestClient._();
 
-  // named private constructor
-  RestClient._internal();
+  // A private constructor. Allows us to create instances of RestClient
+  // only from within the RestClient class itself.
+  RestClient._();
 
   // factory method to return the same object each time its needed
-  factory RestClient() => _restClient;
-
+  factory RestClient() => _singleton;
+  
+  // Singleton accessor
+  static RestClient get instance => RestClient();
+  
   // instantiate json decoder for json serialization
   final JsonDecoder _decoder = JsonDecoder();
 
-  // Get
+  // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String url) {
     return http.get(url).then((http.Response response) {
       final String res = response.body;
@@ -32,7 +36,7 @@ class RestClient {
     });
   }
 
-  // Post
+  // Post:----------------------------------------------------------------------
   Future<dynamic> post(String url, {Map headers, body, encoding}) {
     return http
         .post(url, body: body, headers: headers, encoding: encoding)

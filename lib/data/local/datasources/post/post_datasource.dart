@@ -15,12 +15,12 @@ class PostDataSource {
   // Singleton instance
   static final PostDataSource _singleton = PostDataSource._();
 
+  // A private constructor. Allows us to create instances of PostDataSource
+  // only from within the PostDataSource class itself.
+  PostDataSource._();
+
   // Singleton accessor
   static PostDataSource get instance => _singleton;
-
-  // A private constructor. Allows us to create instances of FlogDao
-  // only from within the FlogDao class itself.
-  PostDataSource._();
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {

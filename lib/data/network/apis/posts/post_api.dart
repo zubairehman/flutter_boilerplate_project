@@ -7,16 +7,20 @@ import 'package:boilerplate/models/post/post_list.dart';
 
 class PostApi {
   // singleton object
-  static final PostApi _postApi = PostApi._internal();
+  static final PostApi _singleton = PostApi._();
 
-  // named private constructor
-  PostApi._internal();
+  // A private constructor. Allows us to create instances of PostApi
+  // only from within the PostApi class itself.
+  PostApi._();
 
   // factory method to return the same object each time its needed
-  factory PostApi() => _postApi;
+  factory PostApi() => _singleton;
+
+  // Singleton accessor
+  static PostApi get instance => _singleton;
 
   // rest client
-  final _restClient = RestClient();
+  final _restClient = RestClient.instance;
 
   /// Returns list of post in response
   Future<PostsList> getPosts() {
