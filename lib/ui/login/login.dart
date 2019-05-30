@@ -1,7 +1,7 @@
 import 'package:boilerplate/constants/strings.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
-import 'package:boilerplate/stores/form_store.dart';
+import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(_passwordFocusNode);
           },
-          errorText: _store.error.userEmail,
+          errorText: _store.formErrorStore.userEmail,
         );
       },
     );
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
           iconColor: Colors.black54,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
-          errorText: _store.error.password,
+          errorText: _store.formErrorStore.password,
         );
       },
     );
@@ -218,10 +218,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context) {
-    if (_store.error.showError) {
-      print(_store.error.errorMessage);
+    if (_store.errorStore.showError) {
+      print(_store.errorStore.errorMessage);
       Future.delayed(Duration(milliseconds: 0), () {
-        showSnackBar(context, _store.error.errorMessage);
+        showSnackBar(context, _store.errorStore.errorMessage);
       });
     }
 

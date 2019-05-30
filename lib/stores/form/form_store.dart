@@ -1,5 +1,6 @@
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/models/post/post_list.dart';
+import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
@@ -8,8 +9,11 @@ part 'form_store.g.dart';
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore implements Store {
-  // store for handling errors
-  final FormErrorState error = FormErrorState();
+  // store for handling form errors
+  final FormErrorStore formErrorStore = FormErrorStore();
+
+  // store for handling error messages
+  final ErrorStore errorStore = ErrorStore();
 
   _FormStore() {
     _setupValidations();
@@ -47,18 +51,18 @@ abstract class _FormStore implements Store {
 
   @computed
   bool get canLogin =>
-      !error.hasErrorsInLogin && userEmail.isNotEmpty && password.isNotEmpty;
+      !formErrorStore.hasErrorsInLogin && userEmail.isNotEmpty && password.isNotEmpty;
 
   @computed
   bool get canRegister =>
-      !error.hasErrorsInRegister &&
+      !formErrorStore.hasErrorsInRegister &&
       userEmail.isNotEmpty &&
       password.isNotEmpty &&
       confirmPassword.isNotEmpty;
 
   @computed
   bool get canForgetPassword =>
-      !error.hasErrorInForgotPassword && userEmail.isNotEmpty;
+      !formErrorStore.hasErrorInForgotPassword && userEmail.isNotEmpty;
 
   // actions:-------------------------------------------------------------------
   @action
@@ -79,33 +83,33 @@ abstract class _FormStore implements Store {
   @action
   void validateUserEmail(String value) {
     if (value.isEmpty) {
-      error.userEmail = "Email can't be empty";
+      formErrorStore.userEmail = "Email can't be empty";
     } else if (!isEmail(value)) {
-      error.userEmail = 'Please enter a valid email address';
+      formErrorStore.userEmail = 'Please enter a valid email address';
     } else {
-      error.userEmail = null;
+      formErrorStore.userEmail = null;
     }
   }
 
   @action
   void validatePassword(String value) {
     if (value.isEmpty) {
-      error.password = "Password can't be empty";
+      formErrorStore.password = "Password can't be empty";
     } else if (value.length < 6) {
-      error.password = "Password must be at-least 6 characters long";
+      formErrorStore.password = "Password must be at-least 6 characters long";
     } else {
-      error.password = null;
+      formErrorStore.password = null;
     }
   }
 
   @action
   void validateConfirmPassword(String value) {
     if (value.isEmpty) {
-      error.confirmPassword = "Confirm password can't be empty";
+      formErrorStore.confirmPassword = "Confirm password can't be empty";
     } else if (value != password) {
-      error.confirmPassword = "Password doen't match";
+      formErrorStore.confirmPassword = "Password doen't match";
     } else {
-      error.confirmPassword = null;
+      formErrorStore.confirmPassword = null;
     }
   }
 
@@ -121,12 +125,12 @@ abstract class _FormStore implements Store {
     Future.delayed(Duration(milliseconds: 2000)).then((future) {
       loading = false;
       success = true;
-      error.showError = false;
+      errorStore.showError = false;
     }).catchError((e) {
       loading = false;
       success = false;
-      error.showError = true;
-      error.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
+      errorStore.showError = true;
+      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
           ? "Username and password doesn't match"
           : "Something went wrong, please check your internet connection and try again";
       print(e);
@@ -151,12 +155,12 @@ abstract class _FormStore implements Store {
       this.postsList = postsList;
       loading = false;
       success = true;
-      error.showError = false;
+      errorStore.showError = false;
     }).catchError((e) {
       loading = false;
       success = false;
-      error.showError = true;
-      error.errorMessage =
+      errorStore.showError = true;
+      errorStore.errorMessage =
           "Something went wrong, please check your internet connection and try again";
       print(e);
     });
@@ -175,9 +179,9 @@ abstract class _FormStore implements Store {
   }
 }
 
-class FormErrorState = _FormErrorState with _$FormErrorState;
+class FormErrorStore = _FormErrorStore with _$FormErrorStore;
 
-abstract class _FormErrorState implements Store {
+abstract class _FormErrorStore implements Store {
   @observable
   String userEmail;
 
@@ -186,12 +190,6 @@ abstract class _FormErrorState implements Store {
 
   @observable
   String confirmPassword;
-
-  @observable
-  String errorMessage;
-
-  @observable
-  bool showError = false;
 
   @computed
   bool get hasErrorsInLogin => userEmail != null || password != null;

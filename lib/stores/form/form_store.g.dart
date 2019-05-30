@@ -219,7 +219,7 @@ mixin _$FormStore on _FormStore, Store {
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
-mixin _$FormErrorState on _FormErrorState, Store {
+mixin _$FormErrorStore on _FormErrorStore, Store {
   Computed<bool> _$hasErrorsInLoginComputed;
 
   @override
@@ -239,7 +239,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
           Computed<bool>(() => super.hasErrorInForgotPassword))
       .value;
 
-  final _$userEmailAtom = Atom(name: '_FormErrorState.userEmail');
+  final _$userEmailAtom = Atom(name: '_FormErrorStore.userEmail');
 
   @override
   String get userEmail {
@@ -255,7 +255,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     _$userEmailAtom.reportChanged();
   }
 
-  final _$passwordAtom = Atom(name: '_FormErrorState.password');
+  final _$passwordAtom = Atom(name: '_FormErrorStore.password');
 
   @override
   String get password {
@@ -270,7 +270,7 @@ mixin _$FormErrorState on _FormErrorState, Store {
     _$passwordAtom.reportChanged();
   }
 
-  final _$confirmPasswordAtom = Atom(name: '_FormErrorState.confirmPassword');
+  final _$confirmPasswordAtom = Atom(name: '_FormErrorStore.confirmPassword');
 
   @override
   String get confirmPassword {
@@ -284,37 +284,5 @@ mixin _$FormErrorState on _FormErrorState, Store {
         .checkIfStateModificationsAreAllowed(_$confirmPasswordAtom);
     super.confirmPassword = value;
     _$confirmPasswordAtom.reportChanged();
-  }
-
-  final _$errorMessageAtom = Atom(name: '_FormErrorState.errorMessage');
-
-  @override
-  String get errorMessage {
-    _$errorMessageAtom.reportObserved();
-    return super.errorMessage;
-  }
-
-  @override
-  set errorMessage(String value) {
-    _$errorMessageAtom.context
-        .checkIfStateModificationsAreAllowed(_$errorMessageAtom);
-    super.errorMessage = value;
-    _$errorMessageAtom.reportChanged();
-  }
-
-  final _$showErrorAtom = Atom(name: '_FormErrorState.showError');
-
-  @override
-  bool get showError {
-    _$showErrorAtom.reportObserved();
-    return super.showError;
-  }
-
-  @override
-  set showError(bool value) {
-    _$showErrorAtom.context
-        .checkIfStateModificationsAreAllowed(_$showErrorAtom);
-    super.showError = value;
-    _$showErrorAtom.reportChanged();
   }
 }
