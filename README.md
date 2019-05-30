@@ -13,7 +13,7 @@ A boilerplate project created in flutter using MobX and Provider.
 * [Database](https://github.com/tekartik/sembast.dart)
 * [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
-* Encryption
+* [Encryption](https://github.com/xxtea/xxtea-dart)
 
 ## Getting Started
 
