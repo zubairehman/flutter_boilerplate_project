@@ -27,6 +27,9 @@ Anything that can be derived from the application state, should be derived. Auto
 
 This includes the UI, data serialization, server communication, etc
 
+You can read more about mobx from the following link:
+[MobX](https://github.com/mobxjs/mobx.dart)
+
 ![picture](art/flow.png)
 
 ### Provider
