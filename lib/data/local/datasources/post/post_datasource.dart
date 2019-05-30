@@ -27,20 +27,20 @@ class PostDataSource {
     return await _postsStore.add(await _db, post.toMap());
   }
 
-  Future update(Post post) async {
+  Future<int> update(Post post) async {
     // For filtering by key (ID), RegEx, greater than, and many other criteria,
     // we use a Finder.
     final finder = Finder(filter: Filter.byKey(post.id));
-    await _postsStore.update(
+    return await _postsStore.update(
       await _db,
       post.toMap(),
       finder: finder,
     );
   }
 
-  Future delete(Post post) async {
+  Future<int> delete(Post post) async {
     final finder = Finder(filter: Filter.byKey(post.id));
-    await _postsStore.delete(
+    return await _postsStore.delete(
       await _db,
       finder: finder,
     );
