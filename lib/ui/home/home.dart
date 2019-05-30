@@ -1,9 +1,6 @@
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form_store.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,33 +53,37 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context) {
         return _store.postsList != null
             ? Material(
-                child: ListView.separated(
-                  itemCount: _store.postsList.posts.length,
-                  separatorBuilder: (context, position) {
-                    return Divider();
-                  },
-                  itemBuilder: (context, position) {
-                    return ListTile(
-                      leading: Icon(Icons.cloud_circle),
-                      title: Text(
-                        '${_store.postsList.posts[position].title}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: false,
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                      subtitle: Text(
-                        '${_store.postsList.posts[position].body}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: false,
-                      ),
-                    );
-                  },
-                ),
+                child: _buildListView(),
               )
             : CustomProgressIndicatorWidget();
       },
     );
+  }
+
+  Widget _buildListView() {
+    return ListView.separated(
+                itemCount: _store.postsList.posts.length,
+                separatorBuilder: (context, position) {
+                  return Divider();
+                },
+                itemBuilder: (context, position) {
+                  return ListTile(
+                    leading: Icon(Icons.cloud_circle),
+                    title: Text(
+                      '${_store.postsList.posts[position].title}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                      '${_store.postsList.posts[position].body}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                    ),
+                  );
+                },
+              );
   }
 }
