@@ -14,9 +14,7 @@ Anything that can be derived from the application state, should be derived. Auto
 
 This includes the UI, data serialization, server communication, etc
 
-<p>
-  <img src="art/flow.png">
-</p>
+![picture](art/flow.png)
 
 ### Boilerplate features:
 
