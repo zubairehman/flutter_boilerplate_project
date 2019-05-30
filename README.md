@@ -15,7 +15,7 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * Theme
 * Rest Client
 * Database
-* MobX (State Management)
+* MobX (to connect the reactive data of your application with the UI)
 * Provider (State Management)
 * Encryption
 
