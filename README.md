@@ -2,6 +2,8 @@
 
 A boilerplate project created in flutter using MobX and Provider.
 
+![picture](art/architecture.png)
+
 ## Boilerplate features:
 
 * Splash
