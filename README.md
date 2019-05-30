@@ -10,9 +10,9 @@ A boilerplate project created in flutter using MobX and Provider.
 * Routing
 * Theme
 * Rest Client
-* Database
-* MobX (to connect the reactive data of your application with the UI)
-* Provider (State Management)
+* [Database](https://github.com/tekartik/sembast.dart)
+* [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
+* [Provider](https://github.com/rrousselGit/provider) (State Management)
 * Encryption
 
 ## Getting Started
