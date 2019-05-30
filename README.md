@@ -18,9 +18,6 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * MobX (State Management)
 * Provider (State Management)
 * Encryption
-* Firebase login
-* Firebase sign-up
-* Firebase forgot password
 
 ### Folder Structure
 Here is the core folder structure which flutter provides.
