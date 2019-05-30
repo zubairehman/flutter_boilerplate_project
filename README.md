@@ -37,6 +37,7 @@ The easiest way to read a value is by using the static method Provider.of<T>(Bui
 
 Combined with the first example of exposing a value, this widget will read the exposed String and render "Hello World."
 
+```
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,8 @@ class Home extends StatelessWidget {
     );
   }
 }
+```
+
 Alternatively instead of using Provider.of, we can use the Consumer widget.
 
 This can be useful for performance optimizations or when it is difficult to obtain a BuildContext descendant of the provider.
