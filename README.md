@@ -2,6 +2,19 @@
 
 A boilerplate project created in flutter using MobX and Provider.
 
+## Boilerplate features:
+
+* Splash
+* Login
+* Home
+* Routing
+* Theme
+* Rest Client
+* Database
+* MobX (to connect the reactive data of your application with the UI)
+* Provider (State Management)
+* Encryption
+
 ## Getting Started
 
 The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
@@ -60,21 +73,8 @@ Center(
 );
 ```
 
-You can read more about provider from the link below:
+You can read more about provider from the following link:
 [Provider](https://github.com/rrousselGit/provider)
-
-### Boilerplate features:
-
-* Splash
-* Login
-* Home
-* Routing
-* Theme
-* Rest Client
-* Database
-* MobX (to connect the reactive data of your application with the UI)
-* Provider (State Management)
-* Encryption
 
 ### Folder Structure
 Here is the core folder structure which flutter provides.
