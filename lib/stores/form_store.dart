@@ -1,4 +1,5 @@
 import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/models/post/post_list.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
@@ -26,6 +27,9 @@ abstract class _FormStore implements Store {
   }
 
   // store variables:-----------------------------------------------------------
+  @observable
+  PostsList postsList;
+
   @observable
   String userEmail = '';
 
@@ -143,7 +147,8 @@ abstract class _FormStore implements Store {
   Future getPosts() async {
     loading = true;
 
-    Repository.instance.getPosts().then((post) {
+    Repository.instance.getPosts().then((postsList) {
+      this.postsList = postsList;
       loading = false;
       success = true;
       error.showError = false;

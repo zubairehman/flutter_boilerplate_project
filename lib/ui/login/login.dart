@@ -208,8 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textColor: Colors.white,
       onPressed: () async {
         if (_store.canLogin) {
-//              _store.login();
-          _store.getPosts();
+          _store.login();
         } else {
           showSnackBar(context, 'Please fill in all the required fields');
         }

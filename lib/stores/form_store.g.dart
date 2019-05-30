@@ -26,6 +26,22 @@ mixin _$FormStore on _FormStore, Store {
           Computed<bool>(() => super.canForgetPassword))
       .value;
 
+  final _$postsListAtom = Atom(name: '_FormStore.postsList');
+
+  @override
+  PostsList get postsList {
+    _$postsListAtom.reportObserved();
+    return super.postsList;
+  }
+
+  @override
+  set postsList(PostsList value) {
+    _$postsListAtom.context
+        .checkIfStateModificationsAreAllowed(_$postsListAtom);
+    super.postsList = value;
+    _$postsListAtom.reportChanged();
+  }
+
   final _$userEmailAtom = Atom(name: '_FormStore.userEmail');
 
   @override
