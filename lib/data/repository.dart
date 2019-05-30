@@ -1,14 +1,14 @@
 import 'dart:async';
 
+import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 
-import 'local/datasources/post/post_datasource.dart';
 import 'network/apis/posts/post_api.dart';
 
 class Repository {
   // database object
-  final _postDataSource = PostDataSource();
+  final _postDataSource = PostDataSource.instance;
 
   // api objects
   final _postApi = PostApi();

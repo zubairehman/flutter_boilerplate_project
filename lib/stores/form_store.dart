@@ -141,6 +141,8 @@ abstract class _FormStore implements Store {
 
   @action
   Future getPosts() async {
+    loading = true;
+
     Repository.get().getPosts().then((post) {
       loading = false;
       success = true;

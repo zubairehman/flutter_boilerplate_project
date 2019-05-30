@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -95,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
+            name: 'navigate',
             builder: (context) {
               return _store.success
                   ? navigate(context)
@@ -102,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
+            name: 'loading',
             builder: (context) {
               return Visibility(
                 visible: _store.loading,
@@ -201,21 +202,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildSignInButton() {
-    return Observer(
-      builder: (context) {
-        return RoundedButtonWidget(
-          buttonText: Strings.login_btn_sign_in,
-          buttonColor: Colors.orangeAccent,
-          textColor: Colors.white,
-          onPressed: () async {
-            if (_store.canLogin) {
+    return RoundedButtonWidget(
+      buttonText: Strings.login_btn_sign_in,
+      buttonColor: Colors.orangeAccent,
+      textColor: Colors.white,
+      onPressed: () async {
+        if (_store.canLogin) {
 //              _store.login();
-              _store.getPosts();
-            } else {
-              showSnackBar(context, 'Please fill in all the required fields');
-            }
-          },
-        );
+          _store.getPosts();
+        } else {
+          showSnackBar(context, 'Please fill in all the required fields');
+        }
       },
     );
   }

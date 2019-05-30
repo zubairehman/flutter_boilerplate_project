@@ -12,17 +12,18 @@ class Post {
     this.body,
   });
 
-  factory Post.fromJson(Map<String, dynamic> json) => Post(
+  factory Post.fromMap(Map<String, dynamic> json) => Post(
         userId: json["userId"],
         id: json["id"],
         title: json["title"],
         body: json["body"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "userId": userId,
         "id": id,
         "title": title,
         "body": body,
       };
+  
 }
