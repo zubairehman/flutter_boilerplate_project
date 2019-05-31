@@ -147,13 +147,6 @@ mixin _$FormStore on _FormStore, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
-  final _$getPostsAsyncAction = AsyncAction('getPosts');
-
-  @override
-  Future<dynamic> getPosts() {
-    return _$getPostsAsyncAction.run(() => super.getPosts());
-  }
-
   final _$_FormStoreActionController = ActionController(name: '_FormStore');
 
   @override

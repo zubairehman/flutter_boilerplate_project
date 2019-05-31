@@ -1,4 +1,3 @@
-import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
@@ -145,25 +144,6 @@ abstract class _FormStore implements Store {
   @action
   Future logout() async {
     loading = true;
-  }
-
-  @action
-  Future getPosts() async {
-    loading = true;
-
-    Repository.instance.getPosts().then((postsList) {
-      this.postsList = postsList;
-      loading = false;
-      success = true;
-      errorStore.showError = false;
-    }).catchError((e) {
-      loading = false;
-      success = false;
-      errorStore.showError = true;
-      errorStore.errorMessage =
-          "Something went wrong, please check your internet connection and try again";
-      print(e);
-    });
   }
 
   // general methods:-----------------------------------------------------------

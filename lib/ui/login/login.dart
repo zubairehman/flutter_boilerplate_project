@@ -10,6 +10,7 @@ import 'package:boilerplate/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flushbar/flushbar_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) {
               return _store.success
                   ? navigate(context)
-                  : showErrorMessage(context);
+                  : showErrorMessage(context, _store.errorStore.errorMessage);
             },
           ),
           Observer(
@@ -210,31 +211,24 @@ class _LoginScreenState extends State<LoginScreen> {
         if (_store.canLogin) {
           _store.login();
         } else {
-          showSnackBar(context, 'Please fill in all the required fields');
+          showErrorMessage(context, 'Please fill in all fields');
         }
       },
     );
   }
 
   // General Methods:-----------------------------------------------------------
-  showErrorMessage(BuildContext context) {
-    if (_store.errorStore.showError) {
-      print(_store.errorStore.errorMessage);
-      Future.delayed(Duration(milliseconds: 0), () {
-        showSnackBar(context, _store.errorStore.errorMessage);
-      });
+  showErrorMessage(BuildContext context, String message) {
+    if(message != null) {
+      FlushbarHelper.createError(
+        message: message,
+        title: 'Error',
+        duration: Duration(seconds: 3),
+      )
+        ..show(context);
     }
 
     return Container();
-  }
-
-  showSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(message),
-    );
-
-    // Find the Scaffold in the Widget tree and use it to show a SnackBar!
-    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   Widget navigate(BuildContext context) {

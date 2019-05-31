@@ -1,6 +1,7 @@
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:boilerplate/utils/dio/dio_error_util.dart';
 import 'package:mobx/mobx.dart';
 
 part 'post_store.g.dart';
@@ -10,7 +11,7 @@ class PostStore = _PostStore with _$PostStore;
 abstract class _PostStore implements Store {
 
   // store for handling errors
-  final ErrorStore error = ErrorStore();
+  final ErrorStore errorStore = ErrorStore();
 
   // store variables:-----------------------------------------------------------
   @observable
@@ -31,13 +32,12 @@ abstract class _PostStore implements Store {
       this.postsList = postsList;
       loading = false;
       success = true;
-      error.showError = false;
+      errorStore.showError = false;
     }).catchError((e) {
       loading = false;
       success = false;
-      error.showError = true;
-      error.errorMessage =
-      "Something went wrong, please check your internet connection and try again";
+      errorStore.showError = true;
+      errorStore.errorMessage = DioErrorUtil.handleError(e);
       print(e);
     });
   }

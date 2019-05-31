@@ -51,6 +51,16 @@ dependencies:
   # String validation and sanitization for Dart. Dart 2-compatible version of validator
   validators: ^2.0.0+1
 
+  # Provides Dart Build System builders for handling JSON.
+  json_serializable: ^3.0.0
+
+  # A powerful Http client for Dart
+  dio: 2.1.6
+
+  # A flexible widget for user notification.
+  flushbar: ^1.5.3
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
