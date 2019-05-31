@@ -11,7 +11,7 @@ A boilerplate project created in flutter using MobX and Provider.
 * Home
 * Routing
 * Theme
-* Rest Client
+* [Dio](https://github.com/flutterchina/dio)
 * [Database](https://github.com/tekartik/sembast.dart)
 * [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
