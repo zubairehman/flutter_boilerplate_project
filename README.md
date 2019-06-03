@@ -38,7 +38,7 @@ You can read more about mobx from the following link:
 
 A dependency injection system built with widgets for widgets. provider is mostly syntax sugar for InheritedWidget, to make common use-cases straightforward.
 
-### Exposing a value
+#### Exposing a value
 To expose a variable using provider, wrap any widget into one of the provider widgets from this package and pass it your variable. Then, all descendants of the newly added provider widget can access this variable.
 
 A simple example would be to wrap the entire application into a Provider widget and pass it our variable:
@@ -50,7 +50,7 @@ Provider<Foo>.value(
 )
 ```
 
-### Reading a value
+#### Reading a value
 The easiest way to read a value is by using the static method Provider.of<T>(BuildContext context). This method will look up in widget tree starting from the widget associated with the BuildContext passed and it will return the nearest variable of type T found (or throw if nothing if found).
 
 Combined with the first example of exposing a value, this widget will read the exposed String and render "Hello World."
