@@ -9,11 +9,27 @@ A boilerplate project created in flutter using MobX and Provider.
 * Home
 * Routing
 * Theme
+* Dio
+* Database
+* MobX (to connect the reactive data of your application with the UI)
+* Provider (State Management)
+* Encryption
+* Validation
+* Code Generation
+* User Notifications
+* Logging
+
+## Libraries & Tools Used
+
 * [Dio](https://github.com/flutterchina/dio)
 * [Database](https://github.com/tekartik/sembast.dart)
 * [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
 * [Encryption](https://github.com/xxtea/xxtea-dart)
+* [Validation](https://github.com/dart-league/validators)
+* [Logging](https://github.com/zubairehman/Flogs)
+* [Notifications](https://github.com/AndreHaueisen/flushbar)
+* [Json Serialization](https://github.com/dart-lang/json_serializable)
 
 ## Getting Started
 
