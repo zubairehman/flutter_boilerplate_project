@@ -2,7 +2,11 @@
 
 A boilerplate project created in flutter using MobX and Provider.
 
-## Boilerplate features:
+## Getting Started
+
+The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
+
+### Boilerplate Features:
 
 * Splash
 * Login
@@ -19,7 +23,7 @@ A boilerplate project created in flutter using MobX and Provider.
 * User Notifications
 * Logging
 
-## Libraries & Tools Used
+### Libraries & Tools Used
 
 * [Dio](https://github.com/flutterchina/dio)
 * [Database](https://github.com/tekartik/sembast.dart)
@@ -30,10 +34,6 @@ A boilerplate project created in flutter using MobX and Provider.
 * [Logging](https://github.com/zubairehman/Flogs)
 * [Notifications](https://github.com/AndreHaueisen/flushbar)
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
-
-## Getting Started
-
-The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
 
 ### MobX
 
