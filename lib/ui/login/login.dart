@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              AppIconWidget(image: 'assets/icons/ic_appicon_new.png'),
+              AppIconWidget(image: 'assets/icons/ic_appicon.png'),
               SizedBox(height: 24.0),
               _buildUserIdField(),
               _buildPasswordField(),
