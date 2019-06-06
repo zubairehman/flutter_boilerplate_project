@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (_store.canLogin) {
           _store.login();
         } else {
-          showErrorMessage(context, 'Please fill in all fields');
+          showErrorMessage(context, Strings.login_validation_error);
         }
       },
     );
