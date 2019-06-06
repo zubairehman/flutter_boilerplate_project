@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
   navigate() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    if (autoLogin && preferences.getBool(Preferences.is_logged_in) ?? false) {
+    if (autoLogin && (preferences?.getBool(Preferences.is_logged_in) ?? false)) {
       Navigator.of(context).pushReplacementNamed(Routes.home);
     } else {
       Navigator.of(context).pushReplacementNamed(Routes.login);

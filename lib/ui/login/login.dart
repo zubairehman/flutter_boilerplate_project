@@ -1,3 +1,4 @@
+import 'package:boilerplate/constants/index.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -70,29 +71,27 @@ class _LoginScreenState extends State<LoginScreen> {
     return Material(
       child: Stack(
         children: <Widget>[
-          OrientationBuilder(
-            builder: (context, orientation) {
-              //variable to hold widget
-              var child;
-
+          LayoutBuilder(
+            builder: (context, dimens) {
               //check to see whether device is in landscape or portrait
-              //load widgets based on device orientation
-              orientation == Orientation.landscape
-                  ? child = Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: _buildLeftSide(),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: _buildRightSide(),
-                        ),
-                      ],
-                    )
-                  : child = Center(child: _buildRightSide());
+              //load widgets based on device orientation and max width
+              if (MediaQuery.of(context).orientation == Orientation.landscape ||
+                  dimens.maxWidth >= Dimens.tablet_breakpoint) {
+                return Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: _buildLeftSide(),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: _buildRightSide(),
+                    ),
+                  ],
+                );
+              }
 
-              return child;
+              return Center(child: _buildRightSide());
             },
           ),
           Observer(
