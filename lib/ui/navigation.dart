@@ -1,8 +1,8 @@
-import 'package:boilerplate/locale/index.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/sharedpref/constants/index.dart';
+import '../locale/index.dart';
 import '../routes.dart';
 import '../widgets/index.dart';
 import 'home/home.dart';
