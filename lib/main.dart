@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         return AppLocalizations.of(context).title;
       },
       theme: themeData,
+      darkTheme: themeDataDark,
       routes: Routes.routes,
       home: SplashScreen(),
     );
