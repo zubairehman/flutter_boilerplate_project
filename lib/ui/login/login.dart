@@ -212,7 +212,8 @@ class _LoginScreenState extends State<LoginScreen> {
         if (_store.canLogin) {
           _store.login();
         } else {
-          showErrorMessage(context, AppLocalizations.of(context).login_validation_error);
+          showErrorMessage(
+              context, AppLocalizations.of(context).login_validation_error);
         }
       },
     );
@@ -220,13 +221,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context, String message) {
-    if(message != null) {
+    if (message != null) {
       FlushbarHelper.createError(
         message: message,
         title: 'Error',
         duration: Duration(seconds: 3),
-      )
-        ..show(context);
+      )..show(context);
     }
 
     return Container();

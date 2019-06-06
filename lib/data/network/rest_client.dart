@@ -14,10 +14,10 @@ class RestClient {
 
   // factory method to return the same object each time its needed
   factory RestClient() => _singleton;
-  
+
   // Singleton accessor
   static RestClient get instance => RestClient();
-  
+
   // instantiate json decoder for json serialization
   final JsonDecoder _decoder = JsonDecoder();
 
@@ -28,7 +28,8 @@ class RestClient {
       final int statusCode = response.statusCode;
 
       if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw NetworkException(message:"Error fetching data from server", statusCode: statusCode);
+        throw NetworkException(
+            message: "Error fetching data from server", statusCode: statusCode);
       }
 
       print(res);
@@ -45,7 +46,8 @@ class RestClient {
       final int statusCode = response.statusCode;
 
       if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw NetworkException(message:"Error fetching data from server", statusCode: statusCode);
+        throw NetworkException(
+            message: "Error fetching data from server", statusCode: statusCode);
       }
       return _decoder.convert(res);
     });

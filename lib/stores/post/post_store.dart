@@ -9,7 +9,6 @@ part 'post_store.g.dart';
 class PostStore = _PostStore with _$PostStore;
 
 abstract class _PostStore implements Store {
-
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
 
