@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../constants/strings.dart';
 import '../../data/sharedpref/constants/preferences.dart';
+import '../../locale/index.dart';
 import '../../routes.dart';
 import '../../stores/form/form_store.dart';
 import '../../widgets/app_icon_widget.dart';
@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: Strings.login_et_user_email,
+          hint: AppLocalizations.of(context).login_et_user_email,
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
           iconColor: Colors.black54,
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: Strings.login_et_user_password,
+          hint: AppLocalizations.of(context).login_et_user_password,
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: FlatButton(
         padding: EdgeInsets.all(0.0),
         child: Text(
-          Strings.login_btn_forgot_password,
+          AppLocalizations.of(context).login_btn_forgot_password,
           style: Theme.of(context)
               .textTheme
               .caption
@@ -205,14 +205,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignInButton() {
     return RoundedButtonWidget(
-      buttonText: Strings.login_btn_sign_in,
+      buttonText: AppLocalizations.of(context).login_btn_sign_in,
       buttonColor: Colors.orangeAccent,
       textColor: Colors.white,
       onPressed: () async {
         if (_store.canLogin) {
           _store.login();
         } else {
-          showErrorMessage(context, Strings.login_validation_error);
+          showErrorMessage(context, AppLocalizations.of(context).login_validation_error);
         }
       },
     );

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../constants/index.dart';
 import '../../data/sharedpref/constants/preferences.dart';
+import '../../locale/index.dart';
 import '../../routes.dart';
 import '../../stores/post/post_store.dart';
 import '../../widgets/progress_indicator_widget.dart';
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildAppBar(BuildContext context) {
     return AppBar(
-      title: Text(Strings.posts_title),
+      title: Text(AppLocalizations.of(context).posts_title),
       actions: <Widget>[
         IconButton(
           onPressed: () {
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           )
-        : Center(child: Text(Strings.posts_not_found));
+        : Center(child: Text(AppLocalizations.of(context).posts_not_found));
   }
 
   // General Methods:-----------------------------------------------------------
