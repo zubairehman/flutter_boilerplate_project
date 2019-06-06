@@ -9,4 +9,8 @@ class Strings {
   static const String login_et_user_password = "Enter password";
   static const String login_btn_forgot_password = "Forgot Password?";
   static const String login_btn_sign_in = "Sign In";
+
+  //Posts
+  static const String posts_title = "Posts";
+  static const String posts_not_found = "No Posts Found";
 }

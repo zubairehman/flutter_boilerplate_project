@@ -1,3 +1,4 @@
+import 'package:boilerplate/constants/index.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildAppBar(BuildContext context) {
     return AppBar(
-      title: Text('Posts'),
+      title: Text(Strings.posts_title),
       actions: <Widget>[
         IconButton(
           onPressed: () {
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           )
-        : Center(child: Text('No posts found'));
+        : Center(child: Text(Strings.posts_not_found));
   }
 
   // General Methods:-----------------------------------------------------------
