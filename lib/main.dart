@@ -31,8 +31,9 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: AppLocalizationsDelegate.supportedLocales,
       debugShowCheckedModeBanner: false,
-      onGenerateTitle: (BuildContext context) =>
-          AppLocalizations.of(context).title,
+      onGenerateTitle: (BuildContext context) {
+        return AppLocalizations.of(context).title;
+      },
       theme: themeData,
       routes: Routes.routes,
       home: SplashScreen(),
