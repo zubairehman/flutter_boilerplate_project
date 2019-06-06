@@ -28,32 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: Text(AppLocalizations.of(context).posts_title),
-      actions: <Widget>[
-        IconButton(
-          onPressed: () {
-            SharedPreferences.getInstance().then((preference) {
-              preference.setBool(Preferences.is_logged_in, false);
-              Navigator.of(context).pushReplacementNamed(Routes.login);
-            });
-          },
-          icon: Icon(
-            Icons.power_settings_new,
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _buildBody() {
     return Stack(
       children: <Widget>[
         Observer(

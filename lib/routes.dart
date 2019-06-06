@@ -17,17 +17,6 @@ class Routes {
   static final routes = <String, WidgetBuilder>{
     splash: (BuildContext context) => SplashScreen(),
     login: (BuildContext context) => LoginScreen(),
-    home: (BuildContext context) => AppNavigation(children: [
-          Screen(
-            iconData: Icons.home,
-            title: 'Home',
-            child: HomeScreen(),
-          ),
-          Screen(
-            iconData: Icons.settings,
-            title: 'Settings',
-            child: SettingsScreen(),
-          ),
-        ]),
+    home: (BuildContext context) => AppNavigation(),
   };
 }

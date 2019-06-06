@@ -44,6 +44,7 @@ class AppLocalizations {
       'login_validation_error': 'Please fill in all fields',
       'posts_title': 'Posts',
       'posts_not_found': 'No Posts Found',
+      'settings_title': 'Settings',
     },
     'es': {
       'title': 'Proyecto repetitivo',
@@ -54,6 +55,7 @@ class AppLocalizations {
       'login_validation_error': 'Por favor rellena todos los campos',
       'posts_title': 'Mensajes',
       'posts_not_found': 'No se han encontrado publicacionesd',
+      'settings_title': 'Ajustes',
     },
   };
 
@@ -72,6 +74,8 @@ class AppLocalizations {
       _localizedValues[locale.languageCode]['posts_title'];
   String get posts_not_found =>
       _localizedValues[locale.languageCode]['posts_not_found'];
+  String get settings_title =>
+      _localizedValues[locale.languageCode]['settings_title'];
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

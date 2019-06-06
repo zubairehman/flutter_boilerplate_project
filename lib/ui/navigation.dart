@@ -1,69 +1,42 @@
-import 'dart:io';
-
+import 'package:boilerplate/locale/index.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AppNavigation extends StatefulWidget {
-  AppNavigation({
-    @required this.children,
-  });
-  final List<Screen> children;
-  @override
-  _AppNavigationState createState() => _AppNavigationState();
-}
+import '../data/sharedpref/constants/index.dart';
+import '../routes.dart';
+import '../widgets/index.dart';
+import 'home/home.dart';
+import 'settings/settings.dart';
 
-class _AppNavigationState extends State<AppNavigation> {
-  int _currentIndex = 0;
+class AppNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          for (int i = 0; i < widget.children.length; i++) ...[
-            Offstage(
-              offstage: _currentIndex != i,
-              child: widget.children[i].child,
-            ),
-          ],
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: tabSelected,
-        items: [
-          for (var tab in widget.children) ...[
-            BottomNavigationBarItem(
-              icon: Icon(tab.icon),
-              title: Text(tab.title),
-            ),
-          ],
-        ],
-      ),
+    return DynamicNavigation(
+      type: NavigationType.bottomTabs,
+      children: [
+        Screen(
+            iconData: Icons.home,
+            title: AppLocalizations.of(context).posts_title,
+            child: HomeScreen(),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  SharedPreferences.getInstance().then((preference) {
+                    preference.setBool(Preferences.is_logged_in, false);
+                    Navigator.of(context).pushReplacementNamed(Routes.login);
+                  });
+                },
+                icon: Icon(
+                  Icons.power_settings_new,
+                ),
+              ),
+            ]),
+        Screen(
+          iconData: Icons.settings,
+          title: AppLocalizations.of(context).settings_title,
+          child: SettingsScreen(),
+        ),
+      ],
     );
-  }
-
-  void tabSelected(val) {
-    if (mounted)
-      setState(() {
-        _currentIndex = val;
-      });
-  }
-}
-
-class Screen {
-  const Screen({
-    @required this.title,
-    @required this.iconData,
-    @required this.child,
-    this.description,
-    this.iosIconData,
-  });
-  final Widget child;
-  final String title, description;
-  final IconData iconData, iosIconData;
-  IconData get icon {
-    if (Platform.isIOS || Platform.isMacOS) {
-      return iosIconData ?? iconData;
-    }
-    return iconData;
   }
 }
