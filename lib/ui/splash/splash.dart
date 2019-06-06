@@ -12,6 +12,8 @@ class SplashScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _SplashScreenState();
 }
 
+const bool autoLogin = true;
+
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
@@ -34,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
   navigate() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    if (preferences.getBool(Preferences.is_logged_in) ?? false) {
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+    if (autoLogin && preferences.getBool(Preferences.is_logged_in) ?? false) {
+      Navigator.of(context).pushReplacementNamed(Routes.home);
     } else {
       Navigator.of(context).pushReplacementNamed(Routes.login);
     }
