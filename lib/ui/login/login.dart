@@ -1,16 +1,17 @@
-import 'package:boilerplate/constants/strings.dart';
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/routes.dart';
-import 'package:boilerplate/stores/form/form_store.dart';
-import 'package:boilerplate/widgets/app_icon_widget.dart';
-import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
-import 'package:boilerplate/widgets/progress_indicator_widget.dart';
-import 'package:boilerplate/widgets/rounded_button_widget.dart';
-import 'package:boilerplate/widgets/textfield_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flushbar/flushbar_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../constants/strings.dart';
+import '../../data/sharedpref/constants/preferences.dart';
+import '../../routes.dart';
+import '../../stores/form/form_store.dart';
+import '../../widgets/app_icon_widget.dart';
+import '../../widgets/empty_app_bar_widget.dart';
+import '../../widgets/progress_indicator_widget.dart';
+import '../../widgets/rounded_button_widget.dart';
+import '../../widgets/textfield_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

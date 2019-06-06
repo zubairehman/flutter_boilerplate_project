@@ -1,11 +1,12 @@
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/routes.dart';
-import 'package:boilerplate/stores/post/post_store.dart';
-import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../data/sharedpref/constants/preferences.dart';
+import '../../routes.dart';
+import '../../stores/post/post_store.dart';
+import '../../widgets/progress_indicator_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
