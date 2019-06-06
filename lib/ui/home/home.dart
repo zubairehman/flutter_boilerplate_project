@@ -1,9 +1,9 @@
-import 'package:boilerplate/constants/index.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constants/index.dart';
 import '../../data/sharedpref/constants/preferences.dart';
 import '../../routes.dart';
 import '../../stores/post/post_store.dart';
