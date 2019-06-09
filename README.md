@@ -23,6 +23,14 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * User Notifications
 * Logging
 
+### Up-Comming Features:
+
+* Dependency Injection
+* Multilingual Support
+* Dark Theme
+* Provider example
+* Minor Improvments
+
 ### Libraries & Tools Used
 
 * [Dio](https://github.com/flutterchina/dio)
