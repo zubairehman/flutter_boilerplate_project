@@ -14,26 +14,16 @@ class Repository {
   final _postDataSource = PostDataSource.instance;
 
   // api objects
-  final _postApi = PostApi.instance;
+  final PostApi postApi;
 
   // shared pref object
-  final _sharedPrefsHelper = SharedPreferenceHelper.instance;
+  final SharedPreferenceHelper sharedPrefsHelper;
 
-  // singleton repository object:-----------------------------------------------
-  static final Repository _singleton = Repository._();
-
-  // A private constructor. Allows us to create instances of Repository
-  // only from within the Repository class itself.
-  Repository._();
-
-  // factory method to return the same object each time its needed
-  factory Repository() => _singleton;
-
-  // Singleton accessor
-  static Repository get instance => _singleton;
+  // constructor
+  Repository(this.postApi, this.sharedPrefsHelper);
 
   // Post: ---------------------------------------------------------------------
-  Future<PostsList> getPosts() => _postApi
+  Future<PostsList> getPosts() => postApi
       .getPosts()
       .then((posts) => posts)
       .catchError((error) => throw error);

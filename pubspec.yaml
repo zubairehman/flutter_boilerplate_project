@@ -60,6 +60,10 @@ dependencies:
   # A flexible widget for user notification.
   flushbar: 1.5.3
 
+  # Dependency injection
+  inject:
+    path: ./injection/inject.dart/package/inject
+
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +71,8 @@ dev_dependencies:
 
   flutter_launcher_icons: "^0.7.0"
   build_runner: ^1.3.0
+  inject_generator:
+    path: ./injection/inject.dart/package/inject_generator
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"
