@@ -1,9 +1,10 @@
-import 'package:boilerplate/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'constants/app_theme.dart';
-import 'constants/strings.dart';
+import 'locale/index.dart';
+import 'routes.dart';
 import 'ui/splash/splash.dart';
 
 void main() {
@@ -22,9 +23,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        const AppLocalizationsDelegate(),
+      ],
+      supportedLocales: AppLocalizationsDelegate.supportedLocales,
       debugShowCheckedModeBanner: false,
-      title: Strings.appName,
+      onGenerateTitle: (BuildContext context) {
+        return AppLocalizations.of(context).title;
+      },
       theme: themeData,
+      darkTheme: themeDataDark,
       routes: Routes.routes,
       home: SplashScreen(),
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'ui/home/home.dart';
 import 'ui/login/login.dart';
+import 'ui/navigation.dart';
+import 'ui/settings/settings.dart';
 import 'ui/splash/splash.dart';
 
 class Routes {
@@ -15,9 +17,6 @@ class Routes {
   static final routes = <String, WidgetBuilder>{
     splash: (BuildContext context) => SplashScreen(),
     login: (BuildContext context) => LoginScreen(),
-    home: (BuildContext context) => HomeScreen(),
+    home: (BuildContext context) => AppNavigation(),
   };
 }
-
-
-

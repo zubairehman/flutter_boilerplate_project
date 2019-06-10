@@ -5,7 +5,6 @@ part 'error_store.g.dart';
 class ErrorStore = _ErrorStore with _$ErrorStore;
 
 abstract class _ErrorStore implements Store {
-
   // store variables:-----------------------------------------------------------
   @observable
   String errorMessage;

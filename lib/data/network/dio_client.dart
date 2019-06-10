@@ -24,7 +24,6 @@ final Dio dio = new Dio()
   }));
 
 class DioClient {
-
   // singleton object
   static final DioClient _singleton = DioClient._();
 
@@ -37,7 +36,7 @@ class DioClient {
 
   // Singleton accessor
   static DioClient get instance => DioClient();
-  
+
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String uri) async {
     try {

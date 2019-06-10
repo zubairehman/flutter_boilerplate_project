@@ -39,14 +39,12 @@ class Repository {
       .catchError((error) => throw error);
 
   Future<List<Post>> findPostById(int id) {
-
     //creating filter
     List<Filter> filters = List();
 
     //check to see if dataLogsType is not null
     if (id != null) {
-      Filter dataLogTypeFilter =
-      Filter.equal(DBConstants.FIELD_ID, id);
+      Filter dataLogTypeFilter = Filter.equal(DBConstants.FIELD_ID, id);
       filters.add(dataLogTypeFilter);
     }
 

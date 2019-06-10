@@ -1,4 +1,3 @@
-
 class Post {
   int userId;
   int id;
@@ -25,5 +24,4 @@ class Post {
         "title": title,
         "body": body,
       };
-  
 }

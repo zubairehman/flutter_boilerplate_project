@@ -1,15 +1,18 @@
 import 'dart:async';
 
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/routes.dart';
-import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../data/sharedpref/constants/preferences.dart';
+import '../../routes.dart';
+import '../../widgets/app_icon_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SplashScreenState();
 }
+
+const bool autoLogin = true;
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
@@ -33,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
   navigate() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    if (preferences.getBool(Preferences.is_logged_in) ?? false) {
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+    if (autoLogin && (preferences?.getBool(Preferences.is_logged_in) ?? false)) {
+      Navigator.of(context).pushReplacementNamed(Routes.home);
     } else {
       Navigator.of(context).pushReplacementNamed(Routes.login);
     }
