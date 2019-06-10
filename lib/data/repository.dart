@@ -23,8 +23,8 @@ class Repository {
   Repository(this._postApi, this._sharedPrefsHelper, this._postDataSource);
 
   // Post: ---------------------------------------------------------------------
-  Future<PostsList> getPosts() {
-    return _postDataSource.getPostsFromDb() ??
+  Future<PostsList> getPosts() async {
+    return await _postDataSource.getPostsFromDb() ??
         _postApi
             .getPosts()
             .then((posts) => posts)
