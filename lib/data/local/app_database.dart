@@ -9,6 +9,9 @@ import 'package:sembast/sembast_io.dart';
 import 'constants/db_constants.dart';
 
 class AppDatabase {
+  // Key for encryption
+  var encryptionKey = "";
+
   // Singleton instance
   static final AppDatabase _singleton = AppDatabase._();
 
@@ -17,9 +20,6 @@ class AppDatabase {
 
   // Completer is used for transforming synchronous code into asynchronous code.
   Completer<Database> _dbOpenCompleter;
-
-  // Key for encryption
-  var encryptionKey = "";
 
   // A private constructor. Allows us to create instances of AppDatabase
   // only from within the AppDatabase class itself.

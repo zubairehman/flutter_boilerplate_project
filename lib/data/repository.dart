@@ -10,7 +10,6 @@ import 'local/constants/db_constants.dart';
 import 'network/apis/posts/post_api.dart';
 
 class Repository {
-
   // data source object
   final PostDataSource _postDataSource;
 
@@ -24,20 +23,21 @@ class Repository {
   Repository(this._postApi, this._sharedPrefsHelper, this._postDataSource);
 
   // Post: ---------------------------------------------------------------------
-  Future<PostsList> getPosts() => _postApi
-      .getPosts()
-      .then((posts) => posts)
-      .catchError((error) => throw error);
+  Future<PostsList> getPosts() {
+    return _postDataSource.getPostsFromDb() ??
+        _postApi
+            .getPosts()
+            .then((posts) => posts)
+            .catchError((error) => throw error);
+  }
 
   Future<List<Post>> findPostById(int id) {
-
     //creating filter
     List<Filter> filters = List();
 
     //check to see if dataLogsType is not null
     if (id != null) {
-      Filter dataLogTypeFilter =
-      Filter.equal(DBConstants.FIELD_ID, id);
+      Filter dataLogTypeFilter = Filter.equal(DBConstants.FIELD_ID, id);
       filters.add(dataLogTypeFilter);
     }
 
