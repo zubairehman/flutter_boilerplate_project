@@ -7,18 +7,18 @@ import 'package:boilerplate/models/post/post_list.dart';
 
 class PostApi {
   // dio instance
-  final DioClient dioClient;
+  final DioClient _dioClient;
 
   // rest-client instance
-  final RestClient restClient;
+  final RestClient _restClient;
 
   // injecting dio instance
-  PostApi(this.dioClient, this.restClient);
+  PostApi(this._dioClient, this._restClient);
 
   /// Returns list of post in response
   Future<PostsList> getPosts() async {
     try {
-      final res = await dioClient.get(Endpoints.getPosts);
+      final res = await _dioClient.get(Endpoints.getPosts);
       return PostsList.fromJson(res);
     } catch (e) {
       print(e.toString());
@@ -29,7 +29,7 @@ class PostApi {
   /// sample api call with default rest client
 //  Future<PostsList> getPosts() {
 //
-//    return restClient
+//    return _restClient
 //        .get(Endpoints.getPosts)
 //        .then((dynamic res) => PostsList.fromJson(res))
 //        .catchError((error) => throw NetworkException(message: error));

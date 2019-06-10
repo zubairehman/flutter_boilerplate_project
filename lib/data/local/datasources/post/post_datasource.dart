@@ -12,15 +12,16 @@ class PostDataSource {
   // singleton instance of an opened database.
   Future<Database> get _db async => await AppDatabase.instance.database;
 
-  // Singleton instance
-  static final PostDataSource _singleton = PostDataSource._();
+//  // Singleton instance
+//  static final PostDataSource _singleton = PostDataSource._();
+//
+//  // A private constructor. Allows us to create instances of PostDataSource
+//  // only from within the PostDataSource class itself.
+//  PostDataSource._();
+//
+//  // Singleton accessor
+//  static PostDataSource get instance => _singleton;
 
-  // A private constructor. Allows us to create instances of PostDataSource
-  // only from within the PostDataSource class itself.
-  PostDataSource._();
-
-  // Singleton accessor
-  static PostDataSource get instance => _singleton;
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {

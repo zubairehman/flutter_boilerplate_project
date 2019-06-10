@@ -10,20 +10,21 @@ import 'local/constants/db_constants.dart';
 import 'network/apis/posts/post_api.dart';
 
 class Repository {
-  // database object
-  final _postDataSource = PostDataSource.instance;
+
+  // data source object
+  final PostDataSource _postDataSource;
 
   // api objects
-  final PostApi postApi;
+  final PostApi _postApi;
 
   // shared pref object
-  final SharedPreferenceHelper sharedPrefsHelper;
+  final SharedPreferenceHelper _sharedPrefsHelper;
 
   // constructor
-  Repository(this.postApi, this.sharedPrefsHelper);
+  Repository(this._postApi, this._sharedPrefsHelper, this._postDataSource);
 
   // Post: ---------------------------------------------------------------------
-  Future<PostsList> getPosts() => postApi
+  Future<PostsList> getPosts() => _postApi
       .getPosts()
       .then((posts) => posts)
       .catchError((error) => throw error);

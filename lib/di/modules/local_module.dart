@@ -1,3 +1,4 @@
+import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:inject/inject.dart';
@@ -24,11 +25,19 @@ class LocalModule extends NetworkModule {
   SharedPreferenceHelper provideSharedPreferenceHelper() =>
       SharedPreferenceHelper(provideSharedPreferences());
 
+  /// A singleton post dataSource provider.
+  ///
+  /// Calling it multiple times will return the same instance.
+  @provide
+  @singleton
+  PostDataSource providePostDataSource() => PostDataSource();
+
   /// A singleton repository provider.
   ///
   /// Calling it multiple times will return the same instance.
   @provide
   @singleton
   Repository provideRepository() =>
-      Repository(providePostApi(), provideSharedPreferenceHelper());
+      Repository(providePostApi(), provideSharedPreferenceHelper(), providePostDataSource());
+
 }

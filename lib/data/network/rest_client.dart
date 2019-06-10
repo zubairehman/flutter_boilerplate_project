@@ -7,10 +7,10 @@ import 'exceptions/network_exceptions.dart';
 
 class RestClient {
   // dio instance
-  final Dio dio;
+  final Dio _dio;
 
   // injecting dio instance
-  RestClient(this.dio);
+  RestClient(this._dio);
 
   // instantiate json decoder for json serialization
   final JsonDecoder _decoder = JsonDecoder();

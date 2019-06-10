@@ -4,15 +4,15 @@ import 'package:inject/inject.dart';
 @provide
 class DioClient {
   // dio instance
-  final Dio dio;
+  final Dio _dio;
 
   // injecting dio instance
-  DioClient(this.dio);
+  DioClient(this._dio);
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String uri) async {
     try {
-      final Response response = await dio.get(uri);
+      final Response response = await _dio.get(uri);
       return response.data;
     } catch (e) {
       print(e.toString());
@@ -23,7 +23,7 @@ class DioClient {
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(String uri, dynamic data) async {
     try {
-      final Response response = await dio.post(uri, data: data);
+      final Response response = await _dio.post(uri, data: data);
       return response.data;
     } catch (e) {
       throw e;
