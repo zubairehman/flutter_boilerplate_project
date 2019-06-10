@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final Dio dio = new Dio()
   ..options.baseUrl = Endpoints.baseUrl
-  ..options.connectTimeout = 5000
-  ..options.receiveTimeout = 3000
+  ..options.connectTimeout = Endpoints.connectionTimeout
+  ..options.receiveTimeout = Endpoints.receiveTimeout
   ..options.headers = {'Content-Type': 'application/json; charset=utf-8'}
   ..interceptors.add(LogInterceptor(responseBody: true))
   ..interceptors.add(InterceptorsWrapper(onRequest: (Options options) async {
