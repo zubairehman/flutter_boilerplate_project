@@ -16,8 +16,8 @@ class NetworkModule {
   @singleton
   Dio provideDio() => Dio()
     ..options.baseUrl = Endpoints.baseUrl
-    ..options.connectTimeout = 5000
-    ..options.receiveTimeout = 3000
+    ..options.connectTimeout = Endpoints.connectionTimeout
+    ..options.receiveTimeout = Endpoints.receiveTimeout
     ..options.headers = {'Content-Type': 'application/json; charset=utf-8'}
     ..interceptors.add(LogInterceptor(responseBody: true))
     ..interceptors.add(InterceptorsWrapper(onRequest: (Options options) async {
@@ -48,10 +48,14 @@ class NetworkModule {
   @singleton
   RestClient provideRestClient() => RestClient(provideDio());
 
+  // Api Providers:-------------------------------------------------------------
+  // Define all your api providers here
   /// A singleton post_api provider.
   ///
   /// Calling it multiple times will return the same instance.
   @provide
   @singleton
   PostApi providePostApi() => PostApi(provideDioClient(), provideRestClient());
+  // Api Providers End:---------------------------------------------------------
+
 }
