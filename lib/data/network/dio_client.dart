@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:inject/inject.dart';
 
-@provide
 class DioClient {
   // dio instance
   final Dio _dio;
