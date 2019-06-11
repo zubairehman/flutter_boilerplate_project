@@ -22,6 +22,7 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * Code Generation
 * User Notifications
 * Logging
+* Dependency Injection
 
 ### Libraries & Tools Used
 
@@ -34,6 +35,7 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * [Logging](https://github.com/zubairehman/Flogs)
 * [Notifications](https://github.com/AndreHaueisen/flushbar)
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
+* [Dependency Injection](https://github.com/google/inject.dart)
 
 ### MobX
 
