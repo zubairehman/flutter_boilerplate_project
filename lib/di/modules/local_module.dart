@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:boilerplate/data/local/app_database.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/repository.dart';
@@ -65,15 +64,8 @@ class LocalModule extends NetworkModule {
     return database;
   }
 
-  /// A singleton app database provider.
-  ///
-  /// Calling it multiple times will return the same instance.
-  @provide
-  @singleton
-  AppDatabase provideAppDatabase() => AppDatabase(provideDatabase());
-
   // DataSources:---------------------------------------------------------------
-  // Define all your data source here
+  // Define all your data sources here
   /// A singleton post dataSource provider.
   ///
   /// Calling it multiple times will return the same instance.

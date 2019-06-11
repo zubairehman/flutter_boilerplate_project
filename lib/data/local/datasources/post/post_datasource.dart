@@ -1,4 +1,3 @@
-import 'package:boilerplate/data/local/app_database.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/models/post/post.dart';
 import 'package:boilerplate/models/post/post_list.dart';
