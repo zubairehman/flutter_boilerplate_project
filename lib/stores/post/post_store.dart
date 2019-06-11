@@ -1,4 +1,5 @@
 import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/main.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
@@ -9,6 +10,9 @@ part 'post_store.g.dart';
 class PostStore = _PostStore with _$PostStore;
 
 abstract class _PostStore implements Store {
+
+  // repository instance
+  Repository repository = appComponent.getRepository();
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
@@ -28,7 +32,7 @@ abstract class _PostStore implements Store {
   Future getPosts() async {
     loading = true;
 
-    Repository.instance.getPosts().then((postsList) {
+    repository.getPosts().then((postsList) {
       this.postsList = postsList;
       loading = false;
       success = true;

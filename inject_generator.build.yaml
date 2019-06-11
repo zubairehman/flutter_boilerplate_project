@@ -1,0 +1,13 @@
+builders:
+  inject_generator:
+    target: ":inject_generator"
+    import: "package:inject_generator/inject_generator.dart"
+    builder_factories:
+    - "summarizeBuilder"
+    - "generateBuilder"
+    build_extensions:
+      ".dart":
+      - ".inject.summary"
+      - ".inject.dart"
+    auto_apply: dependents
+    build_to: source

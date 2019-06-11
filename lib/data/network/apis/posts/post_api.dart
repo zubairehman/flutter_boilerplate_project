@@ -6,33 +6,27 @@ import 'package:boilerplate/data/network/rest_client.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 
 class PostApi {
-  // singleton object
-  static final PostApi _singleton = PostApi._();
+  // dio instance
+  final DioClient _dioClient;
 
-  // A private constructor. Allows us to create instances of PostApi
-  // only from within the PostApi class itself.
-  PostApi._();
+  // rest-client instance
+  final RestClient _restClient;
 
-  // factory method to return the same object each time its needed
-  factory PostApi() => _singleton;
-
-  // Singleton accessor
-  static PostApi get instance => _singleton;
-
-  // rest client
-  final _restClient = RestClient.instance;
-  final _dioClient = DioClient.instance;
+  // injecting dio instance
+  PostApi(this._dioClient, this._restClient);
 
   /// Returns list of post in response
-  Future<PostsList> getPosts() {
-
-    return _dioClient
-        .get(Endpoints.getPosts)
-        .then((dynamic res) => PostsList.fromJson(res))
-        .catchError((error) => throw error);
+  Future<PostsList> getPosts() async {
+    try {
+      final res = await _dioClient.get(Endpoints.getPosts);
+      return PostsList.fromJson(res);
+    } catch (e) {
+      print(e.toString());
+      throw e;
+    }
   }
 
-/// sample api call with default rest client
+  /// sample api call with default rest client
 //  Future<PostsList> getPosts() {
 //
 //    return _restClient

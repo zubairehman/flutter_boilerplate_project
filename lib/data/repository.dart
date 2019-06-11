@@ -10,43 +10,44 @@ import 'local/constants/db_constants.dart';
 import 'network/apis/posts/post_api.dart';
 
 class Repository {
-  // database object
-  final _postDataSource = PostDataSource.instance;
+  // data source object
+  final PostDataSource _postDataSource;
 
   // api objects
-  final _postApi = PostApi.instance;
+  final PostApi _postApi;
 
   // shared pref object
-  final _sharedPrefsHelper = SharedPreferenceHelper.instance;
+  final SharedPreferenceHelper _sharedPrefsHelper;
 
-  // singleton repository object:-----------------------------------------------
-  static final Repository _singleton = Repository._();
-
-  // A private constructor. Allows us to create instances of Repository
-  // only from within the Repository class itself.
-  Repository._();
-
-  // factory method to return the same object each time its needed
-  factory Repository() => _singleton;
-
-  // Singleton accessor
-  static Repository get instance => _singleton;
+  // constructor
+  Repository(this._postApi, this._sharedPrefsHelper, this._postDataSource);
 
   // Post: ---------------------------------------------------------------------
-  Future<PostsList> getPosts() => _postApi
-      .getPosts()
-      .then((posts) => posts)
-      .catchError((error) => throw error);
+  Future<PostsList> getPosts() async {
+    // check to see if posts are present in database, then fetch from database
+    // else make a network call to get all posts, store them into database for
+    // later use
+    return await _postDataSource.count() > 0
+        ? _postDataSource
+            .getPostsFromDb()
+            .then((postsList) => postsList)
+            .catchError((error) => throw error)
+        : _postApi.getPosts().then((postsList) {
+            postsList.posts.forEach((post) {
+              _postDataSource.insert(post);
+            });
+
+            return postsList;
+          }).catchError((error) => throw error);
+  }
 
   Future<List<Post>> findPostById(int id) {
-
     //creating filter
     List<Filter> filters = List();
 
     //check to see if dataLogsType is not null
     if (id != null) {
-      Filter dataLogTypeFilter =
-      Filter.equal(DBConstants.FIELD_ID, id);
+      Filter dataLogTypeFilter = Filter.equal(DBConstants.FIELD_ID, id);
       filters.add(dataLogTypeFilter);
     }
 

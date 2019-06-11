@@ -1,6 +1,6 @@
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/models/post/post.dart';
-import 'package:f_logs/data/local/app_database.dart';
+import 'package:boilerplate/models/post/post_list.dart';
 import 'package:sembast/sembast.dart';
 
 class PostDataSource {
@@ -10,21 +10,67 @@ class PostDataSource {
 
   // Private getter to shorten the amount of code needed to get the
   // singleton instance of an opened database.
-  Future<Database> get _db async => await AppDatabase.instance.database;
+//  Future<Database> get _db async => await AppDatabase.instance.database;
 
-  // Singleton instance
-  static final PostDataSource _singleton = PostDataSource._();
+  // database instance
+  final Future<Database> _db;
 
-  // A private constructor. Allows us to create instances of PostDataSource
-  // only from within the PostDataSource class itself.
-  PostDataSource._();
-
-  // Singleton accessor
-  static PostDataSource get instance => _singleton;
+  // Constructor
+  PostDataSource(this._db);
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
     return await _postsStore.add(await _db, post.toMap());
+  }
+
+  Future<int> count() async {
+    return await _postsStore.count(await _db);
+  }
+
+  Future<List<Post>> getAllSortedByFilter({List<Filter> filters}) async {
+    //creating finder
+    final finder = Finder(
+        filter: Filter.and(filters),
+        sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
+
+    final recordSnapshots = await _postsStore.find(
+      await _db,
+      finder: finder,
+    );
+
+    // Making a List<Post> out of List<RecordSnapshot>
+    return recordSnapshots.map((snapshot) {
+      final post = Post.fromMap(snapshot.value);
+      // An ID is a key of a record from the database.
+      post.id = snapshot.key;
+      return post;
+    }).toList();
+  }
+
+  Future<PostsList> getPostsFromDb() async {
+
+    print('Loading from database');
+
+    // post list
+    var postsList;
+
+    // fetching data
+    final recordSnapshots = await _postsStore.find(
+      await _db,
+    );
+
+    // Making a List<Post> out of List<RecordSnapshot>
+    if(recordSnapshots.length > 0) {
+      postsList = PostsList(
+          posts: recordSnapshots.map((snapshot) {
+            final post = Post.fromMap(snapshot.value);
+            // An ID is a key of a record from the database.
+            post.id = snapshot.key;
+            return post;
+          }).toList());
+    }
+
+    return postsList;
   }
 
   Future<int> update(Post post) async {
@@ -52,37 +98,4 @@ class PostDataSource {
     );
   }
 
-  Future<List<Post>> getAllSortedByFilter({List<Filter> filters}) async {
-    //creating finder
-    final finder = Finder(
-        filter: Filter.and(filters),
-        sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
-
-    final recordSnapshots = await _postsStore.find(
-      await _db,
-      finder: finder,
-    );
-
-    // Making a List<Post> out of List<RecordSnapshot>
-    return recordSnapshots.map((snapshot) {
-      final post = Post.fromMap(snapshot.value);
-      // An ID is a key of a record from the database.
-      post.id = snapshot.key;
-      return post;
-    }).toList();
-  }
-
-  Future<List<Post>> getAllPosts() async {
-    final recordSnapshots = await _postsStore.find(
-      await _db,
-    );
-
-    // Making a List<Post> out of List<RecordSnapshot>
-    return recordSnapshots.map((snapshot) {
-      final post = Post.fromMap(snapshot.value);
-      // An ID is a key of a record from the database.
-      post.id = snapshot.key;
-      return post;
-    }).toList();
-  }
 }

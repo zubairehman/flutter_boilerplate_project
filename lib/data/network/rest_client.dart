@@ -1,23 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 import 'exceptions/network_exceptions.dart';
 
 class RestClient {
-  // singleton object
-  static final RestClient _singleton = RestClient._();
+  // dio instance
+  final Dio _dio;
 
-  // A private constructor. Allows us to create instances of RestClient
-  // only from within the RestClient class itself.
-  RestClient._();
+  // injecting dio instance
+  RestClient(this._dio);
 
-  // factory method to return the same object each time its needed
-  factory RestClient() => _singleton;
-  
-  // Singleton accessor
-  static RestClient get instance => RestClient();
-  
   // instantiate json decoder for json serialization
   final JsonDecoder _decoder = JsonDecoder();
 
@@ -28,7 +22,8 @@ class RestClient {
       final int statusCode = response.statusCode;
 
       if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw NetworkException(message:"Error fetching data from server", statusCode: statusCode);
+        throw NetworkException(
+            message: "Error fetching data from server", statusCode: statusCode);
       }
 
       print(res);
@@ -45,7 +40,8 @@ class RestClient {
       final int statusCode = response.statusCode;
 
       if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw NetworkException(message:"Error fetching data from server", statusCode: statusCode);
+        throw NetworkException(
+            message: "Error fetching data from server", statusCode: statusCode);
       }
       return _decoder.convert(res);
     });
