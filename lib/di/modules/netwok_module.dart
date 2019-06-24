@@ -46,7 +46,7 @@ class NetworkModule {
   /// Calling it multiple times will return the same instance.
   @provide
   @singleton
-  RestClient provideRestClient() => RestClient(provideDio());
+  RestClient provideRestClient() => RestClient();
 
   // Api Providers:-------------------------------------------------------------
   // Define all your api providers here

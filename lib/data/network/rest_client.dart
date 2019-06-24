@@ -1,16 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:dio/dio.dart';
+
 import 'package:http/http.dart' as http;
 
 import 'exceptions/network_exceptions.dart';
 
 class RestClient {
-  // dio instance
-  final Dio _dio;
-
-  // injecting dio instance
-  RestClient(this._dio);
 
   // instantiate json decoder for json serialization
   final JsonDecoder _decoder = JsonDecoder();
