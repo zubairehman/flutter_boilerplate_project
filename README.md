@@ -233,22 +233,34 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-## How to use this Boilerplate repo
-Fork / download this repo
+## How to Use 
 
-Go to projct root and execute following command in console 
-`` flutter pub get ``
+**Step 1:**
+Download or clone this repo by using the link below:
 
-This project uses inject  which works with code generation,  execute following command to generate files.
+```
+https://github.com/zubairehman/flutter-boilerplate-project.git
+```
 
-``flutter packages pub run build_runner build``
+**Step 2:**
+Go to project root and execute the following command in console to get the required dependencies: 
 
-In case having conflict issue on build_runner use following command
+``` 
+flutter pub get 
+```
 
-`` flutter packages pub run build_runner build --delete-conflicting-outputs ``
+**Step 3:**
+This project uses `inject` library that works with code generation, execute the following command to generate files:
 
-   
+```
+flutter packages pub run build_runner build delete-conflicting-outputs
+```
 
+or watch command in order to keep the source code synced automatically:
+
+```
+flutter packages pub run build_runner watch
+```
 
 ## Wiki
 
