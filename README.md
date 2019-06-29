@@ -26,9 +26,10 @@ The Boilerplate contains the minimal implementation required to create a new lib
 
 ### Up-Comming Features:
 
-* Dependency Injection
-* Multilingual Support
 * Dark Theme
+* Connectivity Support
+* Background Fetch Support
+* Multilingual Support
 * Provider example
 * Minor Improvments
 
