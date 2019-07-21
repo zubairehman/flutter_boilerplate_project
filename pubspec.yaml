@@ -41,9 +41,9 @@ dependencies:
 
   # MobX is a library for reactively managing the state of your applications. Use the power of
   # observables, actions, and reactions to supercharge your Dart and Flutter apps.
-  mobx: ^0.1.2
-  flutter_mobx: ^0.1.1
-  mobx_codegen: ^0.1.0+1
+  mobx: ^0.3.4
+  flutter_mobx: ^0.3.0+1
+  mobx_codegen: ^0.3.3+1
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
   provider: ^1.6.1

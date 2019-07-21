@@ -9,7 +9,7 @@ part 'post_store.g.dart';
 
 class PostStore = _PostStore with _$PostStore;
 
-abstract class _PostStore implements Store {
+abstract class _PostStore with Store {
 
   // repository instance
   Repository repository = appComponent.getRepository();

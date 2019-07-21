@@ -7,7 +7,7 @@ part 'form_store.g.dart';
 
 class FormStore = _FormStore with _$FormStore;
 
-abstract class _FormStore implements Store {
+abstract class _FormStore with Store {
   // store for handling form errors
   final FormErrorStore formErrorStore = FormErrorStore();
 
@@ -161,7 +161,7 @@ abstract class _FormStore implements Store {
 
 class FormErrorStore = _FormErrorStore with _$FormErrorStore;
 
-abstract class _FormErrorStore implements Store {
+abstract class _FormErrorStore with Store {
   @observable
   String userEmail;
 

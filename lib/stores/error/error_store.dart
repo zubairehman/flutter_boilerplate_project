@@ -4,7 +4,7 @@ part 'error_store.g.dart';
 
 class ErrorStore = _ErrorStore with _$ErrorStore;
 
-abstract class _ErrorStore implements Store {
+abstract class _ErrorStore with Store {
 
   // store variables:-----------------------------------------------------------
   @observable
