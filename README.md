@@ -266,6 +266,14 @@ or watch command in order to keep the source code synced automatically:
 flutter packages pub run build_runner watch
 ```
 
+## Hide Generated Files
+
+In-order to hide generated files, navigate to `Android Studio` -> `Preferences` -> `Editor` -> `File Types` and past the below lines under `ignore files and folders` section:
+
+```
+*.inject.summary;*.inject.dart;*.g.dart;
+```
+
 ## Wiki
 
 Checkout [wiki](https://github.com/zubairehman/flutter-boilerplate-project/wiki) for more info
