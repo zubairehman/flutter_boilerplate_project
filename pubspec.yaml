@@ -58,7 +58,7 @@ dependencies:
   dio: 2.1.6
 
   # A flexible widget for user notification.
-  flushbar: 1.5.3
+  flushbar: ^1.8.2
 
   # Dependency injection
   inject:
