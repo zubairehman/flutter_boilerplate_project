@@ -274,6 +274,13 @@ In-order to hide generated files, navigate to `Android Studio` -> `Preferences` 
 *.inject.summary;*.inject.dart;*.g.dart;
 ```
 
+In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `Files:Exclude`. Add the following patterns:
+```
+**/*.inject.summary
+**/*.inject.dart
+**/*.g.dart
+```
+
 ## Wiki
 
 Checkout [wiki](https://github.com/zubairehman/flutter-boilerplate-project/wiki) for more info
