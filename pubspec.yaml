@@ -10,7 +10,7 @@ description: A flutter boilerplate project created using MobX and Provider.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   # The following adds the shared pref as a dependency in your application
-  shared_preferences: ^0.5.3+4
+  shared_preferences: ^0.5.4+6
 
   # A composable, Future-based library for making HTTP requests.
   http: ^0.12.0+2
@@ -34,19 +34,19 @@ dependencies:
   # run below mentioned commands to generate launcher icons
   # flutter packages get
   # flutter packages pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.7.3
+  flutter_launcher_icons: ^0.7.4
 
   # Flogs, a powerful logging framework
   f_logs: ^1.2.1
 
   # MobX is a library for reactively managing the state of your applications. Use the power of
   # observables, actions, and reactions to supercharge your Dart and Flutter apps.
-  mobx: ^0.3.8+1
-  flutter_mobx: ^0.3.3+1
-  mobx_codegen: ^0.3.9+1
+  mobx: ^0.3.9+3
+  flutter_mobx: ^0.3.3+3
+  mobx_codegen: ^0.3.10+1
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
-  provider: ^3.1.0
+  provider: ^3.2.0
 
   # String validation and sanitization for Dart. Dart 2-compatible version of validator
   validators: ^2.0.0+1
@@ -55,7 +55,7 @@ dependencies:
   dio: 2.1.13
 
   # A flexible widget for user notification.
-  flushbar: ^1.9.0
+  flushbar: ^1.9.1
 
   # Dependency injection
   inject:
@@ -73,8 +73,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^3.2.2
-  build_runner: ^1.7.1
+  json_serializable: ^3.2.3
+  build_runner: ^1.7.2
   inject_generator:
     git:
       url: https://github.com/google/inject.dart.git

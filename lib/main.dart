@@ -15,6 +15,7 @@ import 'ui/splash/splash.dart';
 var appComponent;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
