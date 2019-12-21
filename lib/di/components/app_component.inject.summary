@@ -1,0 +1,46 @@
+{
+  "asset": "asset:boilerplate/lib/di/components/app_component.dart",
+  "summary": {
+    "injector": [
+      {
+        "name": "AppComponent",
+        "providers": [
+          {
+            "name": "app",
+            "kind": "getter",
+            "injectedType": {
+              "lookupKey": {
+                "root": "asset:boilerplate/lib/main.dart#MyApp",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            "singleton": false,
+            "asynchronous": false,
+            "dependencies": []
+          },
+          {
+            "name": "getRepository",
+            "kind": "method",
+            "injectedType": {
+              "lookupKey": {
+                "root": "asset:boilerplate/lib/data/repository.dart#Repository",
+                "qualifier": null
+              },
+              "isProvider": false
+            },
+            "singleton": false,
+            "asynchronous": false,
+            "dependencies": []
+          }
+        ],
+        "modules": [
+          "asset:boilerplate/lib/di/modules/netwok_module.dart#NetworkModule",
+          "asset:boilerplate/lib/di/modules/local_module.dart#LocalModule"
+        ]
+      }
+    ],
+    "module": [],
+    "injectable": []
+  }
+}

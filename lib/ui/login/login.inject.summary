@@ -1,0 +1,8 @@
+{
+  "asset": "asset:boilerplate/lib/ui/login/login.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

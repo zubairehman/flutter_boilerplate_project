@@ -1,0 +1,8 @@
+{
+  "asset": "asset:boilerplate/lib/data/network/apis/posts/post_api.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

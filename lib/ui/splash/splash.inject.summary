@@ -1,0 +1,8 @@
+{
+  "asset": "asset:boilerplate/lib/ui/splash/splash.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}

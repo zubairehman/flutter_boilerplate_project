@@ -6,7 +6,7 @@ import 'package:inject/inject.dart';
 
 import 'app_component.inject.dart' as g;
 
-/// The top level injector that stitches together multiple app features into
+/// The top level injector that stitches tog`ether multiple app features into
 /// a complete app.
 @Injector(const [NetworkModule, LocalModule])
 abstract class AppComponent {
@@ -14,9 +14,9 @@ abstract class AppComponent {
   MyApp get app;
 
   static Future<AppComponent> create(
-      NetworkModule networkModule,
-      LocalModule localModule,
-      ) async {
+    NetworkModule networkModule,
+    LocalModule localModule,
+  ) async {
     return await g.AppComponent$Injector.create(
       networkModule,
       localModule,

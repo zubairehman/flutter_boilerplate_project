@@ -1,0 +1,8 @@
+{
+  "asset": "asset:boilerplate/lib/ui/home/home.dart",
+  "summary": {
+    "injector": [],
+    "module": [],
+    "injectable": []
+  }
+}
