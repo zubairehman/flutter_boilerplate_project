@@ -3,16 +3,18 @@ name: Flutter action
 on: [push]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        flutter: ['v1.13.5']
-    steps:
-      - uses: actions/checkout@v1
-      - uses: takuyaohashi/setup-flutter@v1
-        with:
-          flutter-version: ${{ matrix.flutter }}
-          channel: 'stable'
-      - name: test
-        run: flutter test
+  build:
+  name: install dependencies
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+
+    - name: install dependencies
+      uses: steebchen/flutter@v1.0.0
+      with:
+        args: pub get
+
+    - name: run tests
+      uses: steebchen/flutter@v1.0.0
+      with:
+        args: test
