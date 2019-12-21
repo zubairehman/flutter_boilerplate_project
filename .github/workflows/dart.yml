@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        flutter: ['latest', 'v1.13.5']
+        flutter: ['v1.13.5']
     steps:
       - uses: actions/checkout@v1
       - uses: takuyaohashi/setup-flutter@v1
