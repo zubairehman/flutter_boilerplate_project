@@ -95,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
-            name: 'navigate',
             builder: (context) {
               return _store.success
                   ? navigate(context)
@@ -103,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
-            name: 'loading',
+            key: GlobalKey(),
             builder: (context) {
               return Visibility(
                 visible: _store.loading,
@@ -219,13 +218,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context, String message) {
-    if(message != null) {
+    if (message != null) {
       FlushbarHelper.createError(
         message: message,
         title: 'Error',
         duration: Duration(seconds: 3),
-      )
-        ..show(context);
+      )..show(context);
     }
 
     return Container();
