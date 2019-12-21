@@ -21,7 +21,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Center(child: AppIconWidget(image: 'assets/icons/ic_appicon.png')),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('흙수저 탈출 앱 원칙', style: Theme.of(context).textTheme.title),
+          ],
+        ),
+      ),
     );
   }
 

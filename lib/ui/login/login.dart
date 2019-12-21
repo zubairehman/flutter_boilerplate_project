@@ -2,7 +2,6 @@ import 'package:boilerplate/constants/strings.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
-import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:boilerplate/widgets/rounded_button_widget.dart';
@@ -135,7 +134,18 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              AppIconWidget(image: 'assets/icons/ic_appicon.png'),
+              RichText(
+                text: TextSpan(
+                  text: '흙수저 탈출 앱 ',
+                  style: Theme.of(context).textTheme.title,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: '원칙',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(text: 'Principles'),
+                  ],
+                ),
+              ),
               SizedBox(height: 24.0),
               _buildUserIdField(),
               _buildPasswordField(),
@@ -210,10 +220,23 @@ class _LoginScreenState extends State<LoginScreen> {
         if (_store.canLogin) {
           _store.login();
         } else {
-          showErrorMessage(context, 'Please fill in all fields');
+          showErrorMessage(context, 'Email / password 를 입력해주세요.');
         }
       },
     );
+  }
+
+  Widget _buildSignUpButton() {
+    return RoundedButtonWidget(
+      buttonText: Strings.login_btn_sign_up, 
+      buttonColor: Colors.orangeAccent, 
+      textColor: Colors.white, onPressed: () async {
+      if (_store.canLogin) {
+        _store.register();
+      } else {
+        showErrorMessage(context, 'Email / password 를 입력해주세요.')
+      }
+    })
   }
 
   // General Methods:-----------------------------------------------------------

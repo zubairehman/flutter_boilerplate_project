@@ -24,14 +24,17 @@
 import 'package:flutter/material.dart';
 
 final ThemeData themeData = new ThemeData(
-    fontFamily: 'ProductSans',
-    brightness: Brightness.light,
-    primarySwatch: MaterialColor(
-        AppColors.green[500].value, AppColors.green),
-    primaryColor: AppColors.green[500],
-    primaryColorBrightness: Brightness.light,
-    accentColor: AppColors.green[500],
-    accentColorBrightness: Brightness.light
+  fontFamily: 'ProductSans',
+  brightness: Brightness.light,
+  primarySwatch: MaterialColor(AppColors.green[500].value, AppColors.green),
+  primaryColor: AppColors.green[500],
+  primaryColorBrightness: Brightness.light,
+  accentColor: AppColors.green[500],
+  accentColorBrightness: Brightness.light,
+  textTheme: TextTheme(
+    headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+    title: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+  ),
 );
 
 class AppColors {

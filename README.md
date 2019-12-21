@@ -1,6 +1,8 @@
-# Boilerplate Project
+# Principle App started.
 
-A boilerplate project created in flutter using MobX and Provider.
+## Before you get started, make sure
+
+that you should understand that you should have concept of Mobx by [!mobx](https://mobx.pub/getting-started#prepare)
 
 ## Getting Started
 
