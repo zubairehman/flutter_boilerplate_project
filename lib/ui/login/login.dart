@@ -150,7 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
               _buildUserIdField(),
               _buildPasswordField(),
               _buildForgotPasswordButton(),
-              _buildSignInButton()
+              _buildSignInButton(),
+              _buildSignUpButton()
             ],
           ),
         ),
@@ -228,15 +229,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignUpButton() {
     return RoundedButtonWidget(
-      buttonText: Strings.login_btn_sign_up, 
-      buttonColor: Colors.orangeAccent, 
-      textColor: Colors.white, onPressed: () async {
-      if (_store.canLogin) {
-        _store.register();
-      } else {
-        showErrorMessage(context, 'Email / password 를 입력해주세요.')
-      }
-    })
+        buttonText: Strings.login_btn_sign_up,
+        buttonColor: Colors.orangeAccent,
+        textColor: Colors.white,
+        onPressed: () async {
+          if (_store.canLogin) {
+            _store.register();
+          } else {
+            showErrorMessage(context, 'Email / password 를 입력해주세요.');
+          }
+        });
   }
 
   // General Methods:-----------------------------------------------------------

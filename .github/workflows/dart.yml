@@ -3,12 +3,16 @@ name: Flutter action
 on: [push]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
-    container:
-      image:  google/dart:latest
-
+    strategy:
+      matrix:
+        flutter: ['latest', 'v1.13.5']
     steps:
-    - uses: subosito/flutter-action@v1.1.1
+      - uses: actions/checkout@v1
+      - uses: takuyaohashi/setup-flutter@v1
+        with:
+          flutter-version: ${{ matrix.flutter }}
+          channel: 'stable'
+      - name: test
+        run: flutter test
