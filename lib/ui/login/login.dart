@@ -95,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
-            name: 'navigate',
             builder: (context) {
               return _store.success
                   ? navigate(context)
@@ -103,7 +102,6 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
-            name: 'loading',
             builder: (context) {
               return Visibility(
                 visible: _store.loading,
