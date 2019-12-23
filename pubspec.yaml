@@ -62,6 +62,7 @@ dependencies:
     git:
       url: https://github.com/google/inject.dart.git
       path: package/inject
+      ref: 7c3cbf6
 
 dependency_overrides:
   source_gen: 0.9.4+6
@@ -79,6 +80,7 @@ dev_dependencies:
     git:
       url: https://github.com/google/inject.dart.git
       path: package/inject_generator
+      ref: 7c3cbf6
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"
