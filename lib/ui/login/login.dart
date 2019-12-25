@@ -101,7 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
-            key: GlobalKey(),
             builder: (context) {
               return Visibility(
                 visible: _store.loading,

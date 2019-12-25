@@ -104,7 +104,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
           ),
           Observer(
-            key: GlobalKey(),
             builder: (context) {
               return Visibility(
                 visible: _store.loading,

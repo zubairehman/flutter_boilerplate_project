@@ -1,8 +1,42 @@
 # Principle App started.
 
-## Before you get started, make sure
+## Before you get started, make sure writted by jasonahn
 
 that you should understand that you should have concept of Mobx by [mobx](https://mobx.pub/getting-started#prepare)
+
+## How to add Data repository writted by jasonahn
+
+1. Define singleton Model Api module in `newtork_module.dart` with `@provide` annotaion
+
+```
+lib/
+|- di/
+  |- modules/network_module.dart
+```
+
+2. Define singleton Repositry in `local_module.dart` with relative modules, for example Network Api module or Preferencese Helper, Db source.
+
+```
+ex) Repository provideRepository() =>
+      Repository(providePostApi(), provideSharedPreferenceHelper(), providePostDataSource());
+
+```
+
+3. call it in the code as stores(mobx) which attached to UI.
+
+```
+// repository instance
+  Repository repository = appComponent.getRepository();
+```
+
+4. implement code with db source and network api call in data layer
+
+```
+ref codes in here
+lib/
+|- data/
+  |- repository.dart
+```
 
 ## Getting Started
 
