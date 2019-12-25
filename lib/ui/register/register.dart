@@ -2,21 +2,24 @@ import 'package:boilerplate/constants/strings.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
-import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
+
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
+import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/widgets/textfield_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flushbar/flushbar_helper.dart';
 
-class LoginScreen extends StatefulWidget {
+import 'package:flushbar/flushbar_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  //store
   //text controllers
   TextEditingController _userEmailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -71,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
           OrientationBuilder(
             builder: (context, orientation) {
               //variable to hold widget
-              var child;
+              Widget child;
 
               //check to see whether device is in landscape or portrait
               //load widgets based on device orientation
@@ -136,22 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
             children: <Widget>[
               RichText(
                 text: TextSpan(
-                  text: '흙수저 탈출 앱 ',
+                  text: '원칙 가입하기',
                   style: Theme.of(context).textTheme.title,
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: '원칙',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextSpan(text: 'Principles'),
-                  ],
                 ),
               ),
               SizedBox(height: 24.0),
-              _buildUserIdField(),
+              _buildEmailField(),
               _buildPasswordField(),
-              _buildForgotPasswordButton(),
-              _buildSignInButton(),
-              _buildSignUpButton()
+              _buildSignUpEmailButton()
             ],
           ),
         ),
@@ -159,11 +154,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildUserIdField() {
+  Widget _buildEmailField() {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: Strings.login_et_user_email,
+          hint: Strings.register_et_user_email,
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
           iconColor: Colors.black54,
@@ -182,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: Strings.login_et_user_password,
+          hint: Strings.register_et_user_password,
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
@@ -195,26 +190,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildForgotPasswordButton() {
-    return Align(
-      alignment: FractionalOffset.centerRight,
-      child: FlatButton(
-        padding: EdgeInsets.all(0.0),
-        child: Text(
-          Strings.login_btn_forgot_password,
-          style: Theme.of(context)
-              .textTheme
-              .caption
-              .copyWith(color: Colors.orangeAccent),
-        ),
-        onPressed: () {},
-      ),
-    );
-  }
-
-  Widget _buildSignInButton() {
+  Widget _buildSignUpEmailButton() {
     return RoundedButtonWidget(
-      buttonText: Strings.login_btn_sign_in,
+      buttonText: Strings.register_btn_sign_up_email,
       buttonColor: Colors.orangeAccent,
       textColor: Colors.white,
       onPressed: () async {
@@ -227,17 +205,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSignUpButton() {
-    return RoundedButtonWidget(
-        buttonText: Strings.login_btn_sign_up,
-        buttonColor: Colors.orangeAccent,
-        textColor: Colors.white,
-        onPressed: () async {
-          Future.delayed(Duration(milliseconds: 0), () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                Routes.register, (Route<dynamic> route) => false);
-          });
-        });
+  Widget navigate(BuildContext context) {
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setBool(Preferences.is_logged_in, true);
+    });
+
+    Future.delayed(Duration(milliseconds: 0), () {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          Routes.home, (Route<dynamic> route) => false);
+    });
+
+    return Container();
   }
 
   // General Methods:-----------------------------------------------------------
@@ -249,19 +227,6 @@ class _LoginScreenState extends State<LoginScreen> {
         duration: Duration(seconds: 3),
       )..show(context);
     }
-
-    return Container();
-  }
-
-  Widget navigate(BuildContext context) {
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.setBool(Preferences.is_logged_in, true);
-    });
-
-    Future.delayed(Duration(milliseconds: 0), () {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home, (Route<dynamic> route) => false);
-    });
 
     return Container();
   }

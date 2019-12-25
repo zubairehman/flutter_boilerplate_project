@@ -2,7 +2,7 @@
 
 ## Before you get started, make sure
 
-that you should understand that you should have concept of Mobx by [!mobx](https://mobx.pub/getting-started#prepare)
+that you should understand that you should have concept of Mobx by [mobx](https://mobx.pub/getting-started#prepare)
 
 ## Getting Started
 
