@@ -1,4 +1,4 @@
-## June 11, 2019
+## Dec 21 2019 jason Ahn
 
-* Added dependency injection
-* Refactored dio client
+- changed test file to tdd
+- added action yml for action in github repo

@@ -11,7 +11,6 @@ import 'di/modules/netwok_module.dart';
 import 'ui/splash/splash.dart';
 
 // global instance for app component
-// TODO find out a better way to use it across application
 var appComponent;
 
 void main() {

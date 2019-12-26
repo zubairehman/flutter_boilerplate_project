@@ -2,12 +2,13 @@ import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
+import 'package:boilerplate/usecases/form/form_store_usecase.dart';
 
 part 'form_store.g.dart';
 
 class FormStore = _FormStore with _$FormStore;
 
-abstract class _FormStore with Store {
+abstract class _FormStore with Store implements LoginRegister {
   // store for handling form errors
   final FormErrorStore formErrorStore = FormErrorStore();
 
@@ -50,7 +51,9 @@ abstract class _FormStore with Store {
 
   @computed
   bool get canLogin =>
-      !formErrorStore.hasErrorsInLogin && userEmail.isNotEmpty && password.isNotEmpty;
+      !formErrorStore.hasErrorsInLogin &&
+      userEmail.isNotEmpty &&
+      password.isNotEmpty;
 
   @computed
   bool get canRegister =>
@@ -115,6 +118,19 @@ abstract class _FormStore with Store {
   @action
   Future register() async {
     loading = true;
+    Future.delayed(Duration(milliseconds: 2000)).then((future) {
+      loading = false;
+      success = true;
+      errorStore.showError = false;
+    }).catchError((e) {
+      loading = false;
+      success = false;
+      errorStore.showError = true;
+      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
+          ? "Username and password doesn't match"
+          : "Something went wrong, please check your internet connection and try again";
+      print(e);
+    });
   }
 
   @action
