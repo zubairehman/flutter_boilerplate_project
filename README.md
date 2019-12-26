@@ -1,4 +1,8 @@
-# Principle App started.
+# Flutter boilerplate with usecases and test codes.
+
+this project foked from [Here](https://github.com/zubairehman/flutter-boilerplate-project)
+
+I added some codes for usecases layer to define specs of my app.
 
 ## Before you get started, make sure writted by jasonahn
 
