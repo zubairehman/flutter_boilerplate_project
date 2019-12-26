@@ -2,7 +2,9 @@
 
 this project foked from [Here](https://github.com/zubairehman/flutter-boilerplate-project)
 
-I added some codes for usecases layer to define specs of my app.
+Change list
+
+- Added usecases layers to describe specification of service
 
 ## Before you get started, make sure writted by jasonahn
 
@@ -327,9 +329,3 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 ## Wiki
 
 Checkout [wiki](https://github.com/zubairehman/flutter-boilerplate-project/wiki) for more info
-
-## Conclusion
-
-I will be happy to answer any questions that you may have on this approach, and if you want to lend a hand with the boilerplate then please feel free to submit an issue and/or pull request 🙂
-
-Again to note, this is example can appear as over-architectured for what it is - but it is an example only. If you liked my work, don’t forget to ⭐ star the repo to show your support.
