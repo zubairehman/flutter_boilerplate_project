@@ -6,11 +6,7 @@ Change list
 
 - Added usecases layers to describe specification of service
 
-## Before you get started, make sure writted by jasonahn
-
-that you should understand that you should have concept of Mobx by [mobx](https://mobx.pub/getting-started#prepare)
-
-## How to add Data repository writted by jasonahn
+## How to add data repository model
 
 1. Define singleton Model Api module in `newtork_module.dart` with `@provide` annotaion
 
