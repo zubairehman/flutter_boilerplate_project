@@ -24,7 +24,7 @@ ex) Repository provideRepository() =>
 
 ```
 
-3. call it in the code as stores(mobx) which attached to UI.
+3. Call it in the code as stores(mobx) which attached to UI.
 
 ```
 // repository instance
