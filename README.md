@@ -1,6 +1,6 @@
 # Flutter boilerplate with usecases and test codes.
 
-this project foked from [Here](https://github.com/zubairehman/flutter-boilerplate-project)
+This project forked from [Here](https://github.com/zubairehman/flutter-boilerplate-project)
 
 Change list
 
