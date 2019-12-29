@@ -53,7 +53,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.g.dart
 ```
 
-### Boilerplate Features:
+## Boilerplate Features:
 
 * Splash
 * Login
