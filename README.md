@@ -321,7 +321,3 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.inject.dart
 **/*.g.dart
 ```
-
-## Wiki
-
-Checkout [wiki](https://github.com/zubairehman/flutter-boilerplate-project/wiki) for more info
