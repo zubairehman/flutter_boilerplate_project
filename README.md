@@ -1,4 +1,4 @@
-# Flutter boilerplate with usecases and test codes.
+# Flutter boilerplate (modified with usecase layer)
 
 This project forked from [Here](https://github.com/zubairehman/flutter-boilerplate-project)
 
