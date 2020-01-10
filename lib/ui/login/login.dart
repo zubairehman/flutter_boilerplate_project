@@ -19,17 +19,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //text controllers
+  //text controllers:-----------------------------------------------------------
   TextEditingController _userEmailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  //focus node
+  //focus node:-----------------------------------------------------------------
   FocusNode _passwordFocusNode;
 
-  //form key
+  //form key:-------------------------------------------------------------------
   final _formKey = GlobalKey<FormState>();
 
-  //store
+  //stores:---------------------------------------------------------------------
   final _store = FormStore();
 
   @override
@@ -37,24 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
 
     _passwordFocusNode = FocusNode();
-
-    _userEmailController.addListener(() {
-      //this will be called whenever user types in some value
-      _store.setUserId(_userEmailController.text);
-    });
-    _passwordController.addListener(() {
-      //this will be called whenever user types in some value
-      _store.setPassword(_passwordController.text);
-    });
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the Widget is removed from the Widget tree
-    _userEmailController.dispose();
-    _passwordController.dispose();
-    _passwordFocusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -66,7 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Material _buildBody() {
+  // body methods:--------------------------------------------------------------
+  Widget _buildBody() {
     return Material(
       child: Stack(
         children: <Widget>[
@@ -99,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) {
               return _store.success
                   ? navigate(context)
-                  : showErrorMessage(context, _store.errorStore.errorMessage);
+                  : _showErrorMessage(_store.errorStore.errorMessage);
             },
           ),
           Observer(
@@ -158,6 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
           iconColor: Colors.black54,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
+          onChanged: (value) {
+            _store.setUserId(_userEmailController.text);
+          },
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(_passwordFocusNode);
           },
@@ -179,6 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
           textController: _passwordController,
           focusNode: _passwordFocusNode,
           errorText: _store.formErrorStore.password,
+          onChanged: (value) {
+            _store.setPassword(_passwordController.text);
+          },
         );
       },
     );
@@ -211,24 +200,10 @@ class _LoginScreenState extends State<LoginScreen> {
           DeviceUtils.hideKeyboard(context);
           _store.login();
         } else {
-          showErrorMessage(context, 'Please fill in all fields');
+          _showErrorMessage('Please fill in all fields');
         }
       },
     );
-  }
-
-  // General Methods:-----------------------------------------------------------
-  showErrorMessage(BuildContext context, String message) {
-    if(message != null && message.isNotEmpty) {
-      FlushbarHelper.createError(
-        message: message,
-        title: 'Error',
-        duration: Duration(seconds: 3),
-      )
-        ..show(context);
-    }
-
-    return Container();
   }
 
   Widget navigate(BuildContext context) {
@@ -243,4 +218,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Container();
   }
+
+  // General Methods:-----------------------------------------------------------
+  _showErrorMessage( String message) {
+    Future.delayed(Duration(milliseconds: 0), () {
+      if (message != null && message.isNotEmpty) {
+        FlushbarHelper.createError(
+          message: message,
+          title: 'Error',
+          duration: Duration(seconds: 3),
+        )..show(context);
+      }
+    });
+
+    return SizedBox.shrink();
+  }
+
+  // dispose:-------------------------------------------------------------------
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is removed from the Widget tree
+    _userEmailController.dispose();
+    _passwordController.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
 }

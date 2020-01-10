@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
   final Color iconColor;
   final FocusNode focusNode;
   final ValueChanged onFieldSubmitted;
+  final ValueChanged onChanged;
   final bool autoFocus;
   final TextInputAction inputAction;
 
@@ -30,6 +31,7 @@ class TextFieldWidget extends StatelessWidget {
     this.iconColor = Colors.grey,
     this.focusNode,
     this.onFieldSubmitted,
+    this.onChanged,
     this.autoFocus = false,
     this.inputAction,
   }) : super(key: key);
@@ -42,6 +44,7 @@ class TextFieldWidget extends StatelessWidget {
         controller: textController,
         focusNode: focusNode,
         onFieldSubmitted: onFieldSubmitted,
+        onChanged: onChanged,
         autofocus: autoFocus,
         textInputAction: inputAction,
         obscureText: this.isObscure,
