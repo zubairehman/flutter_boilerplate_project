@@ -28,7 +28,7 @@ dependencies:
   shared_preferences: ^0.5.6
 
   # A composable, Future-based library for making HTTP requests.
-  http: ^0.12.0+2
+  http: ^0.12.0+4
 
   # The following adds the launcher icon support to your application.
   # run below mentioned commands to generate launcher icons
@@ -37,22 +37,22 @@ dependencies:
   flutter_launcher_icons: ^0.7.4
 
   # Flogs, a powerful logging framework
-  f_logs: ^1.2.1
+  f_logs: ^1.2.2
 
   # MobX is a library for reactively managing the state of your applications. Use the power of
   # observables, actions, and reactions to supercharge your Dart and Flutter apps.
-  mobx: ^0.3.10
-  flutter_mobx: ^0.3.4+1
-  mobx_codegen: ^0.3.10+1
+  mobx: ^0.4.0+1
+  flutter_mobx: ^0.3.6
+  mobx_codegen: ^0.4.0+1
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
-  provider: ^4.0.0
+  provider: ^4.0.1
 
   # String validation and sanitization for Dart. Dart 2-compatible version of validator
   validators: ^2.0.0+1
 
   # A powerful Http client for Dart
-  dio: 3.0.7
+  dio: 3.0.8
 
   # A flexible widget for user notification.
   flushbar: ^1.9.1
@@ -65,17 +65,17 @@ dependencies:
       ref: 7c3cbf6
 
 dependency_overrides:
-  source_gen: 0.9.4+6
-  analyzer: ^0.39.2+1
-  intl: ^0.16.0
+  source_gen: 0.9.4+7
+  analyzer: ^0.39.4
+  intl: ^0.16.1
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^3.2.4
-  build_runner: ^1.7.2
+  json_serializable: ^3.2.5
+  build_runner: ^1.7.3
   inject_generator:
     git:
       url: https://github.com/google/inject.dart.git
