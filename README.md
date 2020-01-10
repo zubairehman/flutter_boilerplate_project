@@ -71,14 +71,13 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Logging
 * Dependency Injection
 * Dark Theme Support (new)
+* Multilingual Support (new)
+* Provider example (new)
 
 ### Up-Coming Features:
 
 * Connectivity Support
 * Background Fetch Support
-* Multilingual Support
-* Provider example
-* Minor Improvements
 
 ### Libraries & Tools Used
 
