@@ -1,0 +1,16 @@
+{
+  "login_start": "Below are list of strings for login es ",
+  "login_et_user_id": "Ingrese el correo electrónico del usuario",
+  "login_et_user_password": "Introducir la contraseña",
+  "login_btn_forgot_password": "¿Se te olvidó tu contraseña",
+  "login_btn_sign_in": "Registrarse",
+  "login_error_fill_fields": "Por favor complete todos los campos e",
+  "login_end": "------------------------------------------------------------------------------------",
+
+  "home_start": "Below are list of strings for home",
+  "home_tv_posts": "Publicaciones",
+  "home_tv_error": "Error",
+  "home_tv_no_post_found": "No se han encontrado publicaciones",
+  "home_tv_choose_language": "Elige lengua",
+  "home_end": "-------------------------------------------------------------------------------------"
+}

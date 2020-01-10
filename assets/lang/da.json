@@ -1,0 +1,17 @@
+{
+  "login_start": "Below are list of strings for login da ",
+  "login_et_user_id": "Brugernavn",
+  "login_et_user_password": "Adgangskode",
+  "login_btn_forgot_password": "Glemt adgangskode?",
+  "login_btn_sign_in": "Log ind",
+  "login_error_fill_fields": "Udfyld venligst alle felterne",
+  "login_end": "------------------------------------------------------------------------------------",
+
+  "home_start": "Below are list of strings for home",
+  "home_tv_posts": "Indlæg",
+  "home_tv_error": "Fejl",
+  "home_tv_no_post_found": "Ingen indlæg fundet",
+  "home_tv_choose_language": "Vælg sprog",
+  "home_end": "-------------------------------------------------------------------------------------"
+
+}

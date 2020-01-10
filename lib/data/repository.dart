@@ -78,4 +78,10 @@ class Repository {
       _sharedPrefsHelper.changeBrightnessToDark(value);
 
   Future<bool> get isDarkMode => _sharedPrefsHelper.isDarkMode;
+
+  // Language: -----------------------------------------------------------------
+  Future<void> changeLanguage(String value) =>
+      _sharedPrefsHelper.changeLanguage(value);
+
+  Future<String> get currentLanguage => _sharedPrefsHelper.currentLanguage;
 }

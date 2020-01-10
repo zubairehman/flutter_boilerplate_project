@@ -1,17 +1,17 @@
-import 'package:boilerplate/constants/strings.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
+import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/widgets/textfield_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flushbar/flushbar_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: Strings.login_et_user_email,
+          hint: AppLocalizations.of(context).translate('login_et_user_email'),
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
           iconColor: Colors.black54,
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: Strings.login_et_user_password,
+          hint: AppLocalizations.of(context).translate('login_et_user_password'),
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: FlatButton(
         padding: EdgeInsets.all(0.0),
         child: Text(
-          Strings.login_btn_forgot_password,
+          AppLocalizations.of(context).translate('login_btn_forgot_password'),
           style: Theme.of(context)
               .textTheme
               .caption
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignInButton() {
     return RoundedButtonWidget(
-      buttonText: Strings.login_btn_sign_in,
+      buttonText: AppLocalizations.of(context).translate('login_btn_sign_in'),
       buttonColor: Colors.orangeAccent,
       textColor: Colors.white,
       onPressed: () async {
@@ -225,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (message != null && message.isNotEmpty) {
         FlushbarHelper.createError(
           message: message,
-          title: 'Error',
+          title: AppLocalizations.of(context).translate('home_tv_error'),
           duration: Duration(seconds: 3),
         )..show(context);
       }

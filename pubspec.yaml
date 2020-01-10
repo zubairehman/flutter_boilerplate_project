@@ -57,6 +57,9 @@ dependencies:
   # A flexible widget for user notification.
   flushbar: ^1.9.1
 
+  # Material Dialog
+  material_dialog: ^0.0.9
+
   # Dependency injection
   inject:
     git:
@@ -103,6 +106,7 @@ flutter:
   assets:
   - assets/images/
   - assets/icons/
+  - assets/lang/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

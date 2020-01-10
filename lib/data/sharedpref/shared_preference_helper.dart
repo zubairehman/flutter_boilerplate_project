@@ -47,4 +47,17 @@ class SharedPreferenceHelper {
       return prefs.setBool(Preferences.is_dark_mode, value);
     });
   }
+
+  // Language:---------------------------------------------------
+  Future<String> get currentLanguage {
+    return _sharedPreference.then((prefs) {
+      return prefs.getString(Preferences.current_language);
+    });
+  }
+
+  Future<void> changeLanguage(String language) {
+    return _sharedPreference.then((prefs) {
+      return prefs.setString(Preferences.current_language, language);
+    });
+  }
 }
