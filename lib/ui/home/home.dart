@@ -4,7 +4,9 @@ import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,69 +33,85 @@ class _HomeScreenState extends State<HomeScreen> {
     // initializing stores
     _themeStore = Provider.of<ThemeStore>(context);
     _postStore = Provider.of<PostStore>(context);
-    _postStore.getPosts();
+
+    // check to see if already called api
+    if(!_postStore.loading) {
+      _postStore.getPosts();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(),
       body: _buildBody(),
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
+  // app bar methods:-----------------------------------------------------------
+  Widget _buildAppBar() {
     return AppBar(
       title: Text('Posts'),
-      actions: <Widget>[
-        Observer(
-          builder: (context) {
-            return IconButton(
-              onPressed: () {
-                _themeStore.changeBrightnessToDark(!_themeStore.darkMode);
-              },
-              icon: Icon(
-                _themeStore.darkMode
-                    ? Icons.brightness_5
-                    : Icons.brightness_3,
-              ),
-            );
-          },
-        ),
-        IconButton(
+      actions: _buildActions(context),
+    );
+  }
+
+  List<Widget> _buildActions(BuildContext context) {
+    return <Widget>[
+      _buildThemeButton(),
+      _buildLogoutButton()
+    ];
+  }
+
+  Widget _buildThemeButton() {
+    return Observer(
+      builder: (context) {
+        return IconButton(
           onPressed: () {
-            SharedPreferences.getInstance().then((preference) {
-              preference.setBool(Preferences.is_logged_in, false);
-              Navigator.of(context).pushReplacementNamed(Routes.login);
-            });
+            _themeStore.changeBrightnessToDark(!_themeStore.darkMode);
           },
           icon: Icon(
-            Icons.power_settings_new,
+            _themeStore.darkMode
+                ? Icons.brightness_5
+                : Icons.brightness_3,
           ),
-        )
+        );
+      },
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return IconButton(
+      onPressed: () {
+        SharedPreferences.getInstance().then((preference) {
+          preference.setBool(Preferences.is_logged_in, false);
+          Navigator.of(context).pushReplacementNamed(Routes.login);
+        });
+      },
+      icon: Icon(
+        Icons.power_settings_new,
+      ),
+    );
+  }
+
+  // body methods:--------------------------------------------------------------
+  Widget _buildBody() {
+    return Stack(
+      children: <Widget>[
+        _handleErrorMessage(),
+        _buildMainContent(),
       ],
     );
   }
 
-  Widget _buildBody() {
-    return Stack(
-      children: <Widget>[
-        Observer(
-          builder: (context) {
-            return _postStore.loading
-                ? CustomProgressIndicatorWidget()
-                : Material(child: _buildListView());
-          },
-        ),
-        Observer(
-          builder: (context) {
-            return _postStore.errorStore.errorMessage.isNotEmpty
-                ? Container()
-                : showErrorMessage(context, _postStore.errorStore.errorMessage);
-          },
-        )
-      ],
-    );
+  Widget _buildMainContent() {
+    return Observer(
+        builder: (context) {
+          return _postStore.loading
+              ? CustomProgressIndicatorWidget()
+              : Material(child: _buildListView());
+        },
+      );
   }
 
   Widget _buildListView() {
@@ -110,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
         : Center(child: Text('No posts found'));
   }
 
-  ListTile _buildListItem(int position) {
+  Widget _buildListItem(int position) {
     return ListTile(
       dense: true,
       leading: Icon(Icons.cloud_circle),
@@ -130,8 +148,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _handleErrorMessage() {
+    return Observer(
+      builder: (context) {
+        if (_postStore.errorStore.errorMessage.isNotEmpty) {
+          return _showErrorMessage(_postStore.errorStore.errorMessage);
+        }
+
+        return SizedBox.shrink();
+      },
+    );
+  }
+
   // General Methods:-----------------------------------------------------------
-  showErrorMessage(BuildContext context, String message) {
+  _showErrorMessage( String message) {
     Future.delayed(Duration(milliseconds: 0), () {
       if (message != null && message.isNotEmpty) {
         FlushbarHelper.createError(
@@ -142,6 +172,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
 
-    return Container();
+    return SizedBox.shrink();
   }
 }

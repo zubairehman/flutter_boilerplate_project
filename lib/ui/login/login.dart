@@ -2,6 +2,7 @@ import 'package:boilerplate/constants/strings.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
+import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
@@ -207,6 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textColor: Colors.white,
       onPressed: () async {
         if (_store.canLogin) {
+          DeviceUtils.hideKeyboard(context);
           _store.login();
         } else {
           showErrorMessage(context, 'Please fill in all fields');
@@ -217,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context, String message) {
-    if(message != null) {
+    if(message != null && message.isNotEmpty) {
       FlushbarHelper.createError(
         message: message,
         title: 'Error',

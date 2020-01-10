@@ -12,7 +12,7 @@ abstract class _ErrorStore with Store {
   // constructor:---------------------------------------------------------------
   _ErrorStore() {
     _disposers = [
-      reaction((_) => errorMessage, reset, delay: 500),
+      reaction((_) => errorMessage, reset, delay: 200),
     ];
   }
 
@@ -29,6 +29,7 @@ abstract class _ErrorStore with Store {
 
   @action
   void reset(String value) {
+    print('calling reset');
     errorMessage = '';
   }
 

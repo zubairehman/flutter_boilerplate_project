@@ -1,18 +1,18 @@
+import 'package:boilerplate/constants/app_theme.dart';
+import 'package:boilerplate/constants/strings.dart';
+import 'package:boilerplate/di/components/app_component.dart';
+import 'package:boilerplate/di/modules/local_module.dart';
+import 'package:boilerplate/di/modules/netwok_module.dart';
+import 'package:boilerplate/di/modules/preference_module.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
+import 'package:boilerplate/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:inject/inject.dart';
 import 'package:provider/provider.dart';
-
-import 'constants/app_theme.dart';
-import 'constants/strings.dart';
-import 'di/components/app_component.dart';
-import 'di/modules/local_module.dart';
-import 'di/modules/netwok_module.dart';
-import 'ui/splash/splash.dart';
 
 // global instance for app component
 AppComponent appComponent;
@@ -25,7 +25,11 @@ void main() {
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
   ]).then((_) async {
-    appComponent = await AppComponent.create(NetworkModule(), LocalModule());
+    appComponent = await AppComponent.create(
+      NetworkModule(),
+      LocalModule(),
+      PreferenceModule(),
+    );
     runApp(appComponent.app);
   });
 }
