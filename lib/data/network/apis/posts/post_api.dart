@@ -16,10 +16,10 @@ class PostApi {
   PostApi(this._dioClient, this._restClient);
 
   /// Returns list of post in response
-  Future<PostsList> getPosts() async {
+  Future<PostList> getPosts() async {
     try {
       final res = await _dioClient.get(Endpoints.getPosts);
-      return PostsList.fromJson(res);
+      return PostList.fromJson(res);
     } catch (e) {
       print(e.toString());
       throw e;

@@ -1,4 +1,3 @@
-import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
@@ -30,9 +29,6 @@ abstract class _FormStore with Store {
   }
 
   // store variables:-----------------------------------------------------------
-  @observable
-  PostsList postsList;
-
   @observable
   String userEmail = '';
 
@@ -124,11 +120,9 @@ abstract class _FormStore with Store {
     Future.delayed(Duration(milliseconds: 2000)).then((future) {
       loading = false;
       success = true;
-      errorStore.showError = false;
     }).catchError((e) {
       loading = false;
       success = false;
-      errorStore.showError = true;
       errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
           ? "Username and password doesn't match"
           : "Something went wrong, please check your internet connection and try again";

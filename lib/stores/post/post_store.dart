@@ -10,39 +10,42 @@ part 'post_store.g.dart';
 class PostStore = _PostStore with _$PostStore;
 
 abstract class _PostStore with Store {
-
   // repository instance
-  Repository repository = appComponent.getRepository();
+  Repository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
 
+  // constructor:---------------------------------------------------------------
+  _PostStore(Repository repository) : this._repository = repository;
+
   // store variables:-----------------------------------------------------------
+  static ObservableFuture<PostList> emptyPostResponse =
+      ObservableFuture.value(null);
+
   @observable
-  PostsList postsList;
+  ObservableFuture<PostList> fetchPostsFuture =
+      ObservableFuture<PostList>(emptyPostResponse);
+
+  @observable
+  PostList postList;
 
   @observable
   bool success = false;
 
-  @observable
-  bool loading = false;
+  @computed
+  bool get loading => fetchPostsFuture.status == FutureStatus.pending;
 
   // actions:-------------------------------------------------------------------
   @action
   Future getPosts() async {
-    loading = true;
+    final future = _repository.getPosts();
+    fetchPostsFuture = ObservableFuture(future);
 
-    repository.getPosts().then((postsList) {
-      this.postsList = postsList;
-      loading = false;
-      success = true;
-      errorStore.showError = false;
-    }).catchError((e) {
-      loading = false;
-      success = false;
-      errorStore.showError = true;
-      errorStore.errorMessage = DioErrorUtil.handleError(e);
-      print(e);
+    await future.then((postList) {
+      this.postList = postList;
+    }).catchError((error) {
+      errorStore.errorMessage = DioErrorUtil.handleError(error);
     });
   }
 }

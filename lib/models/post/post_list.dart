@@ -1,17 +1,17 @@
 import 'package:boilerplate/models/post/post.dart';
 
-class PostsList {
+class PostList {
   final List<Post> posts;
 
-  PostsList({
+  PostList({
     this.posts,
   });
 
-  factory PostsList.fromJson(List<dynamic> json) {
+  factory PostList.fromJson(List<dynamic> json) {
     List<Post> posts = List<Post>();
     posts = json.map((post) => Post.fromMap(post)).toList();
 
-    return PostsList(
+    return PostList(
       posts: posts,
     );
   }

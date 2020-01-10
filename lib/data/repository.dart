@@ -23,7 +23,7 @@ class Repository {
   Repository(this._postApi, this._sharedPrefsHelper, this._postDataSource);
 
   // Post: ---------------------------------------------------------------------
-  Future<PostsList> getPosts() async {
+  Future<PostList> getPosts() async {
     // check to see if posts are present in database, then fetch from database
     // else make a network call to get all posts, store them into database for
     // later use
@@ -72,4 +72,10 @@ class Repository {
       .update(post)
       .then((id) => id)
       .catchError((error) => throw error);
+
+  // Theme: --------------------------------------------------------------------
+  Future<void> changeBrightnessToDark(bool value) =>
+      _sharedPrefsHelper.changeBrightnessToDark(value);
+
+  Future<bool> get isDarkMode => _sharedPrefsHelper.isDarkMode;
 }

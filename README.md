@@ -23,10 +23,10 @@ The Boilerplate contains the minimal implementation required to create a new lib
 * User Notifications
 * Logging
 * Dependency Injection
+* Dark Theme Support (new)
 
 ### Up-Comming Features:
 
-* Dark Theme
 * Connectivity Support
 * Background Fetch Support
 * Multilingual Support

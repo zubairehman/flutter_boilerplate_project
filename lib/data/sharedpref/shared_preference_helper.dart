@@ -13,7 +13,7 @@ class SharedPreferenceHelper {
   // General Methods: ----------------------------------------------------------
   Future<String> get authToken async {
     return _sharedPreference.then((preference) {
-      preference.getString(Preferences.auth_token);
+      return preference.getString(Preferences.auth_token);
     });
   }
 
@@ -31,7 +31,20 @@ class SharedPreferenceHelper {
 
   Future<bool> get isLoggedIn async {
     return _sharedPreference.then((preference) {
-      preference.getString(Preferences.auth_token) ?? false;
+      return preference.getString(Preferences.auth_token) ?? false;
+    });
+  }
+
+  // Theme:------------------------------------------------------
+  Future<bool> get isDarkMode {
+    return _sharedPreference.then((prefs) {
+      return prefs.getBool(Preferences.is_dark_mode) ?? false;
+    });
+  }
+
+  Future<void> changeBrightnessToDark(bool value) {
+    return _sharedPreference.then((prefs) {
+      return prefs.setBool(Preferences.is_dark_mode, value);
     });
   }
 }

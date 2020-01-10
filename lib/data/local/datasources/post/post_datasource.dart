@@ -47,7 +47,7 @@ class PostDataSource {
     }).toList();
   }
 
-  Future<PostsList> getPostsFromDb() async {
+  Future<PostList> getPostsFromDb() async {
 
     print('Loading from database');
 
@@ -61,7 +61,7 @@ class PostDataSource {
 
     // Making a List<Post> out of List<RecordSnapshot>
     if(recordSnapshots.length > 0) {
-      postsList = PostsList(
+      postsList = PostList(
           posts: recordSnapshots.map((snapshot) {
             final post = Post.fromMap(snapshot.value);
             // An ID is a key of a record from the database.

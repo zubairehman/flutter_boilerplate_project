@@ -1,10 +1,12 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
+import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,15 +15,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //store
-  final _store = PostStore();
+  //stores:---------------------------------------------------------------------
+  PostStore _postStore;
+  ThemeStore _themeStore;
 
   @override
   void initState() {
     super.initState();
+  }
 
-    //get all posts
-    _store.getPosts();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // initializing stores
+    _themeStore = Provider.of<ThemeStore>(context);
+    _postStore = Provider.of<PostStore>(context);
+    _postStore.getPosts();
   }
 
   @override
@@ -36,6 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       title: Text('Posts'),
       actions: <Widget>[
+        Observer(
+          builder: (context) {
+            return IconButton(
+              onPressed: () {
+                _themeStore.changeBrightnessToDark(!_themeStore.darkMode);
+              },
+              icon: Icon(
+                _themeStore.darkMode
+                    ? Icons.brightness_5
+                    : Icons.brightness_3,
+              ),
+            );
+          },
+        ),
         IconButton(
           onPressed: () {
             SharedPreferences.getInstance().then((preference) {
@@ -56,16 +80,16 @@ class _HomeScreenState extends State<HomeScreen> {
       children: <Widget>[
         Observer(
           builder: (context) {
-            return _store.loading
+            return _postStore.loading
                 ? CustomProgressIndicatorWidget()
                 : Material(child: _buildListView());
           },
         ),
         Observer(
           builder: (context) {
-            return _store.success
+            return _postStore.errorStore.errorMessage.isNotEmpty
                 ? Container()
-                : showErrorMessage(context, _store.errorStore.errorMessage);
+                : showErrorMessage(context, _postStore.errorStore.errorMessage);
           },
         )
       ],
@@ -73,38 +97,43 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildListView() {
-    return _store.postsList != null
+    return _postStore.postList != null
         ? ListView.separated(
-            itemCount: _store.postsList.posts.length,
+            itemCount: _postStore.postList.posts.length,
             separatorBuilder: (context, position) {
               return Divider();
             },
             itemBuilder: (context, position) {
-              return ListTile(
-                leading: Icon(Icons.cloud_circle),
-                title: Text(
-                  '${_store.postsList.posts[position].title}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                  style: Theme.of(context).textTheme.title,
-                ),
-                subtitle: Text(
-                  '${_store.postsList.posts[position].body}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                ),
-              );
+              return _buildListItem(position);
             },
           )
         : Center(child: Text('No posts found'));
   }
 
+  ListTile _buildListItem(int position) {
+    return ListTile(
+      dense: true,
+      leading: Icon(Icons.cloud_circle),
+      title: Text(
+        '${_postStore.postList.posts[position].title}',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        softWrap: false,
+        style: Theme.of(context).textTheme.title,
+      ),
+      subtitle: Text(
+        '${_postStore.postList.posts[position].body}',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        softWrap: false,
+      ),
+    );
+  }
+
   // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context, String message) {
     Future.delayed(Duration(milliseconds: 0), () {
-      if (message != null) {
+      if (message != null && message.isNotEmpty) {
         FlushbarHelper.createError(
           message: message,
           title: 'Error',
