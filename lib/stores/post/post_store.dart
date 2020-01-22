@@ -1,5 +1,4 @@
 import 'package:boilerplate/data/repository.dart';
-import 'package:boilerplate/main.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
@@ -42,7 +41,7 @@ abstract class _PostStore with Store {
     final future = _repository.getPosts();
     fetchPostsFuture = ObservableFuture(future);
 
-    await future.then((postList) {
+    future.then((postList) {
       this.postList = postList;
     }).catchError((error) {
       errorStore.errorMessage = DioErrorUtil.handleError(error);
