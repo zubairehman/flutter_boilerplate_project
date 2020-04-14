@@ -40,7 +40,7 @@ flutter packages pub run build_runner watch
 
 ## Hide Generated Files
 
-In-order to hide generated files, navigate to `Android Studio` -> `Preferences` -> `Editor` -> `File Types` and past the below lines under `ignore files and folders` section:
+In-order to hide generated files, navigate to `Android Studio` -> `Preferences` -> `Editor` -> `File Types` and paste the below lines under `ignore files and folders` section:
 
 ```
 *.inject.summary;*.inject.dart;*.g.dart;
