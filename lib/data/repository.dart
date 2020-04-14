@@ -47,7 +47,7 @@ class Repository {
 
     //check to see if dataLogsType is not null
     if (id != null) {
-      Filter dataLogTypeFilter = Filter.equal(DBConstants.FIELD_ID, id);
+      Filter dataLogTypeFilter = Filter.equals(DBConstants.FIELD_ID, id);
       filters.add(dataLogTypeFilter);
     }
 
