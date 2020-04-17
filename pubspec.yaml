@@ -46,7 +46,7 @@ dependencies:
   mobx_codegen: ^1.0.3
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
-  provider: ^4.0.4
+  provider: ^4.0.5
 
   # String validation and sanitization for Dart. Dart 2-compatible version of validator
   validators: ^2.0.0+1
@@ -55,7 +55,7 @@ dependencies:
   dio: 3.0.8
 
   # A flexible widget for user notification.
-  flushbar: ^1.9.1
+  flushbar: ^1.10.0
 
   # Material Dialog
   material_dialog: ^0.0.9
@@ -69,7 +69,7 @@ dependencies:
 
 dependency_overrides:
   source_gen: 0.9.5
-  analyzer: ^0.39.4
+  analyzer: ^0.39.7
   intl: ^0.16.1
 
 
@@ -77,8 +77,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^3.2.5
-  build_runner: ^1.8.0
+  json_serializable: ^3.3.0
+  build_runner: ^1.8.1
   inject_generator:
     git:
       url: https://github.com/google/inject.dart.git
