@@ -55,7 +55,8 @@ dependencies:
   dio: 3.0.8
 
   # A flexible widget for user notification.
-  flushbar: ^1.9.1
+  # Do not upgrade until Flutter 1.15 is on stable channel
+  flushbar: 1.9.1
 
   # Material Dialog
   material_dialog: ^0.0.9
