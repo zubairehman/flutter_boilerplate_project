@@ -54,9 +54,7 @@ dependencies:
   # A powerful Http client for Dart
   dio: 3.0.8
 
-  # A flexible widget for user notification.
-  # Do not upgrade until Flutter 1.15 is on stable channel
-  flushbar: 1.9.1
+  flushbar: ^1.10.4
 
   # Material Dialog
   material_dialog: ^0.0.9
