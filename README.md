@@ -20,7 +20,7 @@ https://github.com/zubairehman/flutter-boilerplate-project.git
 
 Go to project root and execute the following command in console to get the required dependencies: 
 
-``` 
+```
 flutter pub get 
 ```
 
@@ -219,7 +219,7 @@ widgets/
 
 This file contains all the routes for your application.
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 import 'ui/home/home.dart';
@@ -246,7 +246,7 @@ class Routes {
 
 This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 
-```
+```dart
 import 'package:boilerplate/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
