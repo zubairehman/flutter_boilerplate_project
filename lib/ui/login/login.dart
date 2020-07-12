@@ -1,6 +1,8 @@
+import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
+import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
@@ -13,8 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../stores/theme/theme_store.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildLeftSide() {
     return SizedBox.expand(
       child: Image.asset(
-        'assets/images/img_login.jpg',
+        Assets.carBackground,
         fit: BoxFit.cover,
       ),
     );

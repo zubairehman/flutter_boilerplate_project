@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
 
     return Material(
-      child: Center(child: AppIconWidget(image: 'assets/icons/ic_appicon.png')),
+      child: Center(child: AppIconWidget(image: Assets.appLogo)),
     );
   }
 
