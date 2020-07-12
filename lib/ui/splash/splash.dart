@@ -14,29 +14,36 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    print('inside initState()');
     super.initState();
     startTimer();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('inside build()');
+
     return Material(
       child: Center(child: AppIconWidget(image: 'assets/icons/ic_appicon.png')),
     );
   }
 
   startTimer() {
-    var _duration = Duration(milliseconds: 5000);
+    print('inside startTimer()');
+    var _duration = Duration(milliseconds: 2000);
     return Timer(_duration, navigate);
   }
 
   navigate() async {
+    print('inside navigate()');
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
+    print('inside if');
     if (preferences.getBool(Preferences.is_logged_in) ?? false) {
-      Navigator.of(context).pushReplacementNamed(Routes.home);
+      Navigator.of(context).pushNamed(Routes.home);
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+      Navigator.of(context).pushNamed(Routes.login);
     }
   }
 }

@@ -32,9 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
   //focus node:-----------------------------------------------------------------
   FocusNode _passwordFocusNode;
 
-  //form key:-------------------------------------------------------------------
-  final _formKey = GlobalKey<FormState>();
-
   //stores:---------------------------------------------------------------------
   final _store = FormStore();
 
@@ -109,24 +106,21 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildRightSide() {
-    return Form(
-      key: _formKey,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              AppIconWidget(image: 'assets/icons/ic_appicon.png'),
-              SizedBox(height: 24.0),
-              _buildUserIdField(),
-              _buildPasswordField(),
-              _buildForgotPasswordButton(),
-              _buildSignInButton()
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            AppIconWidget(image: 'assets/icons/ic_appicon.png'),
+            SizedBox(height: 24.0),
+            _buildUserIdField(),
+            _buildPasswordField(),
+            _buildForgotPasswordButton(),
+            _buildSignInButton()
+          ],
         ),
       ),
     );

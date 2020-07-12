@@ -44,17 +44,19 @@ class MyApp extends StatelessWidget {
   // with Hot Reload than creating it directly in the `build` function.
   final ThemeStore _themeStore = ThemeStore(appComponent.getRepository());
   final PostStore _postStore = PostStore(appComponent.getRepository());
-  final LanguageStore _languageStore = LanguageStore(appComponent.getRepository());
+  final LanguageStore _languageStore =
+      LanguageStore(appComponent.getRepository());
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<ThemeStore>.value(value: _themeStore),
-        Provider<PostStore>.value(value: _postStore),
-        Provider<LanguageStore>.value(value: _languageStore),
+        Provider<ThemeStore>(create: (_) => _themeStore),
+        Provider<PostStore>(create: (_) => _postStore),
+        Provider<LanguageStore>(create: (_) => _languageStore),
       ],
       child: Observer(
+        name: 'global-observer',
         builder: (context) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -75,13 +77,6 @@ class MyApp extends StatelessWidget {
               // Built-in localization of basic text for Cupertino widgets
               GlobalCupertinoLocalizations.delegate,
             ],
-            // Returns a locale which will be used by the app
-            localeResolutionCallback: (locale, supportedLocales) =>
-                // Check if the current device locale is supported
-                supportedLocales.firstWhere(
-                    (supportedLocale) =>
-                        supportedLocale.languageCode == locale.languageCode,
-                    orElse: () => supportedLocales.first),
             home: SplashScreen(),
           );
         },
