@@ -1,6 +1,6 @@
 {
   "login_start": "Below are list of strings for login da ",
-  "login_et_user_id": "Brugernavn",
+  "login_et_user_email": "Brugernavn",
   "login_et_user_password": "Adgangskode",
   "login_btn_forgot_password": "Glemt adgangskode?",
   "login_btn_sign_in": "Log ind",

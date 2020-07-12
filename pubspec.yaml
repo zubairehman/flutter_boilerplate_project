@@ -30,12 +30,6 @@ dependencies:
   # A composable, Future-based library for making HTTP requests.
   http: ^0.12.1
 
-  # The following adds the launcher icon support to your application.
-  # run below mentioned commands to generate launcher icons
-  # flutter packages get
-  # flutter packages pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.7.5
-
   # Flogs, a powerful logging framework
   f_logs: ^1.2.2
 
@@ -43,10 +37,9 @@ dependencies:
   # observables, actions, and reactions to supercharge your Dart and Flutter apps.
   mobx: ^1.2.1+1
   flutter_mobx: ^1.1.0+1
-  mobx_codegen: ^1.1.0+1
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
-  provider: ^4.3.0
+  provider: ^4.3.1
 
   # String validation and sanitization for Dart. Dart 2-compatible version of validator
   validators: ^2.0.1
@@ -54,6 +47,8 @@ dependencies:
   # A powerful Http client for Dart
   dio: 3.0.9
 
+  # A flexible widget for user notification. Customize your text, button, duration, animations
+  # and much more. For Android devs, it is made to replace Snackbars and Toasts.
   flushbar: ^1.10.4
 
   # Material Dialog
@@ -67,15 +62,20 @@ dependencies:
       ref: 7c3cbf6
 
 dependency_overrides:
-  source_gen: 0.9.5
+  source_gen: 0.9.6
   analyzer: ^0.39.12
   intl: ^0.16.1
-
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # The following adds the launcher icon support to your application.
+  # run below mentioned commands to generate launcher icons
+  # flutter packages get
+  # flutter packages pub run flutter_launcher_icons:main
+  flutter_launcher_icons: ^0.7.5
+  mobx_codegen: ^1.1.0+1
   json_serializable: ^3.3.0
   build_runner: ^1.10.0
   inject_generator:

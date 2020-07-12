@@ -1,6 +1,6 @@
 {
   "login_start": "Below are list of strings for login es ",
-  "login_et_user_id": "Ingrese el correo electrónico del usuario",
+  "login_et_user_email": "Ingrese el correo electrónico del usuario",
   "login_et_user_password": "Introducir la contraseña",
   "login_btn_forgot_password": "¿Se te olvidó tu contraseña",
   "login_btn_sign_in": "Registrarse",
