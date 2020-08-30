@@ -1,6 +1,9 @@
 # Boilerplate Project
 
-A boilerplate project created in flutter using MobX and Provider.
+A boilerplate project created in flutter using MobX and Provider. Boilerplate supports both web and mobile, clone the appropriate branches mentioned below:
+
+* For Mobile: https://github.com/zubairehman/flutter-boilerplate-project/tree/master (stable channel)
+* For Web: https://github.com/zubairehman/flutter-boilerplate-project/tree/feature/web-support (beta channel)
 
 ## Getting Started
 
