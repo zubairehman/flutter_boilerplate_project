@@ -38,14 +38,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-
     _passwordFocusNode = FocusNode();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     _themeStore = Provider.of<ThemeStore>(context);
   }
 
@@ -136,6 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
           iconColor: _themeStore.darkMode ? Colors.white70 : Colors.black54,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
+          autoFocus: false,
           onChanged: (value) {
             _store.setUserId(_userEmailController.text);
           },
