@@ -29,9 +29,16 @@ class SharedPreferenceHelper {
     });
   }
 
+  // Login:---------------------------------------------------------------------
   Future<bool> get isLoggedIn async {
     return _sharedPreference.then((preference) {
-      return preference.getString(Preferences.auth_token) ?? false;
+      return preference.getBool(Preferences.is_logged_in) ?? false;
+    });
+  }
+
+  Future<void> saveIsLoggedIn(bool value) async {
+    return _sharedPreference.then((preference) {
+      preference.setBool(Preferences.is_logged_in, value);
     });
   }
 
