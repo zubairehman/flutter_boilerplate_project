@@ -12,33 +12,27 @@ class RestClient {
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String url) {
-    return http.get(url).then((http.Response response) {
-      final String res = response.body;
-      final int statusCode = response.statusCode;
-
-      if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw NetworkException(
-            message: "Error fetching data from server", statusCode: statusCode);
-      }
-
-      print(res);
-      return _decoder.convert(res);
-    });
+    return http.get(url).then(_createResponse);
   }
 
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(String url, {Map headers, body, encoding}) {
     return http
         .post(url, body: body, headers: headers, encoding: encoding)
-        .then((http.Response response) {
-      final String res = response.body;
-      final int statusCode = response.statusCode;
+        .then(_createResponse);
+  }
+  
+  // Response:------------------------------------------------------------------
+  dynamic _createResponse(http.Response response) {
+    final String res = response.body;
+    final int statusCode = response.statusCode;
 
-      if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw NetworkException(
-            message: "Error fetching data from server", statusCode: statusCode);
-      }
-      return _decoder.convert(res);
-    });
+    if (statusCode < 200 || statusCode > 400 || json == null) { 
+      throw NetworkException(
+          message: 'Error fetching data from server',
+          statusCode: statusCode);
+    }
+
+    return _decoder.convert(res);
   }
 }
