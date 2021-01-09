@@ -84,6 +84,7 @@ dev_dependencies:
       url: https://github.com/google/inject.dart.git
       path: package/inject_generator
       ref: 7c3cbf6
+  mockito: ^4.1.1
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"
