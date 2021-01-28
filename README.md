@@ -155,7 +155,7 @@ All the business logic of your application will go into this directory, it repre
 data/
 |- local/
     |- constants/
-    |- datasouces/
+    |- datasources/
     |- app_database.dart
    
 |- network/
