@@ -56,32 +56,6 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.g.dart
 ```
 
-## Boilerplate Features:
-
-* Splash
-* Login
-* Home
-* Routing
-* Theme
-* Dio
-* Database
-* MobX (to connect the reactive data of your application with the UI)
-* Provider (State Management)
-* Encryption
-* Validation
-* Code Generation
-* User Notifications
-* Logging
-* Dependency Injection
-* Dark Theme Support (new)
-* Multilingual Support (new)
-* Provider example (new)
-
-### Up-Coming Features:
-
-* Connectivity Support
-* Background Fetch Support
-
 ### Libraries & Tools Used
 
 * [Dio](https://github.com/flutterchina/dio)
