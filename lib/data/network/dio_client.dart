@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class DioClient {
   // dio instance
   final Dio _dio;
@@ -10,10 +12,10 @@ class DioClient {
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(
       String uri, {
-        Map<String, dynamic> queryParameters,
-        Options options,
-        CancelToken cancelToken,
-        ProgressCallback onReceiveProgress,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onReceiveProgress,
       }) async {
     try {
       final Response response = await _dio.get(
@@ -34,11 +36,11 @@ class DioClient {
   Future<dynamic> post(
       String uri, {
         data,
-        Map<String, dynamic> queryParameters,
-        Options options,
-        CancelToken cancelToken,
-        ProgressCallback onSendProgress,
-        ProgressCallback onReceiveProgress,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onSendProgress,
+        ProgressCallback? onReceiveProgress,
       }) async {
     try {
       final Response response = await _dio.post(

@@ -4,11 +4,13 @@ import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/models/post/post.dart';
 import 'package:boilerplate/models/post/post_list.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sembast/sembast.dart';
 
 import 'local/constants/db_constants.dart';
 import 'network/apis/posts/post_api.dart';
 
+@LazySingleton()
 class Repository {
   // data source object
   final PostDataSource _postDataSource;
@@ -28,7 +30,7 @@ class Repository {
     // else make a network call to get all posts, store them into database for
     // later use
     return await _postApi.getPosts().then((postsList) {
-      postsList.posts.forEach((post) {
+      postsList.posts?.forEach((post) {
         _postDataSource.insert(post);
       });
 
@@ -38,13 +40,11 @@ class Repository {
 
   Future<List<Post>> findPostById(int id) {
     //creating filter
-    List<Filter> filters = List();
+    List<Filter> filters = [];
 
     //check to see if dataLogsType is not null
-    if (id != null) {
-      Filter dataLogTypeFilter = Filter.equals(DBConstants.FIELD_ID, id);
-      filters.add(dataLogTypeFilter);
-    }
+    Filter dataLogTypeFilter = Filter.equals(DBConstants.FIELD_ID, id);
+    filters.add(dataLogTypeFilter);
 
     //making db call
     return _postDataSource
@@ -83,11 +83,11 @@ class Repository {
   Future<void> changeBrightnessToDark(bool value) =>
       _sharedPrefsHelper.changeBrightnessToDark(value);
 
-  Future<bool> get isDarkMode => _sharedPrefsHelper.isDarkMode;
+  bool get isDarkMode => _sharedPrefsHelper.isDarkMode;
 
   // Language: -----------------------------------------------------------------
   Future<void> changeLanguage(String value) =>
       _sharedPrefsHelper.changeLanguage(value);
 
-  Future<String> get currentLanguage => _sharedPrefsHelper.currentLanguage;
+  String? get currentLanguage => _sharedPrefsHelper.currentLanguage;
 }

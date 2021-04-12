@@ -1,9 +1,7 @@
 import 'package:boilerplate/constants/app_theme.dart';
 import 'package:boilerplate/constants/strings.dart';
-import 'package:boilerplate/di/components/app_component.dart';
-import 'package:boilerplate/di/modules/local_module.dart';
-import 'package:boilerplate/di/modules/netwok_module.dart';
-import 'package:boilerplate/di/modules/preference_module.dart';
+import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/di/components/injection.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
@@ -11,17 +9,13 @@ import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/stores/user/user_store.dart';
 import 'package:boilerplate/ui/home/home.dart';
 import 'package:boilerplate/ui/login/login.dart';
-import 'package:boilerplate/ui/splash/splash.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:inject/inject.dart';
+import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
-
-// global instance for app component
-AppComponent appComponent;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,24 +25,19 @@ void main() {
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
   ]).then((_) async {
-    appComponent = await AppComponent.create(
-      NetworkModule(),
-      LocalModule(),
-      PreferenceModule(),
-    );
-    runApp(appComponent.app);
+    configureInjection(Environment.dev);
+    runApp(MyApp());
   });
 }
 
-@provide
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   // Create your store as a final variable in a base Widget. This works better
   // with Hot Reload than creating it directly in the `build` function.
-  final ThemeStore _themeStore = ThemeStore(appComponent.getRepository());
-  final PostStore _postStore = PostStore(appComponent.getRepository());
-  final LanguageStore _languageStore = LanguageStore(appComponent.getRepository());
-  final UserStore _userStore = UserStore(appComponent.getRepository());
+  final ThemeStore _themeStore = ThemeStore(getIt<Repository>());
+  final PostStore _postStore = PostStore(getIt<Repository>());
+  final LanguageStore _languageStore = LanguageStore(getIt<Repository>());
+  final UserStore _userStore = UserStore(getIt<Repository>());
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +57,7 @@ class MyApp extends StatelessWidget {
             routes: Routes.routes,
             locale: Locale(_languageStore.locale),
             supportedLocales: _languageStore.supportedLanguages
-                .map((language) => Locale(language.locale, language.code))
+                .map((language) => Locale(language.locale!, language.code))
                 .toList(),
             localizationsDelegates: [
               // A class which loads the translations from JSON files

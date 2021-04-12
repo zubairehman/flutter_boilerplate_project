@@ -18,7 +18,7 @@ abstract class _FormStore with Store {
   }
 
   // disposers:-----------------------------------------------------------------
-  List<ReactionDisposer> _disposers;
+  late List<ReactionDisposer> _disposers;
 
   void _setupValidations() {
     _disposers = [
@@ -157,13 +157,13 @@ class FormErrorStore = _FormErrorStore with _$FormErrorStore;
 
 abstract class _FormErrorStore with Store {
   @observable
-  String userEmail;
+  String? userEmail;
 
   @observable
-  String password;
+  String? password;
 
   @observable
-  String confirmPassword;
+  String? confirmPassword;
 
   @computed
   bool get hasErrorsInLogin => userEmail != null || password != null;

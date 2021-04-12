@@ -27,10 +27,10 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordController = TextEditingController();
 
   //stores:---------------------------------------------------------------------
-  ThemeStore _themeStore;
+  late ThemeStore _themeStore;
 
   //focus node:-----------------------------------------------------------------
-  FocusNode _passwordFocusNode;
+  late FocusNode _passwordFocusNode;
 
   //stores:---------------------------------------------------------------------
   final _store = FormStore();
@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
           style: Theme.of(context)
               .textTheme
               .caption
-              .copyWith(color: Colors.orangeAccent),
+              ?.copyWith(color: Colors.orangeAccent),
         ),
         onPressed: () {},
       ),

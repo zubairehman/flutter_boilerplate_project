@@ -61,7 +61,7 @@ abstract class _LanguageStore with Store {
   }
 
   @action
-  String getLanguage() {
+  String? getLanguage() {
     return supportedLanguages[supportedLanguages
             .indexWhere((language) => language.locale == _locale)]
         .language;
@@ -70,11 +70,9 @@ abstract class _LanguageStore with Store {
   // general:-------------------------------------------------------------------
   void init() async {
     // getting current language from shared preference
-    _repository?.currentLanguage?.then((locale) {
-      if (locale != null) {
-        _locale = locale;
-      }
-    });
+    if(_repository.currentLanguage != null) {
+      _locale = _repository.currentLanguage!;
+    }
   }
 
   // dispose:-------------------------------------------------------------------
