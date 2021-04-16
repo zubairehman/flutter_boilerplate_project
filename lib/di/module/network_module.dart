@@ -23,22 +23,23 @@ abstract class NetworkModule {
         requestBody: true,
         requestHeader: true,
       ))
-      // ..interceptors.add(
-      //   InterceptorsWrapper(
-      //     onRequest: (RequestOptions options,
-      //         RequestInterceptorHandler handler) async {
-      //       // getting token
-      //       var token = await sharedPrefHelper.authToken;
-      //
-      //       if (token != null) {
-      //         options.headers.putIfAbsent('Authorization', () => token);
-      //       } else {
-      //         print('Auth token is null');
-      //       }
-      //     },
-      //   ),
-      // )
-    ;
+      ..interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (RequestOptions options,
+              RequestInterceptorHandler handler) async {
+            // getting token
+            var token = await sharedPrefHelper.authToken;
+
+            if (token != null) {
+              options.headers.putIfAbsent('Authorization', () => token);
+            } else {
+              print('Auth token is null');
+            }
+
+            return handler.next(options);
+          },
+        ),
+      );
 
     return dio;
   }
