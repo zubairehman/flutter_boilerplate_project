@@ -5,5 +5,5 @@ import 'package:injectable/injectable.dart';
 final getIt = GetIt.instance;
 
 @injectableInit
-void configureInjection(String environment) =>
+void configureInjection() =>
     $initGetIt(getIt);

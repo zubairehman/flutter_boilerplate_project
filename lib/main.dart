@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,7 +24,7 @@ void main() {
     DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
   ]).then((_) async {
-    configureInjection(Environment.dev);
+    configureInjection();
     runApp(MyApp());
   });
 }

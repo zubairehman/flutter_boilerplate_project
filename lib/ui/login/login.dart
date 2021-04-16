@@ -10,9 +10,9 @@ import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/widgets/textfield_widget.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -215,15 +215,26 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // General Methods:-----------------------------------------------------------
   _showErrorMessage( String message) {
-    Future.delayed(Duration(milliseconds: 0), () {
-      if (message != null && message.isNotEmpty) {
-        FlushbarHelper.createError(
-          message: message,
-          title: AppLocalizations.of(context).translate('home_tv_error'),
-          duration: Duration(seconds: 3),
-        )..show(context);
-      }
-    });
+    if (message.isNotEmpty) {
+      Fluttertoast.showToast(
+          msg: message,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
+    // Future.delayed(Duration(milliseconds: 0), () {
+    //   if (message != null && message.isNotEmpty) {
+    //     FlushbarHelper.createError(
+    //       message: message,
+    //       title: AppLocalizations.of(context).translate('home_tv_error'),
+    //       duration: Duration(seconds: 3),
+    //     )..show(context);
+    //   }
+    // });
 
     return SizedBox.shrink();
   }

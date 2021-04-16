@@ -1,4 +1,5 @@
 import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../data/repository.dart';
@@ -6,6 +7,7 @@ import '../form/form_store.dart';
 
 part 'user_store.g.dart';
 
+@Injectable()
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {

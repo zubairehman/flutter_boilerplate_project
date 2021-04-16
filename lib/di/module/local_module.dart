@@ -4,22 +4,21 @@ import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/utils/encryption/xxtea.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
-import 'package:path/path.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class AppModule {
 
-  @LazySingleton()
   @preResolve
   Future<SharedPreferences> provideSharedPreferences() {
     return SharedPreferences.getInstance();
   }
 
-  @LazySingleton()
+  @factoryMethod
   Dio provideDio(SharedPreferenceHelper sharedPrefHelper) {
     final dio = Dio();
 

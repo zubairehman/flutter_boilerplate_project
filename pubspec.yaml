@@ -49,7 +49,8 @@ dependencies:
 
   # A flexible widget for user notification. Customize your text, button, duration, animations
   # and much more. For Android devs, it is made to replace Snackbars and Toasts.
-  flushbar: ^1.10.4
+#  flushbar: ^1.10.4
+  fluttertoast: ^8.0.3
 
   # Material Dialog
 #  material_dialog: ^0.0.9

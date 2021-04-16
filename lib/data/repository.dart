@@ -10,7 +10,8 @@ import 'package:sembast/sembast.dart';
 import 'local/constants/db_constants.dart';
 import 'network/apis/posts/post_api.dart';
 
-@LazySingleton()
+@preResolve
+@Singleton()
 class Repository {
   // data source object
   final PostDataSource _postDataSource;
