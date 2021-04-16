@@ -1,5 +1,5 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/routes.dart';
+import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
