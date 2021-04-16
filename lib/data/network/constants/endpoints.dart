@@ -3,7 +3,6 @@ class Endpoints {
 
   // base url
   static const String baseUrl = "http://jsonplaceholder.typicode.com";
-  // static const String baseUrl = "https://www.apphusetreach.no/application/119267";
 
   // receiveTimeout
   static const int receiveTimeout = 15000;
@@ -13,5 +12,4 @@ class Endpoints {
 
   // booking endpoints
   static const String getPosts = baseUrl + "/posts";
-  static const String getArticles = baseUrl + "/article/get_articles_list";
 }
