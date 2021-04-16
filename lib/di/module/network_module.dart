@@ -6,6 +6,9 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class NetworkModule {
 
+  /// A singleton dio provider.
+  ///
+  /// Calling it multiple times will return the same instance.
   @factoryMethod
   Dio provideDio(SharedPreferenceHelper sharedPrefHelper) {
     final dio = Dio();

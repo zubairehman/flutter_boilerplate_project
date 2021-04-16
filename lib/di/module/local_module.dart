@@ -13,6 +13,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class LocalModule {
+  /// A singleton repository provider.
+  ///
+  /// Calling it multiple times will return the same instance.
   @factoryMethod
   Repository provideRepository(
       PostApi postApi,
@@ -21,11 +24,17 @@ abstract class LocalModule {
     return Repository(postApi, sharedPreferenceHelper, postDataSource);
   }
 
+  /// A singleton preference provider.
+  ///
+  /// Calling it multiple times will return the same instance.
   @preResolve
   Future<SharedPreferences> provideSharedPreferences() {
     return SharedPreferences.getInstance();
   }
 
+  /// A singleton database provider.
+  ///
+  /// Calling it multiple times will return the same instance.
   @preResolve
   Future<Database> provideDatabase() async {
     // Key for encryption
