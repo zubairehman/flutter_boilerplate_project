@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 
 @module
 abstract class NetworkModule {
-
   /// A singleton dio provider.
   ///
   /// Calling it multiple times will return the same instance.
@@ -24,25 +23,21 @@ abstract class NetworkModule {
         requestBody: true,
         requestHeader: true,
       ))
-      // ..interceptors.add(
-      //   InterceptorsWrapper(
-      //     onRequest: (RequestOptions options,
-      //         RequestInterceptorHandler handler) async {
-      //       // // getting shared pref instance
-      //       // var prefs = await SharedPreferences.getInstance();
-      //       //
-      //       // // getting token
-      //       // var token = prefs.getString(Preferences.auth_token);
-      //       //
-      //       // if (token != null) {
-      //       //   options.headers.putIfAbsent('Authorization', () => token);
-      //       // } else {
-      //       //   print('Auth token is null');
-      //       // }
-      //     },
-      //   ),
-      // )
-    ;
+      ..interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (RequestOptions options,
+              RequestInterceptorHandler handler) async {
+            // getting token
+            var token = await sharedPrefHelper.authToken;
+
+            if (token != null) {
+              options.headers.putIfAbsent('Authorization', () => token);
+            } else {
+              print('Auth token is null');
+            }
+          },
+        ),
+      );
 
     return dio;
   }
