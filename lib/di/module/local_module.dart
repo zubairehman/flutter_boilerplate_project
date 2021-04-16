@@ -1,11 +1,9 @@
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/network/apis/posts/post_api.dart';
-import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/utils/encryption/xxtea.dart';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,12 +12,7 @@ import 'package:sembast/sembast_io.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @module
-abstract class AppModule {
-  @preResolve
-  Future<SharedPreferences> provideSharedPreferences() {
-    return SharedPreferences.getInstance();
-  }
-
+abstract class LocalModule {
   @factoryMethod
   Repository provideRepository(
       PostApi postApi,
@@ -28,41 +21,9 @@ abstract class AppModule {
     return Repository(postApi, sharedPreferenceHelper, postDataSource);
   }
 
-  @factoryMethod
-  Dio provideDio(SharedPreferenceHelper sharedPrefHelper) {
-    final dio = Dio();
-
-    dio
-      ..options.baseUrl = Endpoints.baseUrl
-      ..options.connectTimeout = Endpoints.connectionTimeout
-      ..options.receiveTimeout = Endpoints.receiveTimeout
-      ..options.headers = {'Content-Type': 'application/json; charset=utf-8'}
-      ..interceptors.add(LogInterceptor(
-        request: true,
-        responseBody: true,
-        requestBody: true,
-        requestHeader: true,
-      ))
-      ..interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (RequestOptions options,
-              RequestInterceptorHandler handler) async {
-            // // getting shared pref instance
-            // var prefs = await SharedPreferences.getInstance();
-            //
-            // // getting token
-            // var token = prefs.getString(Preferences.auth_token);
-            //
-            // if (token != null) {
-            //   options.headers.putIfAbsent('Authorization', () => token);
-            // } else {
-            //   print('Auth token is null');
-            // }
-          },
-        ),
-      );
-
-    return dio;
+  @preResolve
+  Future<SharedPreferences> provideSharedPreferences() {
+    return SharedPreferences.getInstance();
   }
 
   @preResolve

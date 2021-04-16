@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton()
+@Singleton()
 class DioClient {
   // dio instance
   final Dio _dio;

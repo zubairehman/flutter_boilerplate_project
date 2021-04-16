@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import 'exceptions/network_exceptions.dart';
 
-@LazySingleton()
+@Singleton()
 class RestClient {
 
   // instantiate json decoder for json serialization

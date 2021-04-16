@@ -6,7 +6,7 @@ import 'package:boilerplate/data/network/rest_client.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable()
+@Singleton()
 class PostApi {
   // dio instance
   final DioClient _dioClient;
@@ -28,7 +28,7 @@ class PostApi {
     }
   }
 
-  /// sample api call with default rest client
+/// sample api call with default rest client
 //  Future<PostsList> getPosts() {
 //
 //    return _restClient

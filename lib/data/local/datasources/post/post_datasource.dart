@@ -4,7 +4,7 @@ import 'package:boilerplate/models/post/post_list.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sembast/sembast.dart';
 
-@Injectable()
+@Singleton()
 class PostDataSource {
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are Flogs objects converted to Map
