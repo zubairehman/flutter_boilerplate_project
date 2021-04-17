@@ -49,10 +49,10 @@ dependencies:
 
   # A flexible widget for user notification. Customize your text, button, duration, animations
   # and much more. For Android devs, it is made to replace Snackbars and Toasts.
-  fluttertoast: ^8.0.4
+  another_flushbar: ^1.10.18
 
   # Material Dialog
-#  material_dialog: ^0.0.9
+  material_dialog: ^1.0.0-nullsafety.1
 
   # This package provides internationalization and localization facilities, including message
   # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.

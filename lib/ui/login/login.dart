@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
@@ -12,7 +13,6 @@ import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,18 +62,19 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Stack(
         children: <Widget>[
           MediaQuery.of(context).orientation == Orientation.landscape
-            ? Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: _buildLeftSide(),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: _buildRightSide(),
-                  ),
-                ],
-          ) : Center(child: _buildRightSide()),
+              ? Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: _buildLeftSide(),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: _buildRightSide(),
+                    ),
+                  ],
+                )
+              : Center(child: _buildRightSide()),
           Observer(
             builder: (context) {
               return _store.success
@@ -151,7 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Observer(
       builder: (context) {
         return TextFieldWidget(
-          hint: AppLocalizations.of(context).translate('login_et_user_password'),
+          hint:
+              AppLocalizations.of(context).translate('login_et_user_password'),
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
@@ -214,27 +216,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // General Methods:-----------------------------------------------------------
-  _showErrorMessage( String message) {
+  _showErrorMessage(String message) {
     if (message.isNotEmpty) {
-      Fluttertoast.showToast(
-          msg: message,
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+      Future.delayed(Duration(milliseconds: 0), () {
+        if (message.isNotEmpty) {
+          FlushbarHelper.createError(
+            message: message,
+            title: AppLocalizations.of(context).translate('home_tv_error'),
+            duration: Duration(seconds: 3),
+          )..show(context);
+        }
+      });
     }
-    // Future.delayed(Duration(milliseconds: 0), () {
-    //   if (message != null && message.isNotEmpty) {
-    //     FlushbarHelper.createError(
-    //       message: message,
-    //       title: AppLocalizations.of(context).translate('home_tv_error'),
-    //       duration: Duration(seconds: 3),
-    //     )..show(context);
-    //   }
-    // });
 
     return SizedBox.shrink();
   }
@@ -248,5 +241,4 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordFocusNode.dispose();
     super.dispose();
   }
-
 }

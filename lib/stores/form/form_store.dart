@@ -1,9 +1,11 @@
 import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
 
+@Injectable()
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore with Store {
