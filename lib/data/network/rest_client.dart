@@ -14,20 +14,7 @@ class RestClient {
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String path) {
-    return http
-        .get(Uri.https(Endpoints.baseUrl, path))
-        .then((http.Response response) {
-      final String res = response.body;
-      final int statusCode = response.statusCode;
-
-      if (statusCode < 200 || statusCode > 400) {
-        throw NetworkException(
-            message: "Error fetching data from server", statusCode: statusCode);
-      }
-
-      print(res);
-      return _decoder.convert(res);
-    });
+    return http.get(Uri.https(Endpoints.baseUrl, path)).then(_createResponse);
   }
 
   // Post:----------------------------------------------------------------------
@@ -35,21 +22,12 @@ class RestClient {
       {Map<String, String>? headers, body, encoding}) {
     return http
         .post(
-      Uri.https(Endpoints.baseUrl, path),
-      body: body,
-      headers: headers,
-      encoding: encoding,
-    )
-        .then((http.Response response) {
-      final String res = response.body;
-      final int statusCode = response.statusCode;
-
-      if (statusCode < 200 || statusCode > 400) {
-        throw NetworkException(
-            message: "Error fetching data from server", statusCode: statusCode);
-      }
-      return _decoder.convert(res);
-    });
+          Uri.https(Endpoints.baseUrl, path),
+          body: body,
+          headers: headers,
+          encoding: encoding,
+        )
+        .then(_createResponse);
   }
 
   // Put:----------------------------------------------------------------------
@@ -57,21 +35,12 @@ class RestClient {
       {Map<String, String>? headers, body, encoding}) {
     return http
         .put(
-      Uri.https(Endpoints.baseUrl, path),
-      body: body,
-      headers: headers,
-      encoding: encoding,
-    )
-        .then((http.Response response) {
-      final String res = response.body;
-      final int statusCode = response.statusCode;
-
-      if (statusCode < 200 || statusCode > 400) {
-        throw NetworkException(
-            message: "Error fetching data from server", statusCode: statusCode);
-      }
-      return _decoder.convert(res);
-    });
+          Uri.https(Endpoints.baseUrl, path),
+          body: body,
+          headers: headers,
+          encoding: encoding,
+        )
+        .then(_createResponse);
   }
 
   // Delete:----------------------------------------------------------------------
@@ -79,20 +48,24 @@ class RestClient {
       {Map<String, String>? headers, body, encoding}) {
     return http
         .delete(
-      Uri.https(Endpoints.baseUrl, path),
-      body: body,
-      headers: headers,
-      encoding: encoding,
-    )
-        .then((http.Response response) {
-      final String res = response.body;
-      final int statusCode = response.statusCode;
+          Uri.https(Endpoints.baseUrl, path),
+          body: body,
+          headers: headers,
+          encoding: encoding,
+        )
+        .then(_createResponse);
+  }
 
-      if (statusCode < 200 || statusCode > 400) {
-        throw NetworkException(
-            message: "Error fetching data from server", statusCode: statusCode);
-      }
-      return _decoder.convert(res);
-    });
+  // Response:------------------------------------------------------------------
+  dynamic _createResponse(http.Response response) {
+    final String res = response.body;
+    final int statusCode = response.statusCode;
+
+    if (statusCode < 200 || statusCode > 400) {
+      throw NetworkException(
+          message: 'Error fetching data from server', statusCode: statusCode);
+    }
+
+    return _decoder.convert(res);
   }
 }
