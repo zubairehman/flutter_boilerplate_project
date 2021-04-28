@@ -1,10 +1,12 @@
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 part 'theme_store.g.dart';
 
+@Injectable()
 class ThemeStore = _ThemeStore with _$ThemeStore;
 
 abstract class _ThemeStore with Store {
@@ -39,7 +41,7 @@ abstract class _ThemeStore with Store {
 
   // general methods:-----------------------------------------------------------
   Future init() async {
-    _darkMode = await _repository?.isDarkMode ?? false;
+    _darkMode = _repository.isDarkMode;
   }
 
   bool isPlatformDark(BuildContext context) =>

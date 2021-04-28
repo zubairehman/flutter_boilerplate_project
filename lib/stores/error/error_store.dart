@@ -1,13 +1,15 @@
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 part 'error_store.g.dart';
 
+@Injectable()
 class ErrorStore = _ErrorStore with _$ErrorStore;
 
 abstract class _ErrorStore with Store {
 
   // disposers
-  List<ReactionDisposer> _disposers;
+  late List<ReactionDisposer> _disposers;
 
   // constructor:---------------------------------------------------------------
   _ErrorStore() {

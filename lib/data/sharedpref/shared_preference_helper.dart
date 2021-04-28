@@ -1,70 +1,55 @@
 import 'dart:async';
+
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/preferences.dart';
 
+@Singleton()
 class SharedPreferenceHelper {
   // shared pref instance
-  final Future<SharedPreferences> _sharedPreference;
+  final SharedPreferences _sharedPreference;
 
   // constructor
   SharedPreferenceHelper(this._sharedPreference);
 
   // General Methods: ----------------------------------------------------------
-  Future<String> get authToken async {
-    return _sharedPreference.then((preference) {
-      return preference.getString(Preferences.auth_token);
-    });
+  Future<String?> get authToken async {
+    return _sharedPreference.getString(Preferences.auth_token);
   }
 
-  Future<void> saveAuthToken(String authToken) async {
-    return _sharedPreference.then((preference) {
-      preference.setString(Preferences.auth_token, authToken);
-    });
+  Future<bool> saveAuthToken(String authToken) async {
+    return _sharedPreference.setString(Preferences.auth_token, authToken);
   }
 
-  Future<void> removeAuthToken() async {
-    return _sharedPreference.then((preference) {
-      preference.remove(Preferences.auth_token);
-    });
+  Future<bool> removeAuthToken() async {
+    return _sharedPreference.remove(Preferences.auth_token);
   }
 
   // Login:---------------------------------------------------------------------
   Future<bool> get isLoggedIn async {
-    return _sharedPreference.then((preference) {
-      return preference.getBool(Preferences.is_logged_in) ?? false;
-    });
+    return _sharedPreference.getBool(Preferences.is_logged_in) ?? false;
   }
 
-  Future<void> saveIsLoggedIn(bool value) async {
-    return _sharedPreference.then((preference) {
-      preference.setBool(Preferences.is_logged_in, value);
-    });
+  Future<bool> saveIsLoggedIn(bool value) async {
+    return _sharedPreference.setBool(Preferences.is_logged_in, value);
   }
 
   // Theme:------------------------------------------------------
-  Future<bool> get isDarkMode {
-    return _sharedPreference.then((prefs) {
-      return prefs.getBool(Preferences.is_dark_mode) ?? false;
-    });
+  bool get isDarkMode {
+    return _sharedPreference.getBool(Preferences.is_dark_mode) ?? false;
   }
 
   Future<void> changeBrightnessToDark(bool value) {
-    return _sharedPreference.then((prefs) {
-      return prefs.setBool(Preferences.is_dark_mode, value);
-    });
+    return _sharedPreference.setBool(Preferences.is_dark_mode, value);
   }
 
   // Language:---------------------------------------------------
-  Future<String> get currentLanguage {
-    return _sharedPreference.then((prefs) {
-      return prefs.getString(Preferences.current_language);
-    });
+  String? get currentLanguage {
+    return _sharedPreference.getString(Preferences.current_language);
   }
 
   Future<void> changeLanguage(String language) {
-    return _sharedPreference.then((prefs) {
-      return prefs.setString(Preferences.current_language, language);
-    });
+    return _sharedPreference.setString(Preferences.current_language, language);
   }
 }

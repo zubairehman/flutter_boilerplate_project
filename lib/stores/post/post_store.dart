@@ -2,15 +2,17 @@ import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 part 'post_store.g.dart';
 
+@Injectable()
 class PostStore = _PostStore with _$PostStore;
 
 abstract class _PostStore with Store {
   // repository instance
-  Repository _repository;
+  late Repository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
@@ -19,15 +21,15 @@ abstract class _PostStore with Store {
   _PostStore(Repository repository) : this._repository = repository;
 
   // store variables:-----------------------------------------------------------
-  static ObservableFuture<PostList> emptyPostResponse =
+  static ObservableFuture<PostList?> emptyPostResponse =
       ObservableFuture.value(null);
 
   @observable
-  ObservableFuture<PostList> fetchPostsFuture =
-      ObservableFuture<PostList>(emptyPostResponse);
+  ObservableFuture<PostList?> fetchPostsFuture =
+      ObservableFuture<PostList?>(emptyPostResponse);
 
   @observable
-  PostList postList;
+  PostList? postList;
 
   @observable
   bool success = false;

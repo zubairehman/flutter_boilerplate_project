@@ -1,4 +1,5 @@
 import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../data/repository.dart';
@@ -6,6 +7,7 @@ import '../form/form_store.dart';
 
 part 'user_store.g.dart';
 
+@Injectable()
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
@@ -29,12 +31,12 @@ abstract class _UserStore with Store {
 
     // checking if user is logged in
     repository.isLoggedIn.then((value) {
-      this.isLoggedIn = value ?? false;
+      this.isLoggedIn = value;
     });
   }
 
   // disposers:-----------------------------------------------------------------
-  List<ReactionDisposer> _disposers;
+  late List<ReactionDisposer> _disposers;
 
   void _setupDisposers() {
     _disposers = [

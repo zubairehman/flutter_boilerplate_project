@@ -1,9 +1,11 @@
 import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
 part 'form_store.g.dart';
 
+@Injectable()
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore with Store {
@@ -18,7 +20,7 @@ abstract class _FormStore with Store {
   }
 
   // disposers:-----------------------------------------------------------------
-  List<ReactionDisposer> _disposers;
+  late List<ReactionDisposer> _disposers;
 
   void _setupValidations() {
     _disposers = [
@@ -157,13 +159,13 @@ class FormErrorStore = _FormErrorStore with _$FormErrorStore;
 
 abstract class _FormErrorStore with Store {
   @observable
-  String userEmail;
+  String? userEmail;
 
   @observable
-  String password;
+  String? password;
 
   @observable
-  String confirmPassword;
+  String? confirmPassword;
 
   @computed
   bool get hasErrorsInLogin => userEmail != null || password != null;
