@@ -149,13 +149,13 @@ constants/
 
 ### Data
 
-All the business logic of your application will go into this directory, it represents the data layer of your application. It is sub-divided into three directories `local`, `network` and `shared_perf`, each containing the domain specific logic. Since each layer exists independently, that makes it easier to unit test. The communication between UI and data layer is handled by using central repository.
+All the business logic of your application will go into this directory, it represents the data layer of your application. It is sub-divided into three directories `local`, `network` and `sharedpref`, each containing the domain specific logic. Since each layer exists independently, that makes it easier to unit test. The communication between UI and data layer is handled by using central repository.
 
 ```
 data/
 |- local/
     |- constants/
-    |- datasouces/
+    |- datasources/
     |- app_database.dart
    
 |- network/
