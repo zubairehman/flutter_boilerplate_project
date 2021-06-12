@@ -2,12 +2,10 @@ import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
-import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 part 'post_store.g.dart';
 
-@Injectable()
 class PostStore = _PostStore with _$PostStore;
 
 abstract class _PostStore with Store {

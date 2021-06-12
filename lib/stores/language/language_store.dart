@@ -1,12 +1,10 @@
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/models/language/Language.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
-import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 part 'language_store.g.dart';
 
-@Injectable()
 class LanguageStore = _LanguageStore with _$LanguageStore;
 
 abstract class _LanguageStore with Store {

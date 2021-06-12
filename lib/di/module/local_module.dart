@@ -1,42 +1,27 @@
+import 'dart:async';
+
 import 'package:boilerplate/data/local/constants/db_constants.dart';
-import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
-import 'package:boilerplate/data/network/apis/posts/post_api.dart';
-import 'package:boilerplate/data/repository.dart';
-import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/utils/encryption/xxtea.dart';
-import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@module
 abstract class LocalModule {
-  /// A singleton repository provider.
-  ///
-  /// Calling it multiple times will return the same instance.
-  @factoryMethod
-  Repository provideRepository(
-      PostApi postApi,
-      SharedPreferenceHelper sharedPreferenceHelper,
-      PostDataSource postDataSource) {
-    return Repository(postApi, sharedPreferenceHelper, postDataSource);
-  }
+
 
   /// A singleton preference provider.
   ///
   /// Calling it multiple times will return the same instance.
-  @preResolve
-  Future<SharedPreferences> provideSharedPreferences() {
+  static Future<SharedPreferences> provideSharedPreferences() {
     return SharedPreferences.getInstance();
   }
 
   /// A singleton database provider.
   ///
   /// Calling it multiple times will return the same instance.
-  @preResolve
-  Future<Database> provideDatabase() async {
+  static Future<Database> provideDatabase() async {
     // Key for encryption
     var encryptionKey = "";
 

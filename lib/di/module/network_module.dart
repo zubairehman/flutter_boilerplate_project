@@ -1,15 +1,12 @@
 import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
-@module
 abstract class NetworkModule {
   /// A singleton dio provider.
   ///
   /// Calling it multiple times will return the same instance.
-  @factoryMethod
-  Dio provideDio(SharedPreferenceHelper sharedPrefHelper) {
+  static Dio provideDio(SharedPreferenceHelper sharedPrefHelper) {
     final dio = Dio();
 
     dio
