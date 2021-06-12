@@ -20,11 +20,11 @@ class PostDataSource {
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
-    return await _postsStore.add(await _db, post.toMap());
+    return await _postsStore.add(_db, post.toMap());
   }
 
   Future<int> count() async {
-    return await _postsStore.count(await _db);
+    return await _postsStore.count(_db);
   }
 
   Future<List<Post>> getAllSortedByFilter({List<Filter>? filters}) async {
@@ -34,7 +34,7 @@ class PostDataSource {
         sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
 
     final recordSnapshots = await _postsStore.find(
-      await _db,
+      _db,
       finder: finder,
     );
 
@@ -56,7 +56,7 @@ class PostDataSource {
 
     // fetching data
     final recordSnapshots = await _postsStore.find(
-      await _db,
+      _db,
     );
 
     // Making a List<Post> out of List<RecordSnapshot>
@@ -78,7 +78,7 @@ class PostDataSource {
     // we use a Finder.
     final finder = Finder(filter: Filter.byKey(post.id));
     return await _postsStore.update(
-      await _db,
+      _db,
       post.toMap(),
       finder: finder,
     );
@@ -87,14 +87,14 @@ class PostDataSource {
   Future<int> delete(Post post) async {
     final finder = Finder(filter: Filter.byKey(post.id));
     return await _postsStore.delete(
-      await _db,
+      _db,
       finder: finder,
     );
   }
 
   Future deleteAll() async {
     await _postsStore.drop(
-      await _db,
+      _db,
     );
   }
 
