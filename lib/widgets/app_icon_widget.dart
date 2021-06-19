@@ -14,12 +14,14 @@ class AppIconWidget extends StatelessWidget {
     var size = MediaQuery.of(context).size;
 
     //calculating container width
-    double imageSize;
-    if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      imageSize = (size.width * 0.20);
-    } else {
-      imageSize = (size.height * 0.20);
-    }
+    double imageSize = () {
+      if (MediaQuery.of(context).orientation == Orientation.portrait) {
+        return size.width * 0.20;
+      } else {
+        return size.height * 0.20;
+      }
+    }();  
+    
 
     return Image.asset(
       image,
