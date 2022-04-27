@@ -1,6 +1,7 @@
+import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
-import 'package:boilerplate/models/post/post.dart';
-import 'package:boilerplate/models/post/post_list.dart';
+import 'package:boilerplate/domain/entity/post/post.dart';
+import 'package:boilerplate/domain/entity/post/post_list.dart';
 import 'package:sembast/sembast.dart';
 
 class PostDataSource {
@@ -13,18 +14,18 @@ class PostDataSource {
 //  Future<Database> get _db async => await AppDatabase.instance.database;
 
   // database instance
-  final Database _db;
+  final SembastClient _sembastClient;
 
   // Constructor
-  PostDataSource(this._db);
+  PostDataSource(this._sembastClient);
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
-    return await _postsStore.add(_db, post.toMap());
+    return await _postsStore.add(_sembastClient.database, post.toMap());
   }
 
   Future<int> count() async {
-    return await _postsStore.count(_db);
+    return await _postsStore.count(_sembastClient.database);
   }
 
   Future<List<Post>> getAllSortedByFilter({List<Filter>? filters}) async {
@@ -34,7 +35,7 @@ class PostDataSource {
         sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
 
     final recordSnapshots = await _postsStore.find(
-      _db,
+      _sembastClient.database,
       finder: finder,
     );
 
@@ -56,7 +57,7 @@ class PostDataSource {
 
     // fetching data
     final recordSnapshots = await _postsStore.find(
-      _db,
+      _sembastClient.database,
     );
 
     // Making a List<Post> out of List<RecordSnapshot>
@@ -78,7 +79,7 @@ class PostDataSource {
     // we use a Finder.
     final finder = Finder(filter: Filter.byKey(post.id));
     return await _postsStore.update(
-      _db,
+      _sembastClient.database,
       post.toMap(),
       finder: finder,
     );
@@ -87,14 +88,14 @@ class PostDataSource {
   Future<int> delete(Post post) async {
     final finder = Finder(filter: Filter.byKey(post.id));
     return await _postsStore.delete(
-      _db,
+      _sembastClient.database,
       finder: finder,
     );
   }
 
   Future deleteAll() async {
     await _postsStore.drop(
-      _db,
+      _sembastClient.database,
     );
   }
 

@@ -1,3 +1,6 @@
+# This branch is still under development
+
+
 # Boilerplate Project
 
 A boilerplate project created in flutter using MobX and Provider. Boilerplate supports both web and mobile, clone the appropriate branches mentioned below:
@@ -225,7 +228,7 @@ This file contains all the routes for your application.
 ```dart
 import 'package:flutter/material.dart';
 
-import 'ui/home/home.dart';
+import 'ui/post/post_list.dart';
 import 'ui/login/login.dart';
 import 'ui/splash/splash.dart';
 
@@ -235,7 +238,7 @@ class Routes {
   //static variables
   static const String splash = '/splash';
   static const String login = '/login';
-  static const String home = '/home';
+  static const String home = '/post';
 
   static final routes = <String, WidgetBuilder>{
     splash: (BuildContext context) => SplashScreen(),
