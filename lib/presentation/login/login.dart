@@ -9,6 +9,7 @@ import 'package:boilerplate/core/widgets/textfield_widget.dart';
 import 'package:boilerplate/data/di/data_layer_injection.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
+import 'package:boilerplate/presentation/login/store/login_store.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
@@ -28,7 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //stores:---------------------------------------------------------------------
   final ThemeStore _themeStore = getIt<ThemeStore>();
-  final FormStore _store = getIt<FormStore>();
+  final FormStore _formStore = getIt<FormStore>();
+  final UserStore _userStore = getIt<UserStore>();
 
   //focus node:-----------------------------------------------------------------
   late FocusNode _passwordFocusNode;
@@ -69,15 +71,15 @@ class _LoginScreenState extends State<LoginScreen> {
               : Center(child: _buildRightSide()),
           Observer(
             builder: (context) {
-              return _store.success
+              return _userStore.success
                   ? navigate(context)
-                  : _showErrorMessage(_store.errorStore.errorMessage);
+                  : _showErrorMessage(_formStore.errorStore.errorMessage);
             },
           ),
           Observer(
             builder: (context) {
               return Visibility(
-                visible: _store.loading,
+                visible: _userStore.isLoading,
                 child: CustomProgressIndicatorWidget(),
               );
             },
@@ -129,12 +131,12 @@ class _LoginScreenState extends State<LoginScreen> {
           inputAction: TextInputAction.next,
           autoFocus: false,
           onChanged: (value) {
-            _store.setUserId(_userEmailController.text);
+            _formStore.setUserId(_userEmailController.text);
           },
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(_passwordFocusNode);
           },
-          errorText: _store.formErrorStore.userEmail,
+          errorText: _formStore.formErrorStore.userEmail,
         );
       },
     );
@@ -152,9 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
           iconColor: _themeStore.darkMode ? Colors.white70 : Colors.black54,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
-          errorText: _store.formErrorStore.password,
+          errorText: _formStore.formErrorStore.password,
           onChanged: (value) {
-            _store.setPassword(_passwordController.text);
+            _formStore.setPassword(_passwordController.text);
           },
         );
       },
@@ -184,9 +186,9 @@ class _LoginScreenState extends State<LoginScreen> {
       buttonColor: Colors.orangeAccent,
       textColor: Colors.white,
       onPressed: () async {
-        if (_store.canLogin) {
+        if (_formStore.canLogin) {
           DeviceUtils.hideKeyboard(context);
-          _store.login();
+          _userStore.login(_userEmailController.text, _passwordController.text);
         } else {
           _showErrorMessage('Please fill in all fields');
         }

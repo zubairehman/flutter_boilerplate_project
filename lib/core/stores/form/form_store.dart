@@ -8,12 +8,12 @@ class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore with Store {
   // store for handling form errors
-  final FormErrorStore formErrorStore = FormErrorStore();
+  final FormErrorStore formErrorStore;
 
   // store for handling error messages
-  final ErrorStore errorStore = ErrorStore();
+  final ErrorStore errorStore;
 
-  _FormStore() {
+  _FormStore(this.formErrorStore, this.errorStore) {
     _setupValidations();
   }
 
@@ -40,9 +40,6 @@ abstract class _FormStore with Store {
 
   @observable
   bool success = false;
-
-  @observable
-  bool loading = false;
 
   @computed
   bool get canLogin =>
@@ -106,38 +103,6 @@ abstract class _FormStore with Store {
     } else {
       formErrorStore.confirmPassword = null;
     }
-  }
-
-  @action
-  Future register() async {
-    loading = true;
-  }
-
-  @action
-  Future login() async {
-    loading = true;
-
-    Future.delayed(Duration(milliseconds: 2000)).then((future) {
-      loading = false;
-      success = true;
-    }).catchError((e) {
-      loading = false;
-      success = false;
-      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
-          ? "Username and password doesn't match"
-          : "Something went wrong, please check your internet connection and try again";
-      print(e);
-    });
-  }
-
-  @action
-  Future forgotPassword() async {
-    loading = true;
-  }
-
-  @action
-  Future logout() async {
-    loading = true;
   }
 
   // general methods:-----------------------------------------------------------

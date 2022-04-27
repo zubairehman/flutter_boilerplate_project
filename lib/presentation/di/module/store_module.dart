@@ -19,7 +19,9 @@ mixin StoreModule {
     // factories:---------------------------------------------------------------
     getIt.registerFactory(() => ErrorStore());
     getIt.registerFactory(() => FormErrorStore());
-    getIt.registerFactory(() => FormStore());
+    getIt.registerFactory(
+      () => FormStore(injector<FormErrorStore>(), injector<ErrorStore>()),
+    );
 
     // stores:------------------------------------------------------------------
     injector.registerSingleton<PostStore>(
