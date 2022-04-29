@@ -24,9 +24,12 @@ class Repository {
 
   // Post: ---------------------------------------------------------------------
   Future<PostList> getPosts() async {
-    // check to see if posts are present in database, then fetch from database
-    // else make a network call to get all posts, store them into database for
-    // later use
+    // TODO: refactor to check local database (sembast) and return them if found, 
+    // then execute network api call to get latest from backend database and update the local
+    // database with any that are returned from the database 
+    // the ui would then be auto updated with the results from backend 
+    // benefits: this is local first then check backend database for fast response for user    
+    // CURRENT: this checks backend database for results and inserts them in the local database only at this time
     return await _postApi.getPosts().then((postsList) {
       postsList.posts?.forEach((post) {
         _postDataSource.insert(post);
