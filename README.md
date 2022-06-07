@@ -142,8 +142,8 @@ This directory contains all the application level constants. A separate file is 
 constants/
 |- app_theme.dart
 |- dimens.dart
-|- endpoints.dart
-|- preferences.dart
+|- colors.dart
+|- font_family.dart
 |- strings.dart
 ```
 
