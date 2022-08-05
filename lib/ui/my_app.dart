@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         name: 'global-observer',
         builder: (context) {
           return MaterialApp(
+            navigatorObservers: [
+              SentryNavigatorObserver(),
+            ],
             debugShowCheckedModeBanner: false,
             title: Strings.appName,
             theme: _themeStore.darkMode

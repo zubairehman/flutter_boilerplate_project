@@ -14,6 +14,7 @@ import 'package:boilerplate/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -181,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
               .caption
               ?.copyWith(color: Colors.orangeAccent),
         ),
-        onPressed: () {},
+        onPressed: _onForgotPassword,
       ),
     );
   }
@@ -230,6 +231,18 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return SizedBox.shrink();
+  }
+
+  _onForgotPassword() async {
+    try {
+      // Doing some method that may throw error 
+      throw Exception('Some arbitrary error');
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   // dispose:-------------------------------------------------------------------
