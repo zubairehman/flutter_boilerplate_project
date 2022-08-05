@@ -56,6 +56,9 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.g.dart
 ```
 
+## Sentry
+You have to add Sentry DNS to be able to use Sentry in the project. Change the ```option.dns``` in `main.dart`.
+
 ## Boilerplate Features:
 
 * Splash

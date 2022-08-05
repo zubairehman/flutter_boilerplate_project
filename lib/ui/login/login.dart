@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
+import 'package:boilerplate/utils/message/message.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
@@ -80,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) {
               return _store.success
                   ? navigate(context)
-                  : _showErrorMessage(_store.errorStore.errorMessage);
+                  : ErrorMessage().showMessage(_store.errorStore.errorMessage, context);
             },
           ),
           Observer(
@@ -197,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
           DeviceUtils.hideKeyboard(context);
           _store.login();
         } else {
-          _showErrorMessage('Please fill in all fields');
+          ErrorMessage().showMessage('Please fill in all fields', context);
         }
       },
     );
@@ -217,27 +218,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // General Methods:-----------------------------------------------------------
-  _showErrorMessage(String message) {
-    if (message.isNotEmpty) {
-      Future.delayed(Duration(milliseconds: 0), () {
-        if (message.isNotEmpty) {
-          FlushbarHelper.createError(
-            message: message,
-            title: AppLocalizations.of(context).translate('home_tv_error'),
-            duration: Duration(seconds: 3),
-          )..show(context);
-        }
-      });
-    }
-
-    return SizedBox.shrink();
-  }
-
   _onForgotPassword() async {
     try {
       // Doing some method that may throw error 
       throw Exception('Some arbitrary error');
     } catch (exception, stackTrace) {
+      ErrorMessage().showMessage("This is an sample error message", context);
       await Sentry.captureException(
         exception,
         stackTrace: stackTrace,
