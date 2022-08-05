@@ -1,5 +1,5 @@
 import 'package:boilerplate/data/repository.dart';
-import 'package:boilerplate/models/language/Language.dart';
+import 'package:boilerplate/models/language/language.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -8,8 +8,6 @@ part 'language_store.g.dart';
 class LanguageStore = _LanguageStore with _$LanguageStore;
 
 abstract class _LanguageStore with Store {
-  static const String TAG = "LanguageStore";
-
   // repository instance
   final Repository _repository;
 
@@ -25,7 +23,7 @@ abstract class _LanguageStore with Store {
 
   // constructor:---------------------------------------------------------------
   _LanguageStore(Repository repository)
-      : this._repository = repository {
+      : _repository = repository {
     init();
   }
 
@@ -47,7 +45,7 @@ abstract class _LanguageStore with Store {
 
   @action
   String getCode() {
-    var code;
+    String code;
 
     if (_locale == 'en') {
       code = "US";
@@ -55,6 +53,8 @@ abstract class _LanguageStore with Store {
       code = "DK";
     } else if (_locale == 'es') {
       code = "ES";
+    } else {
+      code = "US";
     }
 
     return code;
@@ -68,14 +68,10 @@ abstract class _LanguageStore with Store {
   }
 
   // general:-------------------------------------------------------------------
-  void init() async {
+  Future init() async {
     // getting current language from shared preference
     if(_repository.currentLanguage != null) {
       _locale = _repository.currentLanguage!;
     }
   }
-
-  // dispose:-------------------------------------------------------------------
-  @override
-  dispose() {}
 }

@@ -10,7 +10,7 @@ class SuccessMessage extends Message {
   @override
   SizedBox showMessage(String message, BuildContext context, {int duration = 3000}) {
     if (message.isNotEmpty) {
-      Future.delayed(const Duration(milliseconds: 0), () {
+      Future.delayed(Duration.zero, () {
         if (message.isNotEmpty) {
           FlushbarHelper.createSuccess(
             message: message,
@@ -29,7 +29,7 @@ class ErrorMessage extends Message {
   @override
   SizedBox showMessage(String message, BuildContext context, {int duration = 3000}) {
     if (message.isNotEmpty) {
-      Future.delayed(const Duration(milliseconds: 0), () {
+      Future.delayed(Duration.zero, () {
         if (message.isNotEmpty) {
           FlushbarHelper.createError(
             message: message,
@@ -48,7 +48,7 @@ class InfomationMessage extends Message {
   @override
   SizedBox showMessage(String message, BuildContext context, {int duration = 3000}) {
     if (message.isNotEmpty) {
-      Future.delayed(const Duration(milliseconds: 0), () {
+      Future.delayed(Duration.zero, () {
         if (message.isNotEmpty) {
           FlushbarHelper.createInformation(
             message: message,

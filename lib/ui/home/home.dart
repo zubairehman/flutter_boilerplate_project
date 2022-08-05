@@ -1,11 +1,10 @@
-import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/utils/message/message.dart';
-import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
+import 'package:boilerplate/utils/message/message.dart';
+import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -91,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.of(context).pushReplacementNamed(Routes.login);
         });
       },
-      icon: Icon(
+      icon: const Icon(
         Icons.power_settings_new,
       ),
     );
@@ -102,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onPressed: () {
         _buildLanguageDialog();
       },
-      icon: Icon(
+      icon: const Icon(
         Icons.language,
       ),
     );
@@ -122,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Observer(
       builder: (context) {
         return _postStore.loading
-            ? CustomProgressIndicatorWidget()
+            ? const CustomProgressIndicatorWidget()
             : Material(child: _buildListView());
       },
     );
@@ -133,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ? ListView.separated(
             itemCount: _postStore.postList!.posts!.length,
             separatorBuilder: (context, position) {
-              return Divider();
+              return const Divider();
             },
             itemBuilder: (context, position) {
               return _buildListItem(position);
@@ -149,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildListItem(int position) {
     return ListTile(
       dense: true,
-      leading: Icon(Icons.cloud_circle),
+      leading: const Icon(Icons.cloud_circle),
       title: Text(
         '${_postStore.postList?.posts?[position].title}',
         maxLines: 1,
@@ -173,13 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
           return ErrorMessage().showMessage(_postStore.errorStore.errorMessage, context);
         }
 
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       },
     );
   }
 
-  // General Methods:-----------------------------------------------------------
-_buildLanguageDialog() {
+// General Methods:-----------------------------------------------------------
+void _buildLanguageDialog() {
   _showDialog<String>(
     context: context,
     child: MaterialDialog(
@@ -187,7 +186,7 @@ _buildLanguageDialog() {
       enableFullWidth: true,
       title: Text(
         AppLocalizations.of(context).translate('home_tv_choose_language'),
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 16.0,
         ),
@@ -196,7 +195,6 @@ _buildLanguageDialog() {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       closeButtonColor: Colors.white,
       enableCloseButton: true,
-      enableBackButton: false,
       onCloseButtonClicked: () {
         Navigator.of(context).pop();
       },
@@ -204,7 +202,7 @@ _buildLanguageDialog() {
           .map(
             (object) => ListTile(
               dense: true,
-              contentPadding: EdgeInsets.all(0.0),
+              contentPadding: EdgeInsets.zero,
               title: Text(
                 object.language!,
                 style: TextStyle(
@@ -225,7 +223,7 @@ _buildLanguageDialog() {
   );
 }
 
-  _showDialog<T>({required BuildContext context, required Widget child}) {
+  void _showDialog<T>({required BuildContext context, required Widget child}) {
     showDialog<T>(
       context: context,
       builder: (BuildContext context) => child,

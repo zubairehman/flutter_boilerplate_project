@@ -1,12 +1,11 @@
-import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/utils/message/message.dart';
-import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
+import 'package:boilerplate/utils/message/message.dart';
+import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
@@ -25,8 +24,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   //text controllers:-----------------------------------------------------------
-  TextEditingController _userEmailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _userEmailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   //stores:---------------------------------------------------------------------
   late ThemeStore _themeStore;
@@ -52,7 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      primary: true,
       appBar: EmptyAppBar(),
       body: _buildBody(),
     );
@@ -63,20 +61,16 @@ class _LoginScreenState extends State<LoginScreen> {
     return Material(
       child: Stack(
         children: <Widget>[
-          MediaQuery.of(context).orientation == Orientation.landscape
-              ? Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: _buildLeftSide(),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: _buildRightSide(),
-                    ),
-                  ],
-                )
-              : Center(child: _buildRightSide()),
+          if (MediaQuery.of(context).orientation == Orientation.landscape) Row(
+            children: <Widget>[
+              Expanded(
+                child: _buildLeftSide(),
+              ),
+              Expanded(
+                child: _buildRightSide(),
+              ),
+            ],
+          ) else Center(child: _buildRightSide()),
           Observer(
             builder: (context) {
               return _store.success
@@ -88,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) {
               return Visibility(
                 visible: _store.loading,
-                child: CustomProgressIndicatorWidget(),
+                child: const CustomProgressIndicatorWidget(),
               );
             },
           )
@@ -111,12 +105,11 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AppIconWidget(image: 'assets/icons/ic_appicon.png'),
-            SizedBox(height: 24.0),
+            const AppIconWidget(image: 'assets/icons/ic_appicon.png'),
+            const SizedBox(height: 24.0),
             _buildUserIdField(),
             _buildPasswordField(),
             _buildForgotPasswordButton(),
@@ -137,7 +130,6 @@ class _LoginScreenState extends State<LoginScreen> {
           iconColor: _themeStore.darkMode ? Colors.white70 : Colors.black54,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
-          autoFocus: false,
           onChanged: (value) {
             _store.setUserId(_userEmailController.text);
           },
@@ -157,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
           hint:
               AppLocalizations.of(context).translate('login_et_user_password'),
           isObscure: true,
-          padding: EdgeInsets.only(top: 16.0),
+          padding: const EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
           iconColor: _themeStore.darkMode ? Colors.white70 : Colors.black54,
           textController: _passwordController,
@@ -174,8 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildForgotPasswordButton() {
     return Align(
       alignment: FractionalOffset.centerRight,
-      child: FlatButton(
-        padding: EdgeInsets.all(0.0),
+      child: TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+        ),
+        onPressed: _onForgotPassword,
         child: Text(
           AppLocalizations.of(context).translate('login_btn_forgot_password'),
           style: Theme.of(context)
@@ -183,7 +178,6 @@ class _LoginScreenState extends State<LoginScreen> {
               .caption
               ?.copyWith(color: Colors.orangeAccent),
         ),
-        onPressed: _onForgotPassword,
       ),
     );
   }
@@ -192,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return RoundedButtonWidget(
       buttonText: AppLocalizations.of(context).translate('login_btn_sign_in'),
       buttonColor: Colors.orangeAccent,
-      textColor: Colors.white,
       onPressed: () async {
         if (_store.canLogin) {
           DeviceUtils.hideKeyboard(context);
@@ -209,16 +202,17 @@ class _LoginScreenState extends State<LoginScreen> {
       prefs.setBool(Preferences.is_logged_in, true);
     });
 
-    Future.delayed(Duration(milliseconds: 0), () {
+    Future.delayed(Duration.zero, () {
       Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home, (Route<dynamic> route) => false);
+        Routes.home, (Route<dynamic> route) => false,
+      );
     });
 
     return Container();
   }
 
   // General Methods:-----------------------------------------------------------
-  _onForgotPassword() async {
+  Future _onForgotPassword() async {
     try {
       // Doing some method that may throw error 
       throw Exception('Some arbitrary error');

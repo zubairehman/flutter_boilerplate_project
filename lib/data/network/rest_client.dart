@@ -2,13 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:boilerplate/data/network/constants/endpoints.dart';
+import 'package:boilerplate/data/network/exceptions/network_exceptions.dart';
 import 'package:http/http.dart' as http;
-
-import 'exceptions/network_exceptions.dart';
 
 class RestClient {
   // instantiate json decoder for json serialization
-  final JsonDecoder _decoder = JsonDecoder();
+  final JsonDecoder _decoder = const JsonDecoder();
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String path) {
@@ -17,7 +16,7 @@ class RestClient {
 
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(String path,
-      {Map<String, String>? headers, body, encoding}) {
+      {Map<String, String>? headers, Object? body, Encoding? encoding}) {
     return http
         .post(
           Uri.https(Endpoints.baseUrl, path),
@@ -30,7 +29,7 @@ class RestClient {
 
   // Put:----------------------------------------------------------------------
   Future<dynamic> put(String path,
-      {Map<String, String>? headers, body, encoding}) {
+      {Map<String, String>? headers, Object? body, Encoding? encoding}) {
     return http
         .put(
           Uri.https(Endpoints.baseUrl, path),
@@ -43,7 +42,7 @@ class RestClient {
 
   // Delete:----------------------------------------------------------------------
   Future<dynamic> delete(String path,
-      {Map<String, String>? headers, body, encoding}) {
+      {Map<String, String>? headers, Object? body, Encoding? encoding}) {
     return http
         .delete(
           Uri.https(Endpoints.baseUrl, path),

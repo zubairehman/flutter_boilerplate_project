@@ -1,11 +1,10 @@
 import 'dart:async';
 
+import 'package:boilerplate/di/components/service_locator.dart';
 import 'package:boilerplate/ui/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-
-import 'di/components/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

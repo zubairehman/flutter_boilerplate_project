@@ -25,15 +25,14 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      print(e.toString());
-      throw e;
+      rethrow;
     }
   }
 
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(
       String uri, {
-        data,
+        dynamic data,
         Map<String, dynamic>? queryParameters,
         Options? options,
         CancelToken? cancelToken,
@@ -52,14 +51,14 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   // Put:-----------------------------------------------------------------------
   Future<dynamic> put(
       String uri, {
-        data,
+        dynamic data,
         Map<String, dynamic>? queryParameters,
         Options? options,
         CancelToken? cancelToken,
@@ -78,14 +77,14 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   // Delete:--------------------------------------------------------------------
   Future<dynamic> delete(
       String uri, {
-        data,
+        dynamic data,
         Map<String, dynamic>? queryParameters,
         Options? options,
         CancelToken? cancelToken,
@@ -102,7 +101,7 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

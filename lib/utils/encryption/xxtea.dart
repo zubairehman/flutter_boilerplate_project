@@ -20,7 +20,7 @@ class _XXTeaDecoder extends Converter<String, Map<String, dynamic>> {
 
   @override
   Map<String, dynamic> convert(String input) {
-    var result = json.decode(xxtea.decryptToString(input, key)!);
+    final result = json.decode(xxtea.decryptToString(input, key)!);
     if (result is Map) {
       return result.cast<String, dynamic>();
     }

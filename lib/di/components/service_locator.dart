@@ -36,7 +36,7 @@ Future<void> setupLocator() async {
   getIt.registerSingleton(RestClient());
 
   // api's:---------------------------------------------------------------------
-  getIt.registerSingleton(PostApi(getIt<DioClient>(), getIt<RestClient>()));
+  getIt.registerSingleton(PostApi(getIt<DioClient>()));
 
   // data sources
   getIt.registerSingleton(PostDataSource(await getIt.getAsync<Database>()));

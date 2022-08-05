@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: _languageStore.supportedLanguages
                 .map((language) => Locale(language.locale!, language.code))
                 .toList(),
-            localizationsDelegates: [
+            localizationsDelegates: const [
               // A class which loads the translations from JSON files
               AppLocalizations.delegate,
               // Built-in localization of basic text for Material widgets
