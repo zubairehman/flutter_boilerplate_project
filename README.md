@@ -41,6 +41,17 @@ or watch command in order to keep the source code synced automatically:
 flutter packages pub run build_runner watch
 ```
 
+**Step 4: intl (l10n)**
+To generate the `l10n` files, execute the following command:
+
+```
+flutter gen-l10n
+```
+
+**Step 5: Setup Sentry**
+You have to add Sentry DNS to be able to use Sentry in the project. Change the ```option.dns``` in `main.dart` or disable all Sentry related code in `main.dart` to disable Sentry.
+
+
 ## Hide Generated Files
 
 In-order to hide generated files, navigate to `Android Studio` -> `Preferences` -> `Editor` -> `File Types` and paste the below lines under `ignore files and folders` section:
@@ -55,9 +66,6 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.inject.dart
 **/*.g.dart
 ```
-
-## Sentry
-You have to add Sentry DNS to be able to use Sentry in the project. Change the ```option.dns``` in `main.dart`.
 
 ## Boilerplate Features:
 
@@ -91,6 +99,7 @@ You have to add Sentry DNS to be able to use Sentry in the project. Change the `
 * [Database](https://github.com/tekartik/sembast.dart)
 * [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
+* [intl] (https://github.com/dart-lang/intl)
 * [Encryption](https://github.com/xxtea/xxtea-dart)
 * [Validation](https://github.com/dart-league/validators)
 * [Logging](https://github.com/zubairehman/Flogs)

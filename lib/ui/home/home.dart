@@ -2,11 +2,11 @@ import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
-import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/utils/message/message.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:material_dialog/material_dialog.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // app bar methods:-----------------------------------------------------------
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      title: Text(AppLocalizations.of(context).translate('home_tv_posts')),
+      title: Text(AppLocalizations.of(context)!.home_tv_posts),
       actions: _buildActions(context),
     );
   }
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         : Center(
             child: Text(
-              AppLocalizations.of(context).translate('home_tv_no_post_found'),
+              AppLocalizations.of(context)!.home_tv_no_post_found,
             ),
           );
   }
@@ -185,7 +185,7 @@ void _buildLanguageDialog() {
       borderRadius: 5.0,
       enableFullWidth: true,
       title: Text(
-        AppLocalizations.of(context).translate('home_tv_choose_language'),
+        AppLocalizations.of(context)!.home_tv_choose_language,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 16.0,

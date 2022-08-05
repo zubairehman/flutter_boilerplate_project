@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 abstract class Message {
   SizedBox showMessage(String message, BuildContext context);
@@ -8,13 +8,14 @@ abstract class Message {
 
 class SuccessMessage extends Message {
   @override
-  SizedBox showMessage(String message, BuildContext context, {int duration = 3000}) {
+  SizedBox showMessage(String message, BuildContext context,
+      {int duration = 3000}) {
     if (message.isNotEmpty) {
       Future.delayed(Duration.zero, () {
         if (message.isNotEmpty) {
           FlushbarHelper.createSuccess(
             message: message,
-            title: AppLocalizations.of(context).translate('message_success'),
+            title: AppLocalizations.of(context)!.message_success,
             duration: Duration(milliseconds: duration),
           ).show(context);
         }
@@ -27,13 +28,14 @@ class SuccessMessage extends Message {
 
 class ErrorMessage extends Message {
   @override
-  SizedBox showMessage(String message, BuildContext context, {int duration = 3000}) {
+  SizedBox showMessage(String message, BuildContext context,
+      {int duration = 3000}) {
     if (message.isNotEmpty) {
       Future.delayed(Duration.zero, () {
         if (message.isNotEmpty) {
           FlushbarHelper.createError(
             message: message,
-            title: AppLocalizations.of(context).translate('message_error'),
+            title: AppLocalizations.of(context)!.message_error,
             duration: Duration(milliseconds: duration),
           ).show(context);
         }
@@ -46,13 +48,14 @@ class ErrorMessage extends Message {
 
 class InfomationMessage extends Message {
   @override
-  SizedBox showMessage(String message, BuildContext context, {int duration = 3000}) {
+  SizedBox showMessage(String message, BuildContext context,
+      {int duration = 3000}) {
     if (message.isNotEmpty) {
       Future.delayed(Duration.zero, () {
         if (message.isNotEmpty) {
           FlushbarHelper.createInformation(
             message: message,
-            title: AppLocalizations.of(context).translate('message_infomation'),
+            title: AppLocalizations.of(context)!.message_information,
             duration: Duration(milliseconds: duration),
           ).show(context);
         }

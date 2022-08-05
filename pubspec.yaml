@@ -16,9 +16,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  intl: ^0.17.0
   flutter_localizations:
     sdk: flutter
-  flutter_cupertino_localizations: ^1.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -53,10 +53,6 @@ dependencies:
 
   # Material Dialog
   material_dialog: ^1.0.0-nullsafety.1
-
-  # This package provides internationalization and localization facilities, including message
-  # translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
-  intl: ^0.17.0
 
   # XXTEA is a fast and secure encryption algorithm. This is a XXTEA library for Dart.
   xxtea: ^2.1.0
@@ -97,7 +93,9 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter:
-
+  # The following line to make our application will auto generate l10n files
+  generate: true
+  
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
