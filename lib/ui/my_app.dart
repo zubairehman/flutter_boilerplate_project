@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             theme: _themeStore.darkMode
                 ? AppThemeData.darkThemeData
                 : AppThemeData.lightThemeData,
-            routes: Routes.routes,
+            onGenerateRoute: (settings) => Routes.routes(settings),
             locale: Locale(_languageStore.locale),
             supportedLocales: _languageStore.supportedLanguages
                 .map((language) => Locale(language.locale!, language.code))
