@@ -5,6 +5,19 @@ A boilerplate project created in flutter using MobX and Provider. Boilerplate su
 * For Mobile: https://github.com/zubairehman/flutter-boilerplate-project/tree/master (stable channel)
 * For Web: https://github.com/zubairehman/flutter-boilerplate-project/tree/feature/web-support (beta channel)
 
+# The difference with the original boilerplate
+
+1. Enhance navigation using the package `page_transition` for more customizable transitions.
+2. Integrate Sentry for error reporting.
+3. Add utils class to show common messages and dialogs.
+4. Add Lint to the project and fix all the linting issues.
+5. Enhance localization using the package `intl`. This will allow you to easily localize your app with more customization.
+6. Simple folder structure when using firebase (Firestore).
+
+**Firebase:**
+
+Checkout branch `feature/firebase` for firebase support.
+
 ## Getting Started
 
 The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
@@ -16,7 +29,7 @@ The Boilerplate contains the minimal implementation required to create a new lib
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/zubairehman/flutter-boilerplate-project.git
+https://github.com/kitemetric/flutter-boilerplate-project.git
 ```
 
 **Step 2:**
@@ -42,15 +55,16 @@ flutter packages pub run build_runner watch
 ```
 
 **Step 4: intl (l10n)**
-To generate the `l10n` files, execute the following command:
+
+This project uses `l10n` library that works with code generation, execute the following command to generate files:
 
 ```
 flutter gen-l10n
 ```
 
 **Step 5: Setup Sentry**
-You have to add Sentry DNS to be able to use Sentry in the project. Change the ```option.dns``` in `main.dart` or disable all Sentry related code in `main.dart` to disable Sentry.
 
+This project uses `Sentry` so you have to add Sentry DNS to be able to use Sentry in the project. Change the ```option.dns``` in `main.dart` or disable all Sentry related code in `main.dart` to disable Sentry.
 
 ## Hide Generated Files
 
@@ -85,8 +99,9 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Logging
 * Dependency Injection
 * Dark Theme Support (new)
-* Multilingual Support (new)
 * Provider example (new)
+* Sentry (new)
+* intl (new)
 
 ### Up-Coming Features:
 
