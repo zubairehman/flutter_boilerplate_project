@@ -39,7 +39,7 @@ dependencies:
   flutter_mobx: ^2.0.0
 
   # An helper to easily exposes a value using InheritedWidget without having to write one.
-  provider: ^5.0.0
+  provider: ^6.0.3
 
   # String validation and sanitization for Dart. Dart 2-compatible version of validator
   validators: ^3.0.0

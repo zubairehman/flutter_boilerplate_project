@@ -2,7 +2,6 @@
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/network/apis/posts/post_api.dart';
 import 'package:boilerplate/data/network/dio_client.dart';
-import 'package:boilerplate/data/network/rest_client.dart';
 import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/di/module/local_module.dart';
@@ -33,7 +32,6 @@ Future<void> setupLocator() async {
   getIt.registerSingleton(SharedPreferenceHelper(await getIt.getAsync<SharedPreferences>()));
   getIt.registerSingleton<Dio>(NetworkModule.provideDio(getIt<SharedPreferenceHelper>()));
   getIt.registerSingleton(DioClient(getIt<Dio>()));
-  getIt.registerSingleton(RestClient());
 
   // api's:---------------------------------------------------------------------
   getIt.registerSingleton(PostApi(getIt<DioClient>()));
