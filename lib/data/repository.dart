@@ -62,7 +62,7 @@ class Repository {
       .catchError((error) => throw error);
 
   Future<int> delete(Post post) => _postDataSource
-      .update(post)
+      .delete(post)
       .then((id) => id)
       .catchError((error) => throw error);
 
