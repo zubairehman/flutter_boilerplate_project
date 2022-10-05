@@ -321,3 +321,30 @@ I will be happy to answer any questions that you may have on this approach, and 
 
 Again to note, this is example can appear as over-architectured for what it is - but it is an example only. If you liked my work, don’t forget to ⭐ star the repo to show your support.
 
+
+## ------------------------------------------------------------------------------
+
+# Setting CI-CD: Web-Android using github actions, iOS using Codemagic
+
+**Web and Android auto build and deploy/public to Firebase hosting/Internal Testing CH Play when trigger occurred, the only thing have to do is config env (only git repo owner can do that)**
+
+## Web
+**Config env**
+You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+`FIREBASE_TOKEN`
+How to get FIREBASE_TOKEN: run cmd `firebase login:ci`
+
+## Android
+You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+`ANDROID_KEYSTORE_BASE64`
+`ANDROID_KEYSTORE_PASSWORD`
+`ANDROID_KEY_PASSWORD`
+`ANDROID_KEY_ALIAS`
+`GOOGLE_SERVICE_ACCOUNT_KEY`
+`ANDROID_PACKAGE_NAME`
+[--> For detail](https://viblo.asia/p/cai-dat-don-gian-automating-publishing-flutter-app-len-google-play-bang-github-actions-63vKjg1dZ2R)
+
+## iOS
+To automatic build and deploy new version to TestFlight, we using **CodeMagic** 
+[Easy to setup here!](https://docs.codemagic.io/yaml-quick-start/building-a-flutter-app/)
+

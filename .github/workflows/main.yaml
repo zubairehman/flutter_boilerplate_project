@@ -1,0 +1,141 @@
+on:
+  # action trigger
+  pull_request:
+    branches:
+      #      - main
+      #      - release/**
+      - develop
+  # action trigger
+  push:
+    branches:
+      #      - main
+      #      - release/**
+      - develop
+name: "Build & Release"
+jobs:
+#  build_ios:
+#    name: Build & Release IOS
+#    runs-on: macos-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      #      - name: Select Xcode version
+#      #        run: sudo xcode-select -s '/Applications/Xcode_11.3.app/Contents/Developer'
+#
+#      - name: Bundle install
+#        run: cd ./ios && bundle install
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: '12.x'
+#
+#      - uses: subosito/flutter-action@v1
+#        with:
+#          flutter-version: '2.10.4'
+#      - name: Install tools
+#        run: |
+#          flutter pub get
+#          cd ./ios && pod install
+#
+#      - name: Setup SSH Keys and known_hosts for fastlane match
+#        run: |
+#          SSH_PATH="$HOME/.ssh"
+#          mkdir -p "$SSH_PATH"
+#          touch "$HOME/.ssh/known_hosts"
+#
+#          echo "$PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
+#
+#          chmod 700 "$HOME/.ssh"
+#          ssh-keyscan github.com >> ~/.ssh/known_hosts
+#          chmod 600 "$HOME/.ssh/known_hosts"
+#          chmod 600 "$HOME/.ssh/id_rsa"
+#
+#          eval $(ssh-agent)
+#          ssh-add -K ~/.ssh/id_rsa
+#        env:
+#          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#
+#      - name: Deploy to TestFlight
+#        run: |
+#          cd ./ios && bundle exec fastlane beta
+#        env:
+#          TEAM_ID: ${{ secrets.TEAM_ID }}
+#          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+#          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+#          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+#          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+#          FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+#          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+#          MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+#          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+#          DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS: ${{ secrets.DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS }}
+
+  build_web:
+    name: Build Flutter (Web)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.10.4'
+      - run: flutter pub get
+      - run: flutter config --enable-web
+      - run: flutter build web
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting --public build/web
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: default
+
+  build_android:
+    name: Build & Release Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.10.4'
+      - run: flutter clean
+      - name: Cache pub dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.FLUTTER_HOME }}/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-pub-
+      - run: flutter pub get
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.0.3
+        with:
+          fileName: key.jks
+          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
+      - run: flutter test   // when have unit test
+
+
+      - run: flutter build appbundle
+      - name: Deploy to Play Store
+        uses: r0adkll/upload-google-play@v1.0.17
+        with:
+          serviceAccountJsonPlainText: ${{secrets.GOOGLE_SERVICE_ACCOUNT_KEY}}
+          packageName: ${{ secrets.ANDROID_PACKAGE_NAME }}
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          track: internal
+          status: draft
+          whatsNewDirectory: lib/whatsnew/
+
+#push code to develop
+#pull request on develop

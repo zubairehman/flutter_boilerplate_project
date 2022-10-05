@@ -49,7 +49,7 @@ mixin _$ErrorStore on _ErrorStore, Store {
   }
 
   @override
-  dynamic dispose() {
+  void dispose() {
     final _$actionInfo =
         _$_ErrorStoreActionController.startAction(name: '_ErrorStore.dispose');
     try {
