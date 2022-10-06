@@ -330,14 +330,18 @@ Again to note, this is example can appear as over-architectured for what it is -
 
 ## Web
 **Config env**
-You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+
+You have to set the values below to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
 
 `FIREBASE_TOKEN`
 
 How to get FIREBASE_TOKEN: run cmd `firebase login:ci`
 
 ## Android
-You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+**Config env**
+
+You have to set the values below to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+
 `ANDROID_KEYSTORE_BASE64`
 
 `ANDROID_KEYSTORE_PASSWORD`
