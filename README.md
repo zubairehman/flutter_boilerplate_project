@@ -347,6 +347,7 @@ How to get FIREBASE_TOKEN: run cmd `firebase login:ci`
 
 ### Android
 You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+
 `ANDROID_KEYSTORE_BASE64`
 
 `ANDROID_KEYSTORE_PASSWORD`
@@ -358,6 +359,7 @@ You have to set the value to GitHub secrets. [How to set the value to GitHub sec
 `GOOGLE_SERVICE_ACCOUNT_KEY`
 
 `ANDROID_PACKAGE_NAME`
+
 [How to get the above values.](https://viblo.asia/p/cai-dat-don-gian-automating-publishing-flutter-app-len-google-play-bang-github-actions-63vKjg1dZ2R)
 
 ### iOS
@@ -368,15 +370,21 @@ To automatic build and deploy new version to TestFlight, we using **CodeMagic**
 Register your app on Codemagic, fetch your codemagic.yaml to Codemagic
 
 **Step 2: Setup**
-*Environment* need to provide the following values:
-`PROVISIONING_PROFILE`:  [What's Provision Profile and How to get?](https://viblo.asia/p/phan-3-provisioning-profiles-gAm5yjqLKdb)
-`CERTIFICATE`: A file prefixed with .p12 [What's Certificate and How to get?](https://stackoverflow.com/questions/9418661/how-to-create-p12-certificate-for-ios-distribution)
-`CERTIFICATE_PASSWORD`: When you create a certificate, it will include a password for this certificate, remember it
-`flutter`: Target flutter version
-`xcode`: Target xcode version
-`cocoapods`: Target cocoapods version
 
-*Trigger* When the trigger occurs, the application will automatically build
+*Environment*:  need to provide the following values:
+```yaml
+    PROVISIONING_PROFILE: # A file prefixed with .mobileprovision
+    CERTIFICATE: #A file prefixed with .p12 
+    CERTIFICATE_PASSWORD: #When you create a certificate, it will include a password for this certificate, remember it
+    flutter: #Target flutter version
+    xcode: #Target xcode version
+    cocoapods: #Target cocoapods version
+```
+[What's Provision Profile and How to get?](https://viblo.asia/p/phan-3-provisioning-profiles-gAm5yjqLKdb)
+
+[What's Certificate and How to get?](https://stackoverflow.com/questions/9418661/how-to-create-p12-certificate-for-ios-distribution)
+
+*Trigger*:  When the trigger occurs, the application will automatically build
 ```yaml
 triggering:     
       events:
@@ -391,7 +399,7 @@ triggering:
 ```
 Current trigger: push tag with tag's name: `release-production*` or `release-staging*`, `*` can be version name like `-v2.1.0`
 
-*Publishing* need to provide some information to be able to automatically publish the app to testflight
+*Publishing*:  need to provide some information to be able to automatically publish the app to testflight
 ```yaml
     publishing:
       # have to config
@@ -402,7 +410,7 @@ Current trigger: push tag with tag's name: `release-production*` or `release-sta
         submit_to_testflight: false
         submit_to_app_store: false
 ```
-Only role `ADMIN` in `User and Access` can create new api key and get them. [Setup App Store Connect API key](https://support.appmachine.com/support/solutions/articles/80001023345-v2-how-to-setup-app-store-connect-api-key)
+Only role `ADMIN` in `User and Access` can create new api key and get them [Setup App Store Connect API key](https://support.appmachine.com/support/solutions/articles/80001023345-v2-how-to-setup-app-store-connect-api-key)
 
 However, you still have to manual the last step at testflight to roll out for testers.
 
