@@ -1,0 +1,101 @@
+
+workflows:
+  workflow-for-main:
+    name: Workflow For Main
+    max_build_duration: 60
+    environment:     # have to config
+      vars:
+        PROVISIONING_PROFILE:
+        CERTIFICATE:
+        CERTIFICATE_PASSWORD:
+      flutter: 2.10.4
+      xcode: '13.3'
+      cocoapods: 1.11.3
+    triggering:     # have to config, due to your team, the config below is trigger on push tag with tag name: release-production*
+      events:
+        - tag
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: release-production*
+          include: true
+    scripts:
+      - flutter packages pub get
+      - find . -name "Podfile" -execdir pod install \;
+      - keychain initialize
+      - |
+        # set up provisioning profiles
+        PROFILE_PATH="$(mktemp "$HOME/Library/MobileDevice/Provisioning Profiles"/ios.mobileprovision)"
+        echo "$PROVISIONING_PROFILE" | base64 --decode > "$PROFILE_PATH"
+        echo "Saved provisioning profile $PROFILE_PATH"
+      - |
+        # set up ios signing certificate
+        echo $CERTIFICATE | base64 --decode > '/tmp/certificate.p12'
+        keychain add-certificates --certificate '/tmp/certificate.p12' --certificate-password $CERTIFICATE_PASSWORD
+      - xcode-project use-profiles
+      - flutter build ipa --export-options-plist ~/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      # have to config
+      app_store_connect:
+        api_key:
+        key_id:
+        issuer_id:
+        submit_to_testflight: false
+        submit_to_app_store: false
+  workflow-for-develop:
+    name: Workflow For Develop
+    max_build_duration: 60
+    environment:
+      vars:
+        ROVISIONING_PROFILE:
+        CERTIFICATE:
+        CERTIFICATE_PASSWORD:
+      flutter: 2.10.4
+      xcode: '13.3'
+      cocoapods: 1.11.3
+    triggering:
+      events:
+        - tag
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: release-staging*
+          include: true
+    scripts:
+      - flutter packages pub get
+      - find . -name "Podfile" -execdir pod install \;
+      - keychain initialize
+      - |
+        # set up provisioning profiles
+        PROFILE_PATH="$(mktemp "$HOME/Library/MobileDevice/Provisioning Profiles"/ios.mobileprovision)"
+        echo "$PROVISIONING_PROFILE" | base64 --decode > "$PROFILE_PATH"
+        echo "Saved provisioning profile $PROFILE_PATH"
+      - |
+        # set up ios signing certificate
+        echo $CERTIFICATE | base64 --decode > '/tmp/certificate.p12'
+        keychain add-certificates --certificate '/tmp/certificate.p12' --certificate-password $CERTIFICATE_PASSWORD
+      - xcode-project use-profiles
+      - flutter build ipa --export-options-plist ~/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      app_store_connect:
+        api_key:
+        key_id:
+        issuer_id:
+        submit_to_testflight: false
+        submit_to_app_store: false

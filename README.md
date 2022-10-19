@@ -18,6 +18,15 @@ A boilerplate project created in flutter using MobX and Provider. Boilerplate su
 
 Checkout branch `feature/firebase` for firebase support.
 
+# Contents
+- [Getting Started](#getting-started)
+- [How to Use](#how-to-use)
+- [Hide Generated Files](#hide-generated-files)
+- [Boilerplate Features](#boilerplate-features)
+- [Wiki](#wiki)
+- [Conclusion](#conclusion)
+- [Setting CI-CD](#setting-ci-cd)
+
 ## Getting Started
 
 The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
@@ -81,7 +90,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.g.dart
 ```
 
-## Boilerplate Features:
+## Boilerplate Features
 
 * Splash
 * Login
@@ -322,13 +331,12 @@ I will be happy to answer any questions that you may have on this approach, and 
 Again to note, this is example can appear as over-architectured for what it is - but it is an example only. If you liked my work, don’t forget to ⭐ star the repo to show your support.
 
 
-## -----------------------------------------------------------------------------
-
-# Setting CI-CD: Web-Android using github actions, iOS using Codemagic
+## Setting CI-CD
+Web-Android using github actions, iOS using Codemagic
 
 **Web and Android auto build and deploy/public to Firebase hosting/Internal Testing CH Play when trigger occurred, the only thing have to do is config env (only git repo owner can do that)**
 
-## Web
+### Web
 **Config env**
 
 You have to set the values below to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
@@ -337,11 +345,8 @@ You have to set the values below to GitHub secrets. [How to set the value to Git
 
 How to get FIREBASE_TOKEN: run cmd `firebase login:ci`
 
-## Android
-**Config env**
-
-You have to set the values below to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
-
+### Android
+You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
 `ANDROID_KEYSTORE_BASE64`
 
 `ANDROID_KEYSTORE_PASSWORD`
@@ -353,11 +358,56 @@ You have to set the values below to GitHub secrets. [How to set the value to Git
 `GOOGLE_SERVICE_ACCOUNT_KEY`
 
 `ANDROID_PACKAGE_NAME`
+[How to get the above values.](https://viblo.asia/p/cai-dat-don-gian-automating-publishing-flutter-app-len-google-play-bang-github-actions-63vKjg1dZ2R)
 
-[--> For detail](https://viblo.asia/p/cai-dat-don-gian-automating-publishing-flutter-app-len-google-play-bang-github-actions-63vKjg1dZ2R)
-
-## iOS
+### iOS
 To automatic build and deploy new version to TestFlight, we using **CodeMagic** 
 
-[Easy to setup here!](https://docs.codemagic.io/yaml-quick-start/building-a-flutter-app/)
+**Step 1: Register**
+
+Register your app on Codemagic, fetch your codemagic.yaml to Codemagic
+
+**Step 2: Setup**
+*Environment* need to provide the following values:
+`PROVISIONING_PROFILE`:  [What's Provision Profile and How to get?](https://viblo.asia/p/phan-3-provisioning-profiles-gAm5yjqLKdb)
+`CERTIFICATE`: A file prefixed with .p12 [What's Certificate and How to get?](https://stackoverflow.com/questions/9418661/how-to-create-p12-certificate-for-ios-distribution)
+`CERTIFICATE_PASSWORD`: When you create a certificate, it will include a password for this certificate, remember it
+`flutter`: Target flutter version
+`xcode`: Target xcode version
+`cocoapods`: Target cocoapods version
+
+*Trigger* When the trigger occurs, the application will automatically build
+```yaml
+triggering:     
+      events:
+        - tag
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: release-production*
+          include: true
+```
+Current trigger: push tag with tag's name: `release-production*` or `release-staging*`, `*` can be version name like `-v2.1.0`
+
+*Publishing* need to provide some information to be able to automatically publish the app to testflight
+```yaml
+    publishing:
+      # have to config
+      app_store_connect: 
+        api_key:
+        key_id:
+        issuer_id:
+        submit_to_testflight: false
+        submit_to_app_store: false
+```
+Only role `ADMIN` in `User and Access` can create new api key and get them. [Setup App Store Connect API key](https://support.appmachine.com/support/solutions/articles/80001023345-v2-how-to-setup-app-store-connect-api-key)
+
+However, you still have to manual the last step at testflight to roll out for testers.
+
+
+CodeMagic provides 2 ways for setup the workflow, above I mentioned how to use .yaml file to write workflow.
+In addition, you can refer to how to use Workflow Editor to create your workflow at [Easy to setup CodeMagic!](https://docs.codemagic.io/yaml-quick-start/building-a-flutter-app/)
+
 
