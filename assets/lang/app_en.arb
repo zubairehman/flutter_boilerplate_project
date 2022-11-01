@@ -1,4 +1,8 @@
 {
+  "message_success": "Success",
+  "message_error": "Error",
+  "message_information": "Information",
+
   "login_start": "Below are list of strings for login",
   "login_et_user_email": "Enter user email",
   "login_et_user_password": "Enter password",

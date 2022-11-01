@@ -15,17 +15,15 @@ abstract class NetworkModule {
       ..options.receiveTimeout = Endpoints.receiveTimeout
       ..options.headers = {'Content-Type': 'application/json; charset=utf-8'}
       ..interceptors.add(LogInterceptor(
-        request: true,
         responseBody: true,
         requestBody: true,
-        requestHeader: true,
       ))
       ..interceptors.add(
         InterceptorsWrapper(
           onRequest: (RequestOptions options,
               RequestInterceptorHandler handler) async {
             // getting token
-            var token = await sharedPrefHelper.authToken;
+            final String? token = await sharedPrefHelper.authToken;
 
             if (token != null) {
               options.headers.putIfAbsent('Authorization', () => token);

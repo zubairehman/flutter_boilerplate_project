@@ -1,8 +1,7 @@
+import 'package:boilerplate/data/repository.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:boilerplate/stores/form/form_store.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../data/repository.dart';
-import '../form/form_store.dart';
 
 part 'user_store.g.dart';
 
@@ -22,14 +21,14 @@ abstract class _UserStore with Store {
   bool isLoggedIn = false;
 
   // constructor:---------------------------------------------------------------
-  _UserStore(Repository repository) : this._repository = repository {
+  _UserStore(Repository repository) : _repository = repository {
 
     // setting up disposers
     _setupDisposers();
 
     // checking if user is logged in
     repository.isLoggedIn.then((value) {
-      this.isLoggedIn = value;
+      isLoggedIn = value;
     });
   }
 
@@ -65,21 +64,20 @@ abstract class _UserStore with Store {
     await future.then((value) async {
       if (value) {
         _repository.saveIsLoggedIn(true);
-        this.isLoggedIn = true;
-        this.success = true;
+        isLoggedIn = true;
+        success = true;
       } else {
         print('failed to login');
       }
-    }).catchError((e) {
-      print(e);
-      this.isLoggedIn = false;
-      this.success = false;
+    }).catchError((Object e) {
+      isLoggedIn = false;
+      success = false;
       throw e;
     });
   }
 
-  logout() {
-    this.isLoggedIn = false;
+  void logout() {
+    isLoggedIn = false;
     _repository.saveIsLoggedIn(false);
   }
 

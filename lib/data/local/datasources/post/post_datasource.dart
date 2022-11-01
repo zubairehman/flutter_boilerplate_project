@@ -6,7 +6,7 @@ import 'package:sembast/sembast.dart';
 class PostDataSource {
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are Flogs objects converted to Map
-  final _postsStore = intMapStoreFactory.store(DBConstants.STORE_NAME);
+  final _postsStore = intMapStoreFactory.store(DBConstants.storeName);
 
   // Private getter to shorten the amount of code needed to get the
   // singleton instance of an opened database.
@@ -20,18 +20,18 @@ class PostDataSource {
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
-    return await _postsStore.add(_db, post.toMap());
+    return _postsStore.add(_db, post.toMap());
   }
 
   Future<int> count() async {
-    return await _postsStore.count(_db);
+    return _postsStore.count(_db);
   }
 
   Future<List<Post>> getAllSortedByFilter({List<Filter>? filters}) async {
     //creating finder
     final finder = Finder(
         filter: filters != null ? Filter.and(filters) : null,
-        sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
+        sortOrders: [SortOrder(DBConstants.fieldID)]);
 
     final recordSnapshots = await _postsStore.find(
       _db,
@@ -48,11 +48,8 @@ class PostDataSource {
   }
 
   Future<PostList> getPostsFromDb() async {
-
-    print('Loading from database');
-
     // post list
-    var postsList;
+    PostList postsList = PostList();
 
     // fetching data
     final recordSnapshots = await _postsStore.find(
@@ -60,7 +57,7 @@ class PostDataSource {
     );
 
     // Making a List<Post> out of List<RecordSnapshot>
-    if(recordSnapshots.length > 0) {
+    if(recordSnapshots.isNotEmpty) {
       postsList = PostList(
           posts: recordSnapshots.map((snapshot) {
             final post = Post.fromMap(snapshot.value);
@@ -77,7 +74,7 @@ class PostDataSource {
     // For filtering by key (ID), RegEx, greater than, and many other criteria,
     // we use a Finder.
     final finder = Finder(filter: Filter.byKey(post.id));
-    return await _postsStore.update(
+    return _postsStore.update(
       _db,
       post.toMap(),
       finder: finder,
@@ -86,7 +83,7 @@ class PostDataSource {
 
   Future<int> delete(Post post) async {
     final finder = Finder(filter: Filter.byKey(post.id));
-    return await _postsStore.delete(
+    return _postsStore.delete(
       _db,
       finder: finder,
     );

@@ -24,18 +24,17 @@ abstract class _ErrorStore with Store {
   // actions:-------------------------------------------------------------------
   @action
   void setErrorMessage(String message) {
-    this.errorMessage = message;
+    errorMessage = message;
   }
 
   @action
   void reset(String value) {
-    print('calling reset');
     errorMessage = '';
   }
 
   // dispose:-------------------------------------------------------------------
   @action
-  dispose() {
+  void dispose() {
     for (final d in _disposers) {
       d();
     }

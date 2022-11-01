@@ -1,4 +1,8 @@
 {
+  "message_success": "Succes",
+  "message_error": "Fejl",
+  "message_information": "Information",
+
   "login_start": "Below are list of strings for login da ",
   "login_et_user_email": "Brugernavn",
   "login_et_user_password": "Adgangskode",

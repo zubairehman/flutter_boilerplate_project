@@ -21,20 +21,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Material(
+    return const Material(
       child: Center(child: AppIconWidget(image: Assets.appLogo)),
     );
   }
 
-  startTimer() {
-    var _duration = Duration(milliseconds: 2000);
-    return Timer(_duration, navigate);
+  Timer startTimer() {
+    const Duration duration = Duration(milliseconds: 2000);
+    return Timer(duration, navigate);
   }
 
-  navigate() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+  Future navigate() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
 
+    if (!mounted) return;
+    
     if (preferences.getBool(Preferences.is_logged_in) ?? false) {
       Navigator.of(context).pushReplacementNamed(Routes.home);
     } else {

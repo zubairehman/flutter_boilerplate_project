@@ -5,6 +5,28 @@ A boilerplate project created in flutter using MobX and Provider. Boilerplate su
 * For Mobile: https://github.com/zubairehman/flutter-boilerplate-project/tree/master (stable channel)
 * For Web: https://github.com/zubairehman/flutter-boilerplate-project/tree/feature/web-support (beta channel)
 
+# The difference with the original boilerplate
+
+1. Enhance navigation using the package `page_transition` for more customizable transitions.
+2. Integrate Sentry for error reporting.
+3. Add utils class to show common messages and dialogs.
+4. Add Lint to the project and fix all the linting issues.
+5. Enhance localization using the package `intl`. This will allow you to easily localize your app with more customization.
+6. Simple folder structure when using firebase (Firestore).
+
+**Firebase:**
+
+Checkout branch `feature/firebase` for firebase support.
+
+# Contents
+- [Getting Started](#getting-started)
+- [How to Use](#how-to-use)
+- [Hide Generated Files](#hide-generated-files)
+- [Boilerplate Features](#boilerplate-features)
+- [Wiki](#wiki)
+- [Conclusion](#conclusion)
+- [Setting CI-CD](#setting-ci-cd)
+
 ## Getting Started
 
 The Boilerplate contains the minimal implementation required to create a new library or project. The repository code is preloaded with some basic components like basic app architecture, app theme, constants and required dependencies to create a new project. By using boiler plate code as standard initializer, we can have same patterns in all the projects that will inherit it. This will also help in reducing setup & development time by allowing you to use same code pattern and avoid re-writing from scratch.
@@ -16,7 +38,7 @@ The Boilerplate contains the minimal implementation required to create a new lib
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/zubairehman/flutter-boilerplate-project.git
+https://github.com/kitemetric/flutter-boilerplate-project.git
 ```
 
 **Step 2:**
@@ -41,6 +63,18 @@ or watch command in order to keep the source code synced automatically:
 flutter packages pub run build_runner watch
 ```
 
+**Step 4: intl (l10n)**
+
+This project uses `l10n` library that works with code generation, execute the following command to generate files:
+
+```
+flutter gen-l10n
+```
+
+**Step 5: Setup Sentry**
+
+This project uses `Sentry` so you have to add Sentry DNS to be able to use Sentry in the project. Change the ```option.dns``` in `main.dart` or disable all Sentry related code in `main.dart` to disable Sentry.
+
 ## Hide Generated Files
 
 In-order to hide generated files, navigate to `Android Studio` -> `Preferences` -> `Editor` -> `File Types` and paste the below lines under `ignore files and folders` section:
@@ -56,7 +90,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 **/*.g.dart
 ```
 
-## Boilerplate Features:
+## Boilerplate Features
 
 * Splash
 * Login
@@ -74,8 +108,9 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Logging
 * Dependency Injection
 * Dark Theme Support (new)
-* Multilingual Support (new)
 * Provider example (new)
+* Sentry (new)
+* intl (new)
 
 ### Up-Coming Features:
 
@@ -88,6 +123,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Database](https://github.com/tekartik/sembast.dart)
 * [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
+* [intl] (https://github.com/dart-lang/intl)
 * [Encryption](https://github.com/xxtea/xxtea-dart)
 * [Validation](https://github.com/dart-league/validators)
 * [Logging](https://github.com/zubairehman/Flogs)
@@ -293,4 +329,93 @@ Checkout [wiki](https://github.com/zubairehman/flutter-boilerplate-project/wiki)
 I will be happy to answer any questions that you may have on this approach, and if you want to lend a hand with the boilerplate then please feel free to submit an issue and/or pull request 🙂
 
 Again to note, this is example can appear as over-architectured for what it is - but it is an example only. If you liked my work, don’t forget to ⭐ star the repo to show your support.
+
+
+## Setting CI-CD
+Web-Android using github actions, iOS using Codemagic
+
+**Web and Android auto build and deploy/public to Firebase hosting/Internal Testing CH Play when trigger occurred, the only thing have to do is config env (only git repo owner can do that)**
+
+### Web
+**Config env**
+
+You have to set the values below to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+
+`FIREBASE_TOKEN`
+
+How to get FIREBASE_TOKEN: run cmd `firebase login:ci`
+
+### Android
+You have to set the value to GitHub secrets. [How to set the value to GitHub secrets.](https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md)
+
+`ANDROID_KEYSTORE_BASE64`
+
+`ANDROID_KEYSTORE_PASSWORD`
+
+`ANDROID_KEY_PASSWORD`
+
+`ANDROID_KEY_ALIAS`
+
+`GOOGLE_SERVICE_ACCOUNT_KEY`
+
+`ANDROID_PACKAGE_NAME`
+
+[How to get the above values.](https://viblo.asia/p/cai-dat-don-gian-automating-publishing-flutter-app-len-google-play-bang-github-actions-63vKjg1dZ2R)
+
+### iOS
+To automatic build and deploy new version to TestFlight, we using **CodeMagic** 
+
+**Step 1: Register**
+
+Register your app on Codemagic, fetch your codemagic.yaml to Codemagic
+
+**Step 2: Setup**
+
+*Environment*:  need to provide the following values:
+```yaml
+    PROVISIONING_PROFILE: # A file prefixed with .mobileprovision
+    CERTIFICATE: #A file prefixed with .p12 
+    CERTIFICATE_PASSWORD: #When you create a certificate, it will include a password for this certificate, remember it
+    flutter: #Target flutter version
+    xcode: #Target xcode version
+    cocoapods: #Target cocoapods version
+```
+[What's Provision Profile and How to get?](https://viblo.asia/p/phan-3-provisioning-profiles-gAm5yjqLKdb)
+
+[What's Certificate and How to get?](https://stackoverflow.com/questions/9418661/how-to-create-p12-certificate-for-ios-distribution)
+
+*Trigger*:  When the trigger occurs, the application will automatically build
+```yaml
+triggering:     
+      events:
+        - tag
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: release-production*
+          include: true
+```
+Current trigger: push tag with tag's name: `release-production*` or `release-staging*`, `*` can be version name like `-v2.1.0`
+
+*Publishing*:  need to provide some information to be able to automatically publish the app to testflight
+```yaml
+    publishing:
+      # have to config
+      app_store_connect: 
+        api_key:
+        key_id:
+        issuer_id:
+        submit_to_testflight: false
+        submit_to_app_store: false
+```
+Only role `ADMIN` in `User and Access` can create new api key and get them [Setup App Store Connect API key](https://support.appmachine.com/support/solutions/articles/80001023345-v2-how-to-setup-app-store-connect-api-key)
+
+However, you still have to manual the last step at testflight to roll out for testers.
+
+
+CodeMagic provides 2 ways for setup the workflow, above I mentioned how to use .yaml file to write workflow.
+In addition, you can refer to how to use Workflow Editor to create your workflow at [Easy to setup CodeMagic!](https://docs.codemagic.io/yaml-quick-start/building-a-flutter-app/)
+
 

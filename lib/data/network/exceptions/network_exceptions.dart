@@ -6,6 +6,6 @@ class NetworkException implements Exception {
 }
 
 class AuthException extends NetworkException {
-  AuthException({message, statusCode})
+  AuthException({String? message, int? statusCode})
       : super(message: message, statusCode: statusCode);
 }
