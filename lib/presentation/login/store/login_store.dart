@@ -1,35 +1,46 @@
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/core/stores/form/form_store.dart';
-import 'package:boilerplate/domain/repository/user/user_repository.dart';
+import 'package:boilerplate/domain/usecase/user/is_logged_in_usecase.dart';
+import 'package:boilerplate/domain/usecase/user/save_login_in_status_usecase.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../domain/entity/user/user.dart';
+import '../../../domain/usecase/user/login_usecase.dart';
 
 part 'login_store.g.dart';
 
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
-  // repository instance
-  final UserRepository _repository;
-
-  // store for handling form errors
-  final FormErrorStore formErrorStore;
-
-  // store for handling error messages
-  final ErrorStore errorStore;
-
-  // bool to check if current user is logged in
-  bool isLoggedIn = false;
 
   // constructor:---------------------------------------------------------------
-  _UserStore(this._repository, this.formErrorStore, this.errorStore) {
+  _UserStore(
+      this._isLoggedInUseCase,
+      this._saveLoginStatusUseCase,
+      this._loginUseCase,
+      this.formErrorStore,
+      this.errorStore,
+      ) {
     // setting up disposers
     _setupDisposers();
 
     // checking if user is logged in
-    _repository.isLoggedIn.then((value) {
-      this.isLoggedIn = value;
+    _isLoggedInUseCase.call(params: null).then((value) async {
+      isLoggedIn = value;
     });
   }
+
+  // use cases:-----------------------------------------------------------------
+  final IsLoggedInUseCase _isLoggedInUseCase;
+  final SaveLoginStatusUseCase _saveLoginStatusUseCase;
+  final LoginUseCase _loginUseCase;
+
+  // stores:--------------------------------------------------------------------
+  // for handling form errors
+  final FormErrorStore formErrorStore;
+
+  // store for handling error messages
+  final ErrorStore errorStore;
 
   // disposers:-----------------------------------------------------------------
   late List<ReactionDisposer> _disposers;
@@ -41,15 +52,17 @@ abstract class _UserStore with Store {
   }
 
   // empty responses:-----------------------------------------------------------
-  static ObservableFuture<bool> emptyLoginResponse =
-      ObservableFuture.value(false);
+  static ObservableFuture<User?> emptyLoginResponse =
+      ObservableFuture.value(User());
 
   // store variables:-----------------------------------------------------------
+  bool isLoggedIn = false;
+
   @observable
   bool success = false;
 
   @observable
-  ObservableFuture<bool> loginFuture = emptyLoginResponse;
+  ObservableFuture<User?> loginFuture = emptyLoginResponse;
 
   @computed
   bool get isLoading => loginFuture.status == FutureStatus.pending;
@@ -57,11 +70,14 @@ abstract class _UserStore with Store {
   // actions:-------------------------------------------------------------------
   @action
   Future login(String email, String password) async {
-    final future = _repository.login(email, password);
+    final LoginParams loginParams =
+        LoginParams(username: email, password: password);
+    final future = _loginUseCase.call(params: loginParams);
     loginFuture = ObservableFuture(future);
+
     await future.then((value) async {
-      if (value) {
-        _repository.saveIsLoggedIn(true);
+      if (value != null) {
+        await _saveLoginStatusUseCase.call(params: true);
         this.isLoggedIn = true;
         this.success = true;
       } else {
@@ -75,9 +91,9 @@ abstract class _UserStore with Store {
     });
   }
 
-  logout() {
+  logout() async {
     this.isLoggedIn = false;
-    _repository.saveIsLoggedIn(false);
+    await _saveLoginStatusUseCase.call(params: false);
   }
 
   // general methods:-----------------------------------------------------------

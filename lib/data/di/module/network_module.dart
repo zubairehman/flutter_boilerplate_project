@@ -8,47 +8,46 @@ import 'package:boilerplate/data/network/interceptors/error_interceptor.dart';
 import 'package:boilerplate/data/network/rest_client.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:get_it/get_it.dart';
 
-final injector = GetIt.instance;
+import '../../../di/service_locator.dart';
 
 mixin NetworkModule {
   static Future<void> configureNetworkModuleInjection() async {
     // event bus:---------------------------------------------------------------
-    injector.registerSingleton<EventBus>(EventBus());
+    getIt.registerSingleton<EventBus>(EventBus());
 
     // interceptors:------------------------------------------------------------
-    injector.registerSingleton<LoggingInterceptor>(LoggingInterceptor());
-    injector.registerSingleton<ErrorInterceptor>(ErrorInterceptor(injector()));
-    injector.registerSingleton<AuthInterceptor>(
+    getIt.registerSingleton<LoggingInterceptor>(LoggingInterceptor());
+    getIt.registerSingleton<ErrorInterceptor>(ErrorInterceptor(getIt()));
+    getIt.registerSingleton<AuthInterceptor>(
       AuthInterceptor(
-        accessToken: () async => await injector<SharedPreferenceHelper>().authToken,
+        accessToken: () async => await getIt<SharedPreferenceHelper>().authToken,
       ),
     );
 
     // rest client:-------------------------------------------------------------
-    injector.registerSingleton(RestClient());
+    getIt.registerSingleton(RestClient());
 
     // dio:---------------------------------------------------------------------
-    injector.registerSingleton<DioConfigs>(
+    getIt.registerSingleton<DioConfigs>(
       const DioConfigs(
         baseUrl: Endpoints.baseUrl,
         connectionTimeout: Endpoints.connectionTimeout,
         receiveTimeout:Endpoints.receiveTimeout,
       ),
     );
-    injector.registerSingleton<DioClient>(
-      DioClient(dioConfigs: injector())
+    getIt.registerSingleton<DioClient>(
+      DioClient(dioConfigs: getIt())
         ..addInterceptors(
           [
-            injector<AuthInterceptor>(),
-            injector<ErrorInterceptor>(),
-            injector<LoggingInterceptor>(),
+            getIt<AuthInterceptor>(),
+            getIt<ErrorInterceptor>(),
+            getIt<LoggingInterceptor>(),
           ],
         ),
     );
 
     // api's:-------------------------------------------------------------------
-    injector.registerSingleton(PostApi(injector<DioClient>(), injector<RestClient>()));
+    getIt.registerSingleton(PostApi(getIt<DioClient>(), getIt<RestClient>()));
   }
 }

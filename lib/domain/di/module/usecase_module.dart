@@ -1,31 +1,46 @@
 import 'dart:async';
 
 import 'package:boilerplate/domain/repository/post/post_repository.dart';
+import 'package:boilerplate/domain/repository/user/user_repository.dart';
 import 'package:boilerplate/domain/usecase/post/delete_post_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/find_post_by_id_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/get_post_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/insert_post_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/udpate_post_usecase.dart';
-import 'package:get_it/get_it.dart';
+import 'package:boilerplate/domain/usecase/user/is_logged_in_usecase.dart';
+import 'package:boilerplate/domain/usecase/user/login_usecase.dart';
+import 'package:boilerplate/domain/usecase/user/save_login_in_status_usecase.dart';
 
-final injector = GetIt.instance;
+import '../../../di/service_locator.dart';
 
 mixin UseCaseModule {
   static Future<void> configureUseCaseModuleInjection() async {
-    injector.registerSingleton<GetPostUseCase>(
-      GetPostUseCase(injector<PostRepository>()),
+    // user:--------------------------------------------------------------------
+    getIt.registerSingleton<IsLoggedInUseCase>(
+      IsLoggedInUseCase(getIt<UserRepository>()),
     );
-    injector.registerSingleton<FindPostByIdUseCase>(
-      FindPostByIdUseCase(injector<PostRepository>()),
+    getIt.registerSingleton<SaveLoginStatusUseCase>(
+      SaveLoginStatusUseCase(getIt<UserRepository>()),
     );
-    injector.registerSingleton<InsertPostUseCase>(
-      InsertPostUseCase(injector<PostRepository>()),
+    getIt.registerSingleton<LoginUseCase>(
+      LoginUseCase(getIt<UserRepository>()),
     );
-    injector.registerSingleton<UpdatePostUseCase>(
-      UpdatePostUseCase(injector<PostRepository>()),
+
+    // post:--------------------------------------------------------------------
+    getIt.registerSingleton<GetPostUseCase>(
+      GetPostUseCase(getIt<PostRepository>()),
     );
-    injector.registerSingleton<DeletePostUseCase>(
-      DeletePostUseCase(injector<PostRepository>()),
+    getIt.registerSingleton<FindPostByIdUseCase>(
+      FindPostByIdUseCase(getIt<PostRepository>()),
+    );
+    getIt.registerSingleton<InsertPostUseCase>(
+      InsertPostUseCase(getIt<PostRepository>()),
+    );
+    getIt.registerSingleton<UpdatePostUseCase>(
+      UpdatePostUseCase(getIt<PostRepository>()),
+    );
+    getIt.registerSingleton<DeletePostUseCase>(
+      DeletePostUseCase(getIt<PostRepository>()),
     );
   }
 }

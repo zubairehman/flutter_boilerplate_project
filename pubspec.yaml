@@ -39,6 +39,7 @@ dependencies:
   # I
   intl: ^0.17.0
   # J
+  json_serializable: ^6.6.1
   # K
   # L
   # M

@@ -2,31 +2,30 @@ import 'dart:async';
 
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/network/apis/posts/post_api.dart';
-import 'package:boilerplate/domain/repository/post/post_repository.dart';
 import 'package:boilerplate/data/repository/post/post_repository_impl.dart';
-import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
 import 'package:boilerplate/data/repository/setting/setting_repository_impl.dart';
-import 'package:boilerplate/domain/repository/user/user_repository.dart';
 import 'package:boilerplate/data/repository/user/user_repository_impl.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
-import 'package:get_it/get_it.dart';
+import 'package:boilerplate/domain/repository/post/post_repository.dart';
+import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
+import 'package:boilerplate/domain/repository/user/user_repository.dart';
 
-final injector = GetIt.instance;
+import '../../../di/service_locator.dart';
 
 mixin RepositoryModule {
   static Future<void> configureRepositoryModuleInjection() async {
     // repository:--------------------------------------------------------------
-    injector.registerSingleton<SettingRepository>(SettingRepositoryImpl(
-      injector<SharedPreferenceHelper>(),
+    getIt.registerSingleton<SettingRepository>(SettingRepositoryImpl(
+      getIt<SharedPreferenceHelper>(),
     ));
 
-    injector.registerSingleton<UserRepository>(UserRepositoryImpl(
-      injector<SharedPreferenceHelper>(),
+    getIt.registerSingleton<UserRepository>(UserRepositoryImpl(
+      getIt<SharedPreferenceHelper>(),
     ));
 
-    injector.registerSingleton<PostRepository>(PostRepositoryImpl(
-      injector<PostApi>(),
-      injector<PostDataSource>(),
+    getIt.registerSingleton<PostRepository>(PostRepositoryImpl(
+      getIt<PostApi>(),
+      getIt<PostDataSource>(),
     ));
   }
 }

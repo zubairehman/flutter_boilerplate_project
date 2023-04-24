@@ -2,17 +2,17 @@ import 'dart:async';
 
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/core/stores/form/form_store.dart';
-import 'package:boilerplate/data/di/data_layer_injection.dart';
 import 'package:boilerplate/domain/repository/post/post_repository.dart';
 import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
-import 'package:boilerplate/domain/repository/user/user_repository.dart';
+import 'package:boilerplate/domain/usecase/user/is_logged_in_usecase.dart';
+import 'package:boilerplate/domain/usecase/user/login_usecase.dart';
+import 'package:boilerplate/domain/usecase/user/save_login_in_status_usecase.dart';
 import 'package:boilerplate/presentation/home/store/language/language_store.dart';
 import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
 import 'package:boilerplate/presentation/login/store/login_store.dart';
 import 'package:boilerplate/presentation/post/store/post_store.dart';
-import 'package:get_it/get_it.dart';
 
-final injector = GetIt.instance;
+import '../../../di/service_locator.dart';
 
 mixin StoreModule {
   static Future<void> configureStoreModuleInjection() async {
@@ -20,22 +20,39 @@ mixin StoreModule {
     getIt.registerFactory(() => ErrorStore());
     getIt.registerFactory(() => FormErrorStore());
     getIt.registerFactory(
-      () => FormStore(injector<FormErrorStore>(), injector<ErrorStore>()),
+      () => FormStore(getIt<FormErrorStore>(), getIt<ErrorStore>()),
     );
 
     // stores:------------------------------------------------------------------
-    injector.registerSingleton<PostStore>(
-      PostStore(injector<PostRepository>(), injector<ErrorStore>()),
+    getIt.registerSingleton<UserStore>(
+      UserStore(
+        getIt<IsLoggedInUseCase>(),
+        getIt<SaveLoginStatusUseCase>(),
+        getIt<LoginUseCase>(),
+        getIt<FormErrorStore>(),
+        getIt<ErrorStore>(),
+      ),
     );
-    injector.registerSingleton<UserStore>(
-      UserStore(injector<UserRepository>(), injector<FormErrorStore>(),
-          injector<ErrorStore>()),
+
+    getIt.registerSingleton<PostStore>(
+      PostStore(
+        getIt<PostRepository>(),
+        getIt<ErrorStore>(),
+      ),
     );
-    injector.registerSingleton<ThemeStore>(
-      ThemeStore(injector<SettingRepository>(), injector<ErrorStore>()),
+
+    getIt.registerSingleton<ThemeStore>(
+      ThemeStore(
+        getIt<SettingRepository>(),
+        getIt<ErrorStore>(),
+      ),
     );
-    injector.registerSingleton<LanguageStore>(
-      LanguageStore(injector<SettingRepository>(), injector<ErrorStore>()),
+
+    getIt.registerSingleton<LanguageStore>(
+      LanguageStore(
+        getIt<SettingRepository>(),
+        getIt<ErrorStore>(),
+      ),
     );
   }
 }

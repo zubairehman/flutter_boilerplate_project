@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:boilerplate/domain/repository/user/user_repository.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 
+import '../../../domain/entity/user/user.dart';
+import '../../../domain/usecase/user/login_usecase.dart';
+
 class UserRepositoryImpl extends UserRepository {
   // shared pref object
   final SharedPreferenceHelper _sharedPrefsHelper;
@@ -12,8 +15,8 @@ class UserRepositoryImpl extends UserRepository {
 
   // Login:---------------------------------------------------------------------
   @override
-  Future<bool> login(String email, String password) async {
-    return await Future.delayed(Duration(seconds: 2), () => true);
+  Future<User?> login(LoginParams params) async {
+    return await Future.delayed(Duration(seconds: 2), () => User());
   }
 
   @override

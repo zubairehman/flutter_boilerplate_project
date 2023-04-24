@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:boilerplate/domain/usecase/user/login_usecase.dart';
+
+import '../../entity/user/user.dart';
+
 abstract class UserRepository {
-  Future<bool> login(String email, String password);
+  Future<User?> login(LoginParams params);
 
   Future<void> saveIsLoggedIn(bool value);
 
