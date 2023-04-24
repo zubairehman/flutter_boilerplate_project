@@ -21,21 +21,21 @@ dependencies:
   flutter_cupertino_localizations: ^1.0.1
 
   # A
-  another_flushbar: ^1.10.28
+  another_flushbar: ^1.12.29
   # B
   # C
-  cupertino_icons: ^1.0.4
+  cupertino_icons: ^1.0.5
   # D
-  dio: ^4.0.6
+  dio: ^5.1.1
   # E
   event_bus: ^2.0.0
   # F
-  flutter_mobx: ^2.0.5
+  flutter_mobx: ^2.0.6+5
   # G
   get_it: ^7.2.0
-  google_fonts: ^2.3.2
+  google_fonts: ^4.0.3
   # H
-  http: ^0.13.4
+  http: ^0.13.5
   # I
   intl: ^0.17.0
   # J
@@ -43,16 +43,16 @@ dependencies:
   # L
   # M
   material_dialog: ^1.0.0-nullsafety.1
-  mobx: ^2.0.7
+  mobx: ^2.1.4
   # N
   # O
   # P
-  path_provider: ^2.0.9
+  path_provider: ^2.0.14
   # Q
   # R
   # S
-  shared_preferences: ^2.0.13
-  sembast: ^3.2.0
+  shared_preferences: ^2.1.0
+  sembast: ^3.4.4
   # T
   # U
   # V
@@ -71,10 +71,10 @@ dev_dependencies:
   # run below mentioned commands to generate launcher icons
   # flutter packages get
   # flutter packages pub run flutter_launcher_icons:main
-  flutter_launcher_icons: ^0.9.2
-  mobx_codegen: ^2.0.6
-  build_runner: ^2.1.10
-  analyzer: ^2.8.0
+  flutter_launcher_icons: ^0.13.1
+  mobx_codegen: ^2.2.0
+  build_runner: ^2.3.3
+  analyzer: ^5.10.0
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"

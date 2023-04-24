@@ -13,7 +13,6 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-
     final String token = await accessToken() ?? '';
     if (token.isNotEmpty) {
       options.headers.putIfAbsent('Authorization', () => 'Bearer $token');

@@ -8,17 +8,15 @@ class RetryInterceptor extends Interceptor {
   final RetryOptions options;
   final bool shouldLog;
 
-  RetryInterceptor({
-    required this.dio,
-    RetryOptions? options,
-    this.shouldLog = true,
-  }) : options = options ?? const RetryOptions();
+  RetryInterceptor(
+      {required this.dio, RetryOptions? options, this.shouldLog = true})
+      : this.options = options ?? const RetryOptions();
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
     var extra = RetryOptions.fromExtra(err.requestOptions, options);
 
-    final shouldRetry = extra.retries > 0 && await options.retryEvaluator(err);
+    var shouldRetry = extra.retries > 0 && await options.retryEvaluator(err);
     if (!shouldRetry) {
       return super.onError(err, handler);
     }
@@ -32,27 +30,26 @@ class RetryInterceptor extends Interceptor {
     err.requestOptions.extra = err.requestOptions.extra
       ..addAll(extra.toExtra());
 
-    if (shouldLog) {
+    if (shouldLog)
       print(
           '[${err.requestOptions.uri}] An error occurred during request, trying a again (remaining tries: ${extra.retries}, error: ${err.error})');
-    }
     // We retry with the updated options
     await dio
         .request(
-          err.requestOptions.path,
-          cancelToken: err.requestOptions.cancelToken,
-          data: err.requestOptions.data,
-          onReceiveProgress: err.requestOptions.onReceiveProgress,
-          onSendProgress: err.requestOptions.onSendProgress,
-          queryParameters: err.requestOptions.queryParameters,
-          options: err.requestOptions.toOptions(),
-        )
+      err.requestOptions.path,
+      cancelToken: err.requestOptions.cancelToken,
+      data: err.requestOptions.data,
+      onReceiveProgress: err.requestOptions.onReceiveProgress,
+      onSendProgress: err.requestOptions.onSendProgress,
+      queryParameters: err.requestOptions.queryParameters,
+      options: err.requestOptions.toOptions(),
+    )
         .then((value) => handler.resolve(value),
-            onError: (error) => handler.reject(error));
+        onError: (error) => handler.reject(error));
   }
 }
 
-typedef RetryEvaluator = FutureOr<bool> Function(DioError error);
+typedef FutureOr<bool> RetryEvaluator(DioError error);
 
 extension RequestOptionsExtensions on RequestOptions {
   Options toOptions() {
@@ -90,30 +87,30 @@ class RetryOptions {
   ///
   /// Defaults to [defaultRetryEvaluator].
   RetryEvaluator get retryEvaluator =>
-      _retryEvaluator ?? defaultRetryEvaluator;
+      this._retryEvaluator ?? defaultRetryEvaluator;
 
   final RetryEvaluator? _retryEvaluator;
 
-  const RetryOptions({
-    this.retries = 3,
-    RetryEvaluator? retryEvaluator,
-    this.retryInterval = const Duration(seconds: 1),
-  }) : _retryEvaluator = retryEvaluator;
+  const RetryOptions(
+      {this.retries = 3,
+        RetryEvaluator? retryEvaluator,
+        this.retryInterval = const Duration(seconds: 1)})
+      : this._retryEvaluator = retryEvaluator;
 
   factory RetryOptions.noRetry() {
-    return const RetryOptions(
+    return RetryOptions(
       retries: 0,
     );
   }
 
-  static const extraKey = 'cache_retry_request';
+  static const extraKey = "cache_retry_request";
 
   /// Returns [true] only if the response hasn't been cancelled or got
   /// a bad status code.
   static FutureOr<bool> defaultRetryEvaluator(DioError error) {
     final cancelError = error.type != DioErrorType.cancel;
-    final responseError = error.type != DioErrorType.badResponse;
-    final shouldRetry = cancelError && responseError;
+    // final responseError = error.type != DioErrorType.response;
+    final shouldRetry = cancelError;
     return shouldRetry;
   }
 
@@ -133,13 +130,13 @@ class RetryOptions {
 
   Map<String, dynamic> toExtra() => {extraKey: this};
 
-  Options toOptions() => Options(extra: toExtra());
+  Options toOptions() => Options(extra: this.toExtra());
 
   Options mergeIn(Options options) {
     return options.copyWith(
         extra: <String, dynamic>{}
           ..addAll(options.extra ?? {})
-          ..addAll(toExtra()));
+          ..addAll(this.toExtra()));
   }
 
   @override
