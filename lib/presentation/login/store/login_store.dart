@@ -12,15 +12,14 @@ part 'login_store.g.dart';
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
-
   // constructor:---------------------------------------------------------------
   _UserStore(
-      this._isLoggedInUseCase,
-      this._saveLoginStatusUseCase,
-      this._loginUseCase,
-      this.formErrorStore,
-      this.errorStore,
-      ) {
+    this._isLoggedInUseCase,
+    this._saveLoginStatusUseCase,
+    this._loginUseCase,
+    this.formErrorStore,
+    this.errorStore,
+  ) {
     // setting up disposers
     _setupDisposers();
 
@@ -53,7 +52,7 @@ abstract class _UserStore with Store {
 
   // empty responses:-----------------------------------------------------------
   static ObservableFuture<User?> emptyLoginResponse =
-      ObservableFuture.value(User());
+      ObservableFuture.value(null);
 
   // store variables:-----------------------------------------------------------
   bool isLoggedIn = false;
@@ -80,8 +79,6 @@ abstract class _UserStore with Store {
         await _saveLoginStatusUseCase.call(params: true);
         this.isLoggedIn = true;
         this.success = true;
-      } else {
-        print('failed to login');
       }
     }).catchError((e) {
       print(e);
