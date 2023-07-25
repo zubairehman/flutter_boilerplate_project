@@ -11,13 +11,13 @@
 /// In order to create the custom colours you need to create a `Map<int, Color>` object
 /// which will have all the shade values. `const Color(0xFF...)` will be how you create
 /// the colours. The six character hex code is what follows. If you wanted the colour
-/// #114488 or #D39090 as primary colours in your theme, then you would have
+/// #114488 or #D39090 as primary colours in your setting, then you would have
 /// `const Color(0x114488)` and `const Color(0xD39090)`, respectively.
 ///
 /// Usage:
-/// In order to use this newly created theme or even the colours in it, you would just
+/// In order to use this newly created setting or even the colours in it, you would just
 /// `import` this file in your project, anywhere you needed it.
-/// `import 'path/to/theme.dart';`
+/// `import 'path/to/setting.dart';`
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
