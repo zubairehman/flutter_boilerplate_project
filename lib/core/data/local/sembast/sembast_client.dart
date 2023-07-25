@@ -1,7 +1,9 @@
 import 'package:boilerplate/core/data/local/encryption/xxtea.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
+import 'package:sembast_web/sembast_web.dart';
 
 class SembastClient {
   final Database _database;
@@ -23,11 +25,22 @@ class SembastClient {
     // Database database;
     final database;
     if (encryptionKey.isNotEmpty) {
-      // Initialize the encryption codec with a user password
       var codec = getXXTeaCodec(password: encryptionKey);
-      database = await databaseFactoryIo.openDatabase(dbPath, codec: codec);
+
+      // Initialize the encryption codec with a user password
+      if(kIsWeb) {
+        var factory = databaseFactoryWeb;
+        database = await factory.openDatabase(databaseName, codec: codec);
+      } else {
+        database = await databaseFactoryIo.openDatabase(dbPath, codec: codec);
+      }
     } else {
-      database = await databaseFactoryIo.openDatabase(dbPath);
+      if(kIsWeb) {
+        var factory = databaseFactoryWeb;
+        database = await factory.openDatabase(databaseName);
+      } else {
+        database = await databaseFactoryIo.openDatabase(dbPath);
+      }
     }
 
     // Return database instance

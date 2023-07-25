@@ -9,12 +9,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setPreferredOrientations();
   await ServiceLocator.configureDependencies();
-  return runZonedGuarded(() async {
-    runApp(MyApp());
-  }, (error, stack) {
-    print(stack);
-    print(error);
-  });
+  runApp(MyApp());
 }
 
 Future<void> setPreferredOrientations() {

@@ -10,15 +10,14 @@ description: A flutter boilerplate project created using MobX and Provider.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-
+  sdk: '>=3.0.6 <4.0.0'
+  
 dependencies:
   flutter:
     sdk: flutter
 
   flutter_localizations:
     sdk: flutter
-  flutter_cupertino_localizations: ^1.0.1
 
   # A
   another_flushbar: ^1.12.29
@@ -37,7 +36,7 @@ dependencies:
   # H
   http: ^0.13.5
   # I
-  intl: ^0.17.0
+  intl: ^0.18.0
   # J
   json_serializable: ^6.6.1
   # K
@@ -53,6 +52,7 @@ dependencies:
   # R
   # S
   shared_preferences: ^2.1.0
+  sembast_web: ^2.1.3
   sembast: ^3.4.4
   # T
   # U
