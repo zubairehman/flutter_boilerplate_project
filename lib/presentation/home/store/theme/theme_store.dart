@@ -44,6 +44,5 @@ abstract class _ThemeStore with Store {
       MediaQuery.platformBrightnessOf(context) == Brightness.dark;
 
   // dispose:-------------------------------------------------------------------
-  @override
   dispose() {}
 }

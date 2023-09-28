@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
           AppLocalizations.of(context).translate('login_btn_forgot_password'),
           style: Theme.of(context)
               .textTheme
-              .caption
+              .bodySmall
               ?.copyWith(color: Colors.orangeAccent),
         ),
         onPressed: () {},
