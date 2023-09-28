@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 library dio_logging_interceptor;
 
 import 'dart:convert';

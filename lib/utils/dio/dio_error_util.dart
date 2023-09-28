@@ -1,9 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:dio/dio.dart';
 
 class DioErrorUtil {
   // general methods:-----------------------------------------------------------
   static String handleError(DioError error) {
     String errorDescription = "";
+    // ignore: unnecessary_type_check
     if (error is DioError) {
       switch (error.type) {
         case DioErrorType.cancel:
@@ -13,9 +16,6 @@ class DioErrorUtil {
         case DioErrorType.connectionTimeout:
         case DioErrorType.unknown:
           errorDescription = "Connection timeout with API server";
-          break;
-        case DioErrorType.receiveTimeout:
-          errorDescription = "Receive timeout in connection with API server";
           break;
         case DioErrorType.receiveTimeout:
           errorDescription = "Receive timeout in connection with API server";

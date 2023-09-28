@@ -18,6 +18,8 @@
 /// In order to use this newly created setting or even the colours in it, you would just
 /// `import` this file in your project, anywhere you needed it.
 /// `import 'path/to/setting.dart';`
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -54,7 +56,7 @@ class AppThemeData {
           _lightFillColor.withOpacity(0.80),
           _darkFillColor,
         ),
-        contentTextStyle: _textTheme.subtitle1!.apply(color: _darkFillColor),
+        contentTextStyle: _textTheme.titleMedium!.apply(color: _darkFillColor),
       ),
     );
   }
