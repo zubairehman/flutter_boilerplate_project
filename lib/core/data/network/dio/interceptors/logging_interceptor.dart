@@ -175,7 +175,7 @@ class LoggingInterceptor extends Interceptor {
 
   @override
   void onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) {
     if (level == Level.none) {

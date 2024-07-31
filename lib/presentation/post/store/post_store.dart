@@ -46,7 +46,7 @@ abstract class _PostStore with Store {
     future.then((postList) {
       this.postList = postList;
     }).catchError((error) {
-      errorStore.errorMessage = DioErrorUtil.handleError(error);
+      errorStore.errorMessage = DioExceptionUtil.handleError(error);
     });
   }
 }

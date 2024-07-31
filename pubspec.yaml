@@ -36,13 +36,12 @@ dependencies:
   # H
   http: ^0.13.5
   # I
-  intl: ^0.18.0
+  intl: ^0.19.0
   # J
   json_serializable: ^6.6.1
   # K
   # L
   # M
-  material_dialog: ^1.0.0-nullsafety.1
   mobx: ^2.1.4
   # N
   # O

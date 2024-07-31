@@ -15,7 +15,7 @@ class RetryInterceptor extends Interceptor {
   }) : options = options ?? const RetryOptions();
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
     var extra = RetryOptions.fromExtra(err.requestOptions, options);
 
     final shouldRetry = extra.retries > 0 && await options.retryEvaluator(err);
@@ -52,7 +52,7 @@ class RetryInterceptor extends Interceptor {
   }
 }
 
-typedef RetryEvaluator = FutureOr<bool> Function(DioError error);
+typedef RetryEvaluator = FutureOr<bool> Function(DioException error);
 
 extension RequestOptionsExtensions on RequestOptions {
   Options toOptions() {
@@ -110,9 +110,9 @@ class RetryOptions {
 
   /// Returns [true] only if the response hasn't been cancelled or got
   /// a bad status code.
-  static FutureOr<bool> defaultRetryEvaluator(DioError error) {
-    final cancelError = error.type != DioErrorType.cancel;
-    final responseError = error.type != DioErrorType.badResponse;
+  static FutureOr<bool> defaultRetryEvaluator(DioException error) {
+    final cancelError = error.type != DioExceptionType.cancel;
+    final responseError = error.type != DioExceptionType.badResponse;
     final shouldRetry = cancelError && responseError;
     return shouldRetry;
   }
