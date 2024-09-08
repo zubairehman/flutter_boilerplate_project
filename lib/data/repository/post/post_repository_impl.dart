@@ -63,7 +63,7 @@ class PostRepositoryImpl extends PostRepository {
 
   @override
   Future<int> delete(Post post) => _postDataSource
-      .update(post)
+      .delete(post)
       .then((id) => id)
       .catchError((error) => throw error);
 }
