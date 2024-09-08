@@ -13,7 +13,7 @@ import 'package:boilerplate/domain/usecase/user/save_login_in_status_usecase.dar
 
 import '../../../di/service_locator.dart';
 
-mixin UseCaseModule {
+class UseCaseModule {
   static Future<void> configureUseCaseModuleInjection() async {
     // user:--------------------------------------------------------------------
     getIt.registerSingleton<IsLoggedInUseCase>(

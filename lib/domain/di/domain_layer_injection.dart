@@ -1,6 +1,6 @@
 import 'package:boilerplate/domain/di/module/usecase_module.dart';
 
-mixin DomainLayerInjection {
+class DomainLayerInjection {
   static Future<void> configureDomainLayerInjection() async {
     await UseCaseModule.configureUseCaseModuleInjection();
   }

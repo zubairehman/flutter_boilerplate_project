@@ -11,7 +11,7 @@ import 'package:event_bus/event_bus.dart';
 
 import '../../../di/service_locator.dart';
 
-mixin NetworkModule {
+class NetworkModule {
   static Future<void> configureNetworkModuleInjection() async {
     // event bus:---------------------------------------------------------------
     getIt.registerSingleton<EventBus>(EventBus());

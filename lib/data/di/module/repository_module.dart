@@ -12,7 +12,7 @@ import 'package:boilerplate/domain/repository/user/user_repository.dart';
 
 import '../../../di/service_locator.dart';
 
-mixin RepositoryModule {
+class RepositoryModule {
   static Future<void> configureRepositoryModuleInjection() async {
     // repository:--------------------------------------------------------------
     getIt.registerSingleton<SettingRepository>(SettingRepositoryImpl(

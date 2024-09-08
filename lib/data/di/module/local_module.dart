@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../di/service_locator.dart';
 
-mixin LocalModule {
+class LocalModule {
   static Future<void> configureLocalModuleInjection() async {
     // preference manager:------------------------------------------------------
     getIt.registerSingletonAsync<SharedPreferences>(

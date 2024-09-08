@@ -14,7 +14,7 @@ import 'package:boilerplate/presentation/post/store/post_store.dart';
 
 import '../../../di/service_locator.dart';
 
-mixin StoreModule {
+class StoreModule {
   static Future<void> configureStoreModuleInjection() async {
     // factories:---------------------------------------------------------------
     getIt.registerFactory(() => ErrorStore());

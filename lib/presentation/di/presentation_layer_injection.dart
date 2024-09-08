@@ -1,6 +1,6 @@
 import 'package:boilerplate/presentation/di/module/store_module.dart';
 
-mixin PresentationLayerInjection {
+class PresentationLayerInjection {
   static Future<void> configurePresentationLayerInjection() async {
     await StoreModule.configureStoreModuleInjection();
   }
