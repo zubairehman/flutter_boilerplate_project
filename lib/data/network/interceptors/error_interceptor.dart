@@ -7,11 +7,9 @@ class ErrorInterceptor extends Interceptor {
   ErrorInterceptor(this._eventBus);
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     _eventBus.fire(
-      ErrorEvent(
-          path: err.requestOptions.path,
-          response: err.response),
+      ErrorEvent(path: err.requestOptions.path, response: err.response),
     );
     super.onError(err, handler);
   }

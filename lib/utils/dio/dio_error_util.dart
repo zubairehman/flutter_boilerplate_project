@@ -1,33 +1,30 @@
 import 'package:dio/dio.dart';
 
-class DioErrorUtil {
+class DioExceptionUtil {
   // general methods:-----------------------------------------------------------
-  static String handleError(DioError error) {
+  static String handleError(DioException error) {
     String errorDescription = "";
-    if (error is DioError) {
+    if (error is DioException) {
       switch (error.type) {
-        case DioErrorType.cancel:
+        case DioExceptionType.cancel:
           errorDescription = "Request to API server was cancelled";
           break;
-        case DioErrorType.connectionError:
-        case DioErrorType.connectionTimeout:
-        case DioErrorType.unknown:
+        case DioExceptionType.connectionError:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.unknown:
           errorDescription = "Connection timeout with API server";
           break;
-        case DioErrorType.receiveTimeout:
+        case DioExceptionType.receiveTimeout:
           errorDescription = "Receive timeout in connection with API server";
           break;
-        case DioErrorType.receiveTimeout:
-          errorDescription = "Receive timeout in connection with API server";
-          break;
-        case DioErrorType.badResponse:
+        case DioExceptionType.badResponse:
           errorDescription =
           "Received invalid status code: ${error.response?.statusCode}";
           break;
-        case DioErrorType.sendTimeout:
+        case DioExceptionType.sendTimeout:
           errorDescription = "Send timeout in connection with API server";
           break;
-        case DioErrorType.badCertificate:
+        case DioExceptionType.badCertificate:
           errorDescription = "Incorrect certificate";
           break;
       }

@@ -11,7 +11,7 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
-  
+
 dependencies:
   flutter:
     sdk: flutter
@@ -36,13 +36,12 @@ dependencies:
   # H
   http: ^0.13.5
   # I
-  intl: ^0.18.0
+  intl: ^0.19.0
   # J
   json_serializable: ^6.6.1
   # K
   # L
   # M
-  material_dialog: ^1.0.0-nullsafety.1
   mobx: ^2.1.4
   # N
   # O
@@ -82,43 +81,18 @@ flutter_icons:
   android: true
   ios: true
 
-
-# For information on the generic Dart art of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/images/
-  - assets/icons/
-  - assets/lang/
+    - assets/images/
+    - assets/icons/
+    - assets/lang/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.io/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.io/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   fonts:
-  - family: ProductSans
-    fonts:
-    - asset: assets/fonts/Product-Sans-Regular.ttf
-    - asset: assets/fonts/Product-Sans-Italic.ttf
-      style: italic
-    - asset: assets/fonts/Product-Sans-Bold.ttf
-      weight: 700
-
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.io/custom-fonts/#from-packages
+    - family: ProductSans
+      fonts:
+        - asset: assets/fonts/Product-Sans-Regular.ttf
+        - asset: assets/fonts/Product-Sans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Product-Sans-Bold.ttf
+          weight: 700

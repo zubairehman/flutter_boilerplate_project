@@ -13,7 +13,7 @@ class RetryInterceptor extends Interceptor {
       : this.options = options ?? const RetryOptions();
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     var extra = RetryOptions.fromExtra(err.requestOptions, options);
 
     var shouldRetry = extra.retries > 0 && await options.retryEvaluator(err);
@@ -36,20 +36,20 @@ class RetryInterceptor extends Interceptor {
     // We retry with the updated options
     await dio
         .request(
-      err.requestOptions.path,
-      cancelToken: err.requestOptions.cancelToken,
-      data: err.requestOptions.data,
-      onReceiveProgress: err.requestOptions.onReceiveProgress,
-      onSendProgress: err.requestOptions.onSendProgress,
-      queryParameters: err.requestOptions.queryParameters,
-      options: err.requestOptions.toOptions(),
-    )
+          err.requestOptions.path,
+          cancelToken: err.requestOptions.cancelToken,
+          data: err.requestOptions.data,
+          onReceiveProgress: err.requestOptions.onReceiveProgress,
+          onSendProgress: err.requestOptions.onSendProgress,
+          queryParameters: err.requestOptions.queryParameters,
+          options: err.requestOptions.toOptions(),
+        )
         .then((value) => handler.resolve(value),
-        onError: (error) => handler.reject(error));
+            onError: (error) => handler.reject(error));
   }
 }
 
-typedef FutureOr<bool> RetryEvaluator(DioError error);
+typedef FutureOr<bool> RetryEvaluator(DioException error);
 
 extension RequestOptionsExtensions on RequestOptions {
   Options toOptions() {
@@ -93,8 +93,8 @@ class RetryOptions {
 
   const RetryOptions(
       {this.retries = 3,
-        RetryEvaluator? retryEvaluator,
-        this.retryInterval = const Duration(seconds: 1)})
+      RetryEvaluator? retryEvaluator,
+      this.retryInterval = const Duration(seconds: 1)})
       : this._retryEvaluator = retryEvaluator;
 
   factory RetryOptions.noRetry() {
@@ -107,9 +107,9 @@ class RetryOptions {
 
   /// Returns [true] only if the response hasn't been cancelled or got
   /// a bad status code.
-  static FutureOr<bool> defaultRetryEvaluator(DioError error) {
-    final cancelError = error.type != DioErrorType.cancel;
-    // final responseError = error.type != DioErrorType.response;
+  static FutureOr<bool> defaultRetryEvaluator(DioException error) {
+    final cancelError = error.type != DioExceptionType.cancel;
+    // final responseError = error.type != DioExceptionType.response;
     final shouldRetry = cancelError;
     return shouldRetry;
   }
