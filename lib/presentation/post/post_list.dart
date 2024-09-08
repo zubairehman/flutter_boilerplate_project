@@ -45,7 +45,7 @@ class _PostListScreenState extends State<PostListScreen> {
       builder: (context) {
         return _postStore.loading
             ? CustomProgressIndicatorWidget()
-            : Material(child: _buildListView());
+            : _buildListView();
       },
     );
   }
