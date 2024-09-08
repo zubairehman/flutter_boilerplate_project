@@ -26,13 +26,14 @@ class PostApi {
     }
   }
 
-/// sample api call with default rest client
-//  Future<PostsList> getPosts() {
-//
-//    return _restClient
-//        .get(Endpoints.getPosts)
-//        .then((dynamic res) => PostsList.fromJson(res))
-//        .catchError((error) => throw NetworkException(message: error));
-//  }
-
+  /// sample api call with default rest client
+//   Future<PostList> getPosts() async {
+//     try {
+//       final res = await _restClient.get(Endpoints.getPosts);
+//       return PostList.fromJson(res.data);
+//     } catch (e) {
+//       print(e.toString());
+//       throw e;
+//     }
+//   }
 }

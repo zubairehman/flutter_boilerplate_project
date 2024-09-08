@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:http/http.dart' as http;
 
 import 'exceptions/network_exceptions.dart';
@@ -12,7 +11,7 @@ class RestClient {
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(String path) {
-    return http.get(Uri.https(Endpoints.baseUrl, path)).then(_createResponse);
+    return http.get(Uri.parse(path)).then(_createResponse);
   }
 
   // Post:----------------------------------------------------------------------
@@ -20,7 +19,7 @@ class RestClient {
       {Map<String, String>? headers, body, encoding}) {
     return http
         .post(
-          Uri.https(Endpoints.baseUrl, path),
+          Uri.parse(path),
           body: body,
           headers: headers,
           encoding: encoding,
@@ -33,7 +32,7 @@ class RestClient {
       {Map<String, String>? headers, body, encoding}) {
     return http
         .put(
-          Uri.https(Endpoints.baseUrl, path),
+          Uri.parse(path),
           body: body,
           headers: headers,
           encoding: encoding,
@@ -46,7 +45,7 @@ class RestClient {
       {Map<String, String>? headers, body, encoding}) {
     return http
         .delete(
-          Uri.https(Endpoints.baseUrl, path),
+          Uri.parse(path),
           body: body,
           headers: headers,
           encoding: encoding,
