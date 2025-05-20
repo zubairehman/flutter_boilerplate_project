@@ -31,16 +31,27 @@ class TextFieldWidget extends StatelessWidget {
         obscureText: this.isObscure,
         maxLength: 25,
         keyboardType: this.inputType,
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: Colors.white,
+            ),
         decoration: InputDecoration(
             hintText: this.hint,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.black26,
             hintStyle: Theme.of(context)
                 .textTheme
                 .bodyLarge!
                 .copyWith(color: hintColor),
             errorText: errorText,
             counterText: '',
-            icon: this.isIcon ? Icon(this.icon, color: iconColor) : null),
+            errorStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.red,
+                ),
+            prefixIcon: this.isIcon ? Icon(this.icon, color: iconColor) : null),
       ),
     );
   }

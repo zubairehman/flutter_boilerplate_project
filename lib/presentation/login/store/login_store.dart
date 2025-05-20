@@ -51,7 +51,7 @@ abstract class _UserStore with Store {
   }
 
   // empty responses:-----------------------------------------------------------
-  static ObservableFuture<User?> emptyLoginResponse =
+  static ObservableFuture<UserResponse?> emptyLoginResponse =
       ObservableFuture.value(null);
 
   // store variables:-----------------------------------------------------------
@@ -61,7 +61,7 @@ abstract class _UserStore with Store {
   bool success = false;
 
   @observable
-  ObservableFuture<User?> loginFuture = emptyLoginResponse;
+  ObservableFuture<UserResponse?> loginFuture = emptyLoginResponse;
 
   @computed
   bool get isLoading => loginFuture.status == FutureStatus.pending;
@@ -75,13 +75,16 @@ abstract class _UserStore with Store {
     loginFuture = ObservableFuture(future);
 
     await future.then((value) async {
-      if (value != null) {
+      if (value?.data != null) {
         await _saveLoginStatusUseCase.call(params: true);
         this.isLoggedIn = true;
         this.success = true;
       }
+      if (value?.status == 'error') {
+        this.isLoggedIn = false;
+        this.success = false;
+      }
     }).catchError((e) {
-      print(e);
       this.isLoggedIn = false;
       this.success = false;
       throw e;

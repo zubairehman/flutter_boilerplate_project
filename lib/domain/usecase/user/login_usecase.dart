@@ -18,13 +18,13 @@ class LoginParams {
   Map<String, dynamic> toJson() => _$LoginParamsToJson(this);
 }
 
-class LoginUseCase implements UseCase<User?, LoginParams> {
+class LoginUseCase implements UseCase<UserResponse?, LoginParams> {
   final UserRepository _userRepository;
 
   LoginUseCase(this._userRepository);
 
   @override
-  Future<User?> call({required LoginParams params}) async {
+  Future<UserResponse?> call({required LoginParams params}) async {
     return _userRepository.login(params);
   }
 }

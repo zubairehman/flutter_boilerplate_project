@@ -3,6 +3,7 @@ import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/core/stores/form/form_store.dart';
 import 'package:boilerplate/core/widgets/app_icon_widget.dart';
 import 'package:boilerplate/core/widgets/empty_app_bar_widget.dart';
+import 'package:boilerplate/core/widgets/passwordfield_widget.dart';
 import 'package:boilerplate/core/widgets/progress_indicator_widget.dart';
 import 'package:boilerplate/core/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/core/widgets/textfield_widget.dart';
@@ -46,8 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       primary: true,
-      appBar: EmptyAppBar(),
-      body: _buildBody(),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Assets.BBBackground),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: _buildBody(),
+      ),
     );
   }
 
@@ -55,20 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildBody() {
     return Stack(
       children: <Widget>[
-        MediaQuery.of(context).orientation == Orientation.landscape
-            ? Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: _buildLeftSide(),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: _buildRightSide(),
-                  ),
-                ],
-              )
-            : Center(child: _buildRightSide()),
+        Center(child: _buildLoginForm()),
         Observer(
           builder: (context) {
             return _userStore.success
@@ -83,30 +78,28 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CustomProgressIndicatorWidget(),
             );
           },
-        )
+        ),
       ],
     );
   }
 
-  Widget _buildLeftSide() {
-    return SizedBox.expand(
-      child: Image.asset(
-        Assets.carBackground,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
-  Widget _buildRightSide() {
+  Widget _buildLoginForm() {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AppIconWidget(image: 'assets/icons/ic_appicon.png'),
+            AppIconWidget(image: Assets.appLogo),
+            SizedBox(height: 20.0),
+            Center(
+              child: Text(
+                AppLocalizations.of(context).translate('login_headline'),
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
             SizedBox(height: 24.0),
             _buildUserIdField(),
             _buildPasswordField(),
@@ -125,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
           hint: AppLocalizations.of(context).translate('login_et_user_email'),
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
-          iconColor: _themeStore.darkMode ? Colors.white70 : Colors.black54,
+          iconColor: Colors.white70,
           textController: _userEmailController,
           inputAction: TextInputAction.next,
           autoFocus: false,
@@ -144,13 +137,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildPasswordField() {
     return Observer(
       builder: (context) {
-        return TextFieldWidget(
+        return PasswordFieldWidget(
           hint:
               AppLocalizations.of(context).translate('login_et_user_password'),
-          isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
-          icon: Icons.lock,
-          iconColor: _themeStore.darkMode ? Colors.white70 : Colors.black54,
+          iconColor: Colors.white70,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
           errorText: _formStore.formErrorStore.password,
@@ -169,10 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(0.0),
         child: Text(
           AppLocalizations.of(context).translate('login_btn_forgot_password'),
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(color: Colors.orangeAccent),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w200),
         ),
         onPressed: () {},
       ),
@@ -182,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSignInButton() {
     return RoundedButtonWidget(
       buttonText: AppLocalizations.of(context).translate('login_btn_sign_in'),
-      buttonColor: Colors.orangeAccent,
+      buttonColor: Colors.blue[900],
       textColor: Colors.white,
       onPressed: () async {
         if (_formStore.canLogin) {
@@ -217,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
             message: message,
             title: AppLocalizations.of(context).translate('home_tv_error'),
             duration: Duration(seconds: 3),
-          )..show(context);
+          ).show(context);
         }
       });
     }
