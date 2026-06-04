@@ -4,33 +4,23 @@ import 'package:boilerplate/core/data/network/dio/interceptors/auth_interceptor.
 import 'package:boilerplate/core/data/network/dio/interceptors/logging_interceptor.dart';
 import 'package:boilerplate/data/network/apis/posts/post_api.dart';
 import 'package:boilerplate/data/network/constants/endpoints.dart';
-import 'package:boilerplate/data/network/interceptors/error_interceptor.dart';
-import 'package:boilerplate/data/network/rest_client.dart';
 import 'package:boilerplate/data/secure_storage/secure_storage_helper.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../di/service_locator.dart';
 
 class NetworkModule {
   static Future<void> configureNetworkModuleInjection() async {
-    // event bus:---------------------------------------------------------------
-    getIt.registerSingleton<EventBus>(EventBus());
-
     // interceptors:------------------------------------------------------------
     if (kDebugMode) {
       getIt.registerSingleton<LoggingInterceptor>(LoggingInterceptor());
     }
-    getIt.registerSingleton<ErrorInterceptor>(ErrorInterceptor(getIt()));
     getIt.registerSingleton<AuthInterceptor>(
       AuthInterceptor(
         accessToken: () async =>
             await getIt<SecureStorageHelper>().authToken,
       ),
     );
-
-    // rest client:-------------------------------------------------------------
-    getIt.registerSingleton(RestClient());
 
     // dio:---------------------------------------------------------------------
     getIt.registerSingleton<DioConfigs>(
@@ -45,7 +35,6 @@ class NetworkModule {
         ..addInterceptors(
           [
             getIt<AuthInterceptor>(),
-            getIt<ErrorInterceptor>(),
             if (kDebugMode) getIt<LoggingInterceptor>(),
           ],
         ),
