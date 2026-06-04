@@ -62,6 +62,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 ## Boilerplate Features:
 
 * Splash
+* Native Splash (flutter_native_splash)
 * Animation helpers
 * Login
 * Home
@@ -90,6 +91,37 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Connectivity Support (connectivity_plus)
 * Background Fetch Support
 
+### Native Splash Screen
+
+The project uses `flutter_native_splash` to generate native splash screens for iOS, Android, and Web platforms. The splash screen displays the app icon with a white background during app startup.
+
+**Configuration:** Defined in `pubspec.yaml` under `flutter_native_splash`.
+
+**Usage:**
+
+```bash
+# Generate native splash screens
+flutter pub run flutter_native_splash:create
+
+# Undo changes (restore original)
+flutter pub run flutter_native_splash:create --undo
+```
+
+**Customization:** Modify the `flutter_native_splash` section in `pubspec.yaml`:
+
+```yaml
+flutter_native_splash:
+  image: assets/icons/ic_launcher.png
+  color: "#FFFFFF"  # Background color
+  android: true     # Generate Android splash
+  ios: true         # Generate iOS splash
+```
+
+The generated splash screens will be placed in:
+- Android: `android/app/src/main/res/drawable/` and `android/app/src/main/res/values*/`
+- iOS: `ios/Runner/`
+- Web: `web/`
+
 ### Libraries & Tools Used
 
 * [Dio](https://github.com/flutterchina/dio)
@@ -108,6 +140,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage)
 * [Device Info Plus](https://pub.dev/packages/device_info_plus)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
+* [Flutter Native Splash](https://pub.dev/packages/flutter_native_splash) (Native splash screen generation)
 * [Connectivity Plus](https://pub.dev/packages/connectivity_plus)
 * [Device Info Plus](https://pub.dev/packages/device_info_plus) (cross-platform device information)
 

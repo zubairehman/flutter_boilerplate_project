@@ -80,6 +80,10 @@ dev_dependencies:
   # flutter packages get
   # flutter packages pub run flutter_launcher_icons:main
   flutter_launcher_icons: ^0.14.4
+  # The following adds the native splash screen support
+  # run: flutter pub run flutter_native_splash:create
+  # then: flutter pub run flutter_native_splash:create --undo to undo
+  flutter_native_splash: ^2.4.4
   mobx_codegen: ^2.2.0
   build_runner: ^2.3.3
   analyzer: ^12.1.0
@@ -87,6 +91,14 @@ dev_dependencies:
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"
+  android: true
+  ios: true
+
+# Native splash screen configuration
+# run: flutter pub run flutter_native_splash:create
+flutter_native_splash:
+  image: assets/icons/ic_launcher.png
+  color: "#FFFFFF"
   android: true
   ios: true
 
