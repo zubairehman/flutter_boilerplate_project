@@ -53,8 +53,7 @@ void main() {
     await getIt.reset();
   });
 
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('app renders without crashing', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
   });
 }
