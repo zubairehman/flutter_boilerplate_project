@@ -1,0 +1,56 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-06-04T00:00:00.000Z",
+  "dependencies": [
+    {
+      "name": "dio",
+      "resolvedVersion": "5.9.2",
+      "repoUrl": "https://github.com/cfug/dio.git",
+      "ref": "dio_v5.9.2",
+      "commit": "d3231734bcc0b25d01f4e628fb70a66c6fbfde90",
+      "path": ".slim/clonedeps/repos/cfug__dio",
+      "packagePath": "dio",
+      "reason": "Core HTTP client used by the data/network layer for requests, interceptors, adapters, and cancellation."
+    },
+    {
+      "name": "mobx / flutter_mobx / mobx_codegen",
+      "resolvedVersion": "mobx 2.6.0; flutter_mobx 2.3.0; mobx_codegen 2.7.7",
+      "repoUrl": "https://github.com/mobxjs/mobx.dart.git",
+      "ref": "mobx-2.6.0",
+      "commit": "d677b8d361301b60577267703371013749b7b7de",
+      "path": ".slim/clonedeps/repos/mobxjs__mobx.dart",
+      "packagePath": "mobx; flutter_mobx; mobx_codegen",
+      "reason": "State management, Flutter Observer bindings, and generated store code used throughout presentation stores."
+    },
+    {
+      "name": "get_it",
+      "resolvedVersion": "9.2.1",
+      "repoUrl": "https://github.com/flutter-it/get_it.git",
+      "ref": "f4396cc0f23d84ddb4b07f656a10d661862f7349",
+      "commit": "f4396cc0f23d84ddb4b07f656a10d661862f7349",
+      "path": ".slim/clonedeps/repos/flutter-it__get_it",
+      "packagePath": ".",
+      "reason": "Service locator and dependency registration source for the app composition root. No upstream v9.2.1 tag was available, so this clone is pinned to the cloned commit."
+    },
+    {
+      "name": "sembast / sembast_web",
+      "resolvedVersion": "sembast 3.8.8; sembast_web 2.4.5",
+      "repoUrl": "https://github.com/tekartik/sembast.dart.git",
+      "ref": "sembast/v3.8.8",
+      "commit": "708a1952a6e1be4d77a0b99435a18c0b89b70f7d",
+      "path": ".slim/clonedeps/repos/tekartik__sembast.dart",
+      "packagePath": "sembast; sembast_web",
+      "reason": "Local NoSQL persistence and web persistence backend used by the app cache/data layer."
+    },
+    {
+      "name": "shared_preferences",
+      "resolvedVersion": "2.5.5",
+      "repoUrl": "https://github.com/flutter/packages.git",
+      "ref": "shared_preferences-v2.5.5",
+      "commit": "371106fe7d9864a157fc9366f57d0b0e64fab932",
+      "path": ".slim/clonedeps/repos/flutter__packages",
+      "packagePath": "packages/shared_preferences/shared_preferences",
+      "reason": "Key-value settings persistence used for login state, theme, language, and auth token preferences."
+    }
+  ]
+}
