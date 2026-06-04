@@ -7,11 +7,11 @@ Defines `DBConstants` — static constants for Sembast database name, store name
 - **Constants class**: Private constructor; all members are `static const`.
 
 ## Data & Control Flow
-- `DBConstants.DB_NAME` → used by `LocalModule` when calling `SembastClient.provideDatabase()`.
-- `DBConstants.STORE_NAME` → used by `PostDataSource` to open the Sembast store.
-- `DBConstants.FIELD_ID` → used by `PostRepositoryImpl.findPostById()` as a filter key.
+- `DBConstants.dbName` → used by `LocalModule` when calling `SembastClient.provideDatabase()`.
+- `DBConstants.storeName` → used by `PostDataSource` to open the Sembast store.
+- `DBConstants.fieldId` → used by `PostRepositoryImpl.findPostById()` and `PostDataSource.upsert()` as a filter key.
 
 ## Integration Points
-- `lib/data/di/module/local_module.dart` — uses `DBConstants.DB_NAME`.
-- `lib/data/local/datasources/post/post_datasource.dart` — uses `DBConstants.STORE_NAME`.
-- `lib/data/repository/post/post_repository_impl.dart` — uses `DBConstants.FIELD_ID` for query filters.
+- `lib/data/di/module/local_module.dart` — uses `DBConstants.dbName`.
+- `lib/data/local/datasources/post/post_datasource.dart` — uses `DBConstants.storeName`, `DBConstants.fieldId`.
+- `lib/data/repository/post/post_repository_impl.dart` — uses `DBConstants.fieldId` for query filters.

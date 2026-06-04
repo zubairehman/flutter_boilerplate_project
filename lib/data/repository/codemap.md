@@ -5,13 +5,13 @@ Contains concrete implementations of domain repository abstractions. Each subfol
 
 ## Design Patterns
 - **Repository implementation pattern**: Classes extend abstract domain repositories (`PostRepository`, `UserRepository`, `SettingRepository`) and delegate to injected data sources.
-- **Cache-on-fetch**: `PostRepositoryImpl.getPosts()` fetches from `PostApi` then persists each post to `PostDataSource` before returning.
-- **Error propagation**: All repository methods use `.catchError((error) => throw error)` to bubble failures to the domain layer.
+- **Cache-on-fetch with offline fallback**: `PostRepositoryImpl.getPosts()` fetches from `PostApi`, persists each post via `PostDataSource.upsert()`, and on network failure falls back to cached `PostDataSource.getPostsFromDb()`.
+- **Error propagation**: Methods use `.catchError((error) => throw error)` to bubble failures to the domain layer.
 
 ## Data & Control Flow
 1. Domain use cases call repository interface methods.
 2. Repository implementations route to appropriate data sources (API for network, DataSource for local, SharedPreferenceHelper for settings).
-3. Data is transformed/mapped as needed (Sembast snapshots → entities, JSON → entities).
+3. Data is transformed/mapped as needed (DTOs → domain entities via mapper extensions).
 4. Results or errors propagate back to the domain layer.
 
 ## Integration Points

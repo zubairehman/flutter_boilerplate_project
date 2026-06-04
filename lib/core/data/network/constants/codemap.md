@@ -1,13 +1,12 @@
 # lib/core/data/network/constants/
 ## Responsibility
-Centralizes network configuration constants: base API URL, receive timeout, and connection timeout.
+Placeholder directory for network configuration constants. Currently empty — `DioConfigs` defines its own default timeout values.
 
 ## Design Patterns
-- **Static Constants Class**: `NetworkConstants._()` private constructor prevents instantiation; all fields are `static const`.
+- Constants previously centralized here have been removed; `DioConfigs` now carries defaults internally.
 
 ## Data & Control Flow
-- `NetworkConstants.baseUrl` → used as default in `DioConfigs` or overridden per environment.
-- `NetworkConstants.receiveTimeout` (15 000 ms) and `connectionTimeout` (30 000 ms) → inform `DioClient` timeout settings.
+- None — no source files in this directory.
 
 ## Integration Points
-- Referenced by DI/config modules to construct `DioConfigs` passed to `DioClient`.
+- None currently. `DioConfigs` no longer depends on external constants.

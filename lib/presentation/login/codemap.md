@@ -8,13 +8,14 @@ Login screen with email/password form. `LoginScreen` is a `StatefulWidget` that 
 - **Service Locator**: `ThemeStore`, `FormStore`, `UserStore` resolved via `getIt<T>()`.
 - **Form validation via store**: `FormStore.canLogin` guards the sign-in button; field errors displayed from `FormStore.formErrorStore.userEmail` / `.password`.
 - **Responsive layout**: `MediaQuery.of(context).orientation` switches between two-pane and single-pane layout.
+- **Post-frame navigation**: `navigate()` uses `WidgetsBinding.instance.addPostFrameCallback` with `mounted` check for safe navigation after async state change.
 
 ## Data & Control Flow
 1. User types → `TextFieldWidget.onChanged` → `_formStore.setUserId()` / `_formStore.setPassword()`.
-2. Sign-in button: Checks `_formStore.canLogin` → `_userStore.login(email, password)`.
+2. Sign-in button: Checks `_formStore.canLogin` → `unawaited(_userStore.login(email, password))`.
 3. `UserStore.login()` sets `loginFuture` (ObservableFuture) → `isLoading` computed becomes true → `CustomProgressIndicatorWidget` shown.
-4. On success (`UserStore.success`): `navigate()` writes `Preferences.is_logged_in = true` to `SharedPreferences`, then `Navigator.pushNamedAndRemoveUntil(Routes.home, …)`.
-5. On error: `_formStore.errorStore.errorMessage` shown via `FlushbarHelper.createError()`.
+4. On success (`UserStore.success`): `navigate()` calls `Navigator.of(context).pushNamedAndRemoveUntil(Routes.home, …)` via `addPostFrameCallback`.
+5. On error: `_formStore.errorStore.errorMessage` shown via `FlushbarHelper.createError()` in `addPostFrameCallback` with `mounted` check.
 
 ## Integration Points
 - **`store/login_store.dart`**: `UserStore` handles login API call and auth state.
@@ -23,4 +24,3 @@ Login screen with email/password form. `LoginScreen` is a `StatefulWidget` that 
 - **`core/widgets/`**: `AppIconWidget`, `EmptyAppBar`, `CustomProgressIndicatorWidget`, `RoundedButtonWidget`, `TextFieldWidget`.
 - **`../home/store/theme/theme_store.dart`**: `ThemeStore` for icon color adaptation.
 - **`utils/routes/routes.dart`**: `Routes.home` for post-login navigation.
-- **`data/sharedpref/constants/preferences.dart`**: `Preferences.is_logged_in`.

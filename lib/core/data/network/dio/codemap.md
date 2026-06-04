@@ -15,3 +15,8 @@ Wraps the `Dio` HTTP client with configurable options (`DioConfigs`) and pluggab
 - `configs/dio_configs.dart` → `DioClient` reads `baseUrl`, timeouts from `DioConfigs`.
 - `interceptors/` → injected via `addInterceptors()`.
 - Feature repositories and DI → obtain `DioClient` instance.
+
+| Directory | Responsibility |
+|-----------|---------------|
+| `configs/` | `DioConfigs` value object with `baseUrl`, `receiveTimeout` (10 000 ms), `connectionTimeout` (10 000 ms) |
+| `interceptors/` | Auth, retry, and logging interceptors |

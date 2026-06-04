@@ -1,6 +1,6 @@
 # lib/core/stores/form/
 ## Responsibility
-MobX stores for form field state and validation: `FormStore` manages email/password/confirm-password inputs and computed readiness flags; `FormErrorStore` tracks per-field validation error messages.
+MobX stores for form field state and validation: `FormStore` manages email/password/confirm-password inputs, a `success` flag, and computed readiness flags; `FormErrorStore` tracks per-field validation error messages.
 
 ## Design Patterns
 - **MobX Code-Gen**: Both `FormStore` and `FormErrorStore` use generated mixin merging.

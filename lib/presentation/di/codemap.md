@@ -9,7 +9,7 @@ Presentation-layer dependency injection entry point. `PresentationLayerInjection
 
 ## Data & Control Flow
 1. App startup calls `PresentationLayerInjection.configurePresentationLayerInjection()`.
-2. That calls `StoreModule.configureStoreModuleInjection()`, which registers factories (ErrorStore, FormErrorStore, FormStore) and singletons (UserStore, PostStore, ThemeStore, LanguageStore) into `getIt`.
+2. That calls `StoreModule.configureStoreModuleInjection()`, which registers factories (ErrorStore, FormErrorStore, FormStore) and singletons (UserStore, ThemeStore, LanguageStore) plus a factory (PostStore) into `getIt`.
 3. Widgets resolve stores via `getIt<T>()` at construction time.
 
 ## Integration Points

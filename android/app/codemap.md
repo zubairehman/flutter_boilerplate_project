@@ -13,7 +13,7 @@ The sole Android application module. Defines the APK/AAB build configuration, li
 2. Reads `local.properties` for Flutter version metadata.
 3. Configures `android {}` block: namespace `com.iotecksolutions.todoapp`, compileSdk 36, minSdk from Flutter, targetSdk 36, Java 17 compatibility.
 4. Kotlin compiler target set to JVM 17 via `kotlin { compilerOptions {} }`.
-5. Release build type signs with debug config (placeholder for production signing).
+5. Release build type requires explicit signing configuration (`RELEASE_STORE_FILE`); throws `GradleException` if not configured.
 6. `flutter { source '../..' }` points the Flutter source set to the project root `lib/`.
 
 ## Integration Points

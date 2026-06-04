@@ -1,17 +1,18 @@
 # lib/presentation/post/store/
 
 ## Responsibility
-Post data state management. `PostStore` (MobX) fetches posts via `GetPostUseCase`, tracks loading/success/error state, and exposes `postList` observable for UI consumption.
+Post data state management. `PostStore` (MobX) fetches posts via `GetPostUseCase`, tracks loading/success/error state, and exposes `postList` observable for UI consumption. Registered as a factory in `StoreModule`.
 
 ## Design Patterns
 - **MobX store**: `_PostStore` (abstract) → `PostStore = _PostStore with _$PostStore`. Uses `@observable`, `@computed`, `@action`.
 - **ObservableFuture tracking**: `fetchPostsFuture` wraps the async fetch; `loading` computed from `fetchPostsFuture.status == FutureStatus.pending`.
-- **Error delegation**: Errors are not thrown but written to `errorStore.errorMessage` via `DioExceptionUtil.handleError()`.
+- **Error delegation**: `DioException` errors mapping via `DioExceptionUtil.handleError()` written to `errorStore.errorMessage`; other errors silently caught.
+- **Factory registration**: PostStore is registered as `getIt.registerFactory` (not singleton), so each widget gets a fresh instance.
 
 ## Data & Control Flow
 1. `getPosts()` → `_getPostUseCase.call(params: null)` → wrapped in `ObservableFuture` → `fetchPostsFuture` updated.
-2. On success: `postList` set to returned `PostList`.
-3. On error: `errorStore.errorMessage = DioExceptionUtil.handleError(error)` — UI picks this up via `Observer`.
+2. On success: `postList` set to returned `PostList`, `success` set to `true` (unused by current UI).
+3. On error (DioException): `errorStore.errorMessage = DioExceptionUtil.handleError(error)` — UI picks this up via `Observer`.
 4. `loading` computed: returns true while `fetchPostsFuture` is pending.
 
 ## Integration Points
@@ -19,3 +20,4 @@ Post data state management. `PostStore` (MobX) fetches posts via `GetPostUseCase
 - **`domain/entity/post/post_list.dart`**: `PostList` entity with `posts` list.
 - **`core/stores/error/error_store.dart`**: `ErrorStore` for error message propagation.
 - **`utils/dio/dio_error_util.dart`**: `DioExceptionUtil.handleError()` maps Dio exceptions to user-facing strings.
+- **`package:dio/dio.dart`**: `DioException` type check in error handling.

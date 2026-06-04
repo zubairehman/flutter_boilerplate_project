@@ -7,7 +7,7 @@ User authentication and login-status use cases: logging in, checking login state
 ## Design Patterns
 
 - **Use Case pattern**: three classes, each implements `UseCase<T, P>`.
-- **Parameter object for login**: `LoginParams` (annotated `@JsonSerializable`) carries `username`/`password`; generated code in `login_usecase.g.dart` provides `fromJson`/`toJson`.
+- **Parameter object for login**: `LoginParams` is a plain Dart class carrying `username`/`password` (no `@JsonSerializable` annotation, no code generation).
 - **Simple delegation**: each use case's `call()` directly forwards to `UserRepository`.
 
 ### Classes
@@ -28,5 +28,4 @@ User authentication and login-status use cases: logging in, checking login state
 
 - **Injected repository**: `UserRepository` (resolved from GetIt in `UseCaseModule`).
 - **Consumed by**: presentation auth/login store or BLoC.
-- **Code generation**: `login_usecase.g.dart` provides `_$LoginParamsFromJson` / `_$LoginParamsToJson`.
 - **File naming quirk**: `save_login_in_status_usecase.dart` contains an extraneous "in" in the filename (class is `SaveLoginStatusUseCase`; expected filename would be `save_login_status_usecase.dart`).

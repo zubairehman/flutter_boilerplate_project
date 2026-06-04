@@ -4,6 +4,13 @@
 
 Contains all use case classes — single-responsibility command objects that encapsulate domain operations. Each use case implements `UseCase<T, P>` from `core/domain/usecase/use_case.dart`, takes a repository via constructor injection, and exposes a `call({required P params})` method.
 
+## Directory Map
+
+| Directory | Purpose |
+|---|---|
+| `post/` | Post-related use cases |
+| `user/` | User auth/login use cases |
+
 ## Design Patterns
 
 - **Use Case / Interactor pattern**: one class per business operation, implementing `UseCase<T, P>` where `T` is the return type and `P` is the parameter type.

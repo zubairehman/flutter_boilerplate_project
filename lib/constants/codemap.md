@@ -16,9 +16,9 @@ Declares app-wide static configuration values: theme data, color palettes, dimen
 - `AppThemeData` → consumed by `MaterialApp.theme` / `MaterialApp.darkTheme` in presentation layer
 - `AppColors` → used for custom color references outside the ColorScheme (e.g., charts, gradients)
 - `Dimens` → referenced in widget padding/margin layouts (horizontal_padding, vertical_padding)
-- `Assets` → string paths for `Image.asset()` and splash screen resources
-- `FontFamily` → font family names for custom `TextStyle` font family overrides
-- `Strings` → hardcoded string constants (e.g., `appName`)
+- `Assets` → string paths for `Image.asset()`: `appLogo` (app icon), `carBackground` (login screen image)
+- `FontFamily` → mutable static font family names (`productSans`, `roboto`) for custom `TextStyle` overrides (non-const fields)
+- `Strings` → hardcoded string constants: `appName` = `'Boilerplate Project'`
 
 ## Integration Points
 

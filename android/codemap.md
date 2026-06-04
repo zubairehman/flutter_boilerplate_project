@@ -12,7 +12,7 @@ Android platform shell for the Flutter boilerplate app. Houses the Gradle build 
 ## Data & Control Flow
 1. `settings.gradle` resolves the Flutter SDK path from `local.properties` and includes the Flutter tools Gradle plugin.
 2. Root `build.gradle` configures repositories and delegates evaluation to `:app`.
-3. `app/build.gradle` consumes Flutter version metadata from `local.properties`, configures Android SDK versions (compileSdk 36, targetSdk 36), and wires the `flutter` source set to the parent `lib/` directory.
+3. `app/build.gradle` consumes Flutter version metadata from `local.properties`, configures Android SDK versions (compileSdk 36, targetSdk 36), namespace `com.iotecksolutions.todoapp`, and wires the `flutter` source set to the parent `lib/` directory.
 4. Gradle daemon JVM is resolved to JDK 21 via Foojay toolchains.
 
 ## Integration Points

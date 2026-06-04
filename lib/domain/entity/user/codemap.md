@@ -2,18 +2,19 @@
 
 ## Responsibility
 
-Defines the `User` entity — the domain model representing an authenticated user. Currently a stub class with no fields (placeholder for future extension).
+Defines the `User` entity — the immutable domain model representing an authenticated user with `id` and `email` fields.
 
 ## Design Patterns
 
-- **Stub entity**: `User` is a minimal placeholder awaiting property additions as auth requirements evolve.
+- **Immutable entity with required non-nullable fields**: `User` uses a `const` constructor with `required String id` and `required String email`.
 
 ## Data & Control Flow
 
 - `UserRepository.login()` returns `User?`.
 - `LoginUseCase` exposes `User?` as its return type.
+- Data-layer user repository implementation creates `User` instances from API responses.
 
 ## Integration Points
 
 - **Consumed by**: `UserRepository` (return type), `LoginUseCase` (return type).
-- **Implemented by**: data-layer user repository implementation.
+- **Produced by**: data-layer user repository implementation.

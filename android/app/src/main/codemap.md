@@ -17,6 +17,6 @@ Primary Android source set containing the production application definition: `An
 
 ## Integration Points
 - **AndroidManifest.xml**: Registers the activity, declares `INTERNET` permission, sets Flutter embedding version.
-- **kotlin/com/iotecksolutions/flutterboilerplate/MainActivity.kt**: Native entrypoint — thin subclass of `FlutterActivity`.
+- **kotlin/com/iotecksolutions/todoapp/MainActivity.kt**: Native entrypoint — thin subclass of `FlutterActivity` in the `com.iotecksolutions.todoapp` package.
 - **res/values/styles.xml** and **res/values-night/styles.xml**: Theme definitions consumed by manifest meta-data references.
 - **Flutter Dart layer**: `lib/main.dart` is the Dart-side counterpart entrypoint loaded by the engine.

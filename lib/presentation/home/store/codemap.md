@@ -10,6 +10,8 @@ Container folder for home-feature MobX stores — delegates to `theme/` and `lan
 ## Data & Control Flow
 - `ThemeStore` (in `theme/`) and `LanguageStore` (in `language/`) are both singletons registered in `StoreModule`. They are resolved by `MyApp`, `HomeScreen`, and `LoginScreen` via `getIt`.
 - Both stores call `SettingRepository` to persist/read preferences on construction (`init()`) and on user action.
+- `LanguageStore.changeLanguage()` now validates locale against `supportedLanguages` and writes `errorStore.errorMessage` for unsupported values.
+- `ThemeStore` now exposes `isPlatformDark(BuildContext)` for platform brightness detection.
 
 ## Integration Points
 - **`theme/theme_store.dart`**: Dark-mode state management.
