@@ -8,6 +8,7 @@ import 'package:boilerplate/data/network/interceptors/error_interceptor.dart';
 import 'package:boilerplate/data/network/rest_client.dart';
 import 'package:boilerplate/data/secure_storage/secure_storage_helper.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../di/service_locator.dart';
 
@@ -17,7 +18,9 @@ class NetworkModule {
     getIt.registerSingleton<EventBus>(EventBus());
 
     // interceptors:------------------------------------------------------------
-    getIt.registerSingleton<LoggingInterceptor>(LoggingInterceptor());
+    if (kDebugMode) {
+      getIt.registerSingleton<LoggingInterceptor>(LoggingInterceptor());
+    }
     getIt.registerSingleton<ErrorInterceptor>(ErrorInterceptor(getIt()));
     getIt.registerSingleton<AuthInterceptor>(
       AuthInterceptor(
@@ -43,7 +46,7 @@ class NetworkModule {
           [
             getIt<AuthInterceptor>(),
             getIt<ErrorInterceptor>(),
-            getIt<LoggingInterceptor>(),
+            if (kDebugMode) getIt<LoggingInterceptor>(),
           ],
         ),
     );

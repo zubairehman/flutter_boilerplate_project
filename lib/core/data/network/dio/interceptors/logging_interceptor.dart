@@ -77,11 +77,29 @@ class LoggingInterceptor extends Interceptor {
   final JsonDecoder decoder = const JsonDecoder();
   final JsonEncoder encoder = const JsonEncoder.withIndent('  ');
 
+  static const _sensitiveKeys = {
+    'authorization',
+    'cookie',
+    'set-cookie',
+    'password',
+    'token',
+  };
+
   LoggingInterceptor({
     this.level = Level.body,
     this.compact = false,
     this.logPrint = print,
   });
+
+  Object? _redactValue(String key, Object? value) {
+    return _sensitiveKeys.contains(key.toLowerCase()) ? '<redacted>' : value;
+  }
+
+  Map<dynamic, dynamic> _redactMap(Map<dynamic, dynamic> input) {
+    return input.map(
+      (key, value) => MapEntry(key, _redactValue(key.toString(), value)),
+    );
+  }
 
   @override
   void onRequest(
@@ -100,7 +118,7 @@ class LoggingInterceptor extends Interceptor {
 
     logPrint('[DIO][HEADERS]');
     options.headers.forEach((key, value) {
-      logPrint('$key:$value');
+      logPrint('$key:${_redactValue(key.toString(), value)}');
     });
 
     if (level == Level.headers) {
@@ -110,12 +128,11 @@ class LoggingInterceptor extends Interceptor {
 
     final data = options.data;
     if (data != null) {
-      // logPrint('[DIO]dataType:${data.runtimeType}');
       if (data is Map) {
         if (compact) {
-          logPrint('$data');
+          logPrint('${_redactMap(data)}');
         } else {
-          _prettyPrintJson(data);
+          _prettyPrintJson(_redactMap(data));
         }
       } else if (data is FormData) {
         // NOT IMPLEMENT
@@ -147,7 +164,7 @@ class LoggingInterceptor extends Interceptor {
 
     logPrint('[DIO][HEADER]');
     response.headers.forEach((key, value) {
-      logPrint('$key:$value');
+      logPrint('$key:${_redactValue(key, value)}');
     });
     logPrint('[DIO][HEADERS]<-- END ${response.requestOptions.method}');
     if (level == Level.headers) {
@@ -155,12 +172,11 @@ class LoggingInterceptor extends Interceptor {
     }
     final data = response.data;
     if (data != null) {
-      // logPrint('[DIO]dataType:${data.runtimeType}');
       if (data is Map) {
         if (compact) {
-          logPrint('$data');
+          logPrint('${_redactMap(data)}');
         } else {
-          _prettyPrintJson(data);
+          _prettyPrintJson(_redactMap(data));
         }
       } else if (data is List) {
         // NOT IMPLEMENT

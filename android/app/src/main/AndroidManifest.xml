@@ -15,7 +15,7 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="Boilerplate Project"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
