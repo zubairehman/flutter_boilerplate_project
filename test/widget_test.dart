@@ -84,7 +84,8 @@ class _FakeUserRepository implements UserRepository {
   bool _isLoggedIn = false;
 
   @override
-  Future<User?> login(LoginParams params) async => User();
+  Future<User?> login(LoginParams params) async =>
+      User(id: 'demo-user', email: params.username);
 
   @override
   Future<void> saveIsLoggedIn(bool value) async {
