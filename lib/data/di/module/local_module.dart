@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:boilerplate/core/data/local/crypto_service.dart';
 import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
 import 'package:boilerplate/data/connectivity/connectivity_service.dart';
 import 'package:boilerplate/data/device_info/device_info_service.dart';
@@ -34,11 +33,6 @@ class LocalModule {
     // connectivity:-------------------------------------------------------------
     getIt.registerSingleton<ConnectivityService>(ConnectivityService());
 
-    // crypto service:------------------------------------------------------------
-    getIt.registerSingleton<CryptoService>(
-      CryptoService('your-app-secret-key-change-in-production'),
-    );
-
     // preference manager:------------------------------------------------------
     getIt.registerSingletonAsync<SharedPreferences>(
         SharedPreferences.getInstance);
@@ -48,12 +42,16 @@ class LocalModule {
 
     // database:----------------------------------------------------------------
 
+    final dbEncryptionKey =
+        await getIt<SecureStorageHelper>().getOrCreateDatabaseEncryptionKey();
+
     getIt.registerSingletonAsync<SembastClient>(
       () async => SembastClient.provideDatabase(
         databaseName: DBConstants.dbName,
         databasePath: kIsWeb
             ? "/assets/db"
             : (await getApplicationDocumentsDirectory()).path,
+        encryptionKey: dbEncryptionKey,
       ),
     );
 
