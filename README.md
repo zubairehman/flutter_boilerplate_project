@@ -62,6 +62,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 ## Boilerplate Features:
 
 * Splash
+* Animation helpers
 * Login
 * Home
 * Routing
@@ -95,6 +96,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Validation](https://github.com/dart-league/validators)
 * [Logging](https://github.com/zubairehman/Flogs)
 * [Notifications](https://github.com/AndreHaueisen/flushbar)
+* [Flutter Animate](https://pub.dev/packages/flutter_animate)
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
 
@@ -296,4 +298,3 @@ Checkout [wiki](https://github.com/zubairehman/flutter-boilerplate-project/wiki)
 I will be happy to answer any questions that you may have on this approach, and if you want to lend a hand with the boilerplate then please feel free to submit an issue and/or pull request 🙂
 
 Again to note, this is example can appear as over-architectured for what it is - but it is an example only. If you liked my work, don’t forget to ⭐ star the repo to show your support.
-

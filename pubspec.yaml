@@ -29,6 +29,7 @@ dependencies:
   # E
   event_bus: ^2.0.0
   # F
+  flutter_animate: ^4.5.2
   flutter_mobx: ^2.0.6+5
   # G
   get_it: ^9.2.1
