@@ -5,6 +5,8 @@ import 'package:boilerplate/presentation/home/store/language/language_store.dart
 import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
 import 'package:boilerplate/presentation/login/store/login_store.dart';
 import 'package:boilerplate/presentation/post/post_list.dart';
+import 'package:boilerplate/presentation/settings/settings_dialog.dart';
+import 'package:boilerplate/presentation/settings/store/settings_store.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return <Widget>[
       _buildLanguageButton(),
       _buildThemeButton(),
+      _buildSettingsButton(),
       _buildLogoutButton(),
     ];
   }
@@ -71,6 +74,22 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       icon: Icon(
         Icons.power_settings_new,
+      ),
+    );
+  }
+
+  Widget _buildSettingsButton() {
+    return IconButton(
+      onPressed: () {
+        showSettingsDialog(
+          context: context,
+          themeStore: _themeStore,
+          languageStore: _languageStore,
+          settingsStore: getIt<SettingsStore>(),
+        );
+      },
+      icon: Icon(
+        Icons.settings,
       ),
     );
   }
