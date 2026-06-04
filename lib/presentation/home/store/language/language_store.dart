@@ -1,5 +1,7 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:boilerplate/core/stores/error/error_store.dart';
-import 'package:boilerplate/domain/entity/language/Language.dart';
+import 'package:boilerplate/domain/entity/language/language.dart';
 import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -8,8 +10,6 @@ part 'language_store.g.dart';
 class LanguageStore = _LanguageStore with _$LanguageStore;
 
 abstract class _LanguageStore with Store {
-  static const String TAG = "LanguageStore";
-
   // repository instance
   final SettingRepository _repository;
 
@@ -46,17 +46,9 @@ abstract class _LanguageStore with Store {
 
   @action
   String getCode() {
-    var code;
-
-    if (_locale == 'en') {
-      code = "US";
-    } else if (_locale == 'da') {
-      code = "DK";
-    } else if (_locale == 'es') {
-      code = "ES";
-    }
-
-    return code;
+    if (_locale == 'da') return "DK";
+    if (_locale == 'es') return "ES";
+    return "US";
   }
 
   @action
@@ -75,6 +67,5 @@ abstract class _LanguageStore with Store {
   }
 
   // dispose:-------------------------------------------------------------------
-  @override
-  dispose() {}
+  void dispose() {}
 }

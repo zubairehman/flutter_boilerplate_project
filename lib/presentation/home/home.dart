@@ -10,6 +10,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -60,11 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildLogoutButton() {
     return IconButton(
-      onPressed: () {
-        SharedPreferences.getInstance().then((preference) {
-          preference.setBool(Preferences.is_logged_in, false);
-          Navigator.of(context).pushReplacementNamed(Routes.login);
-        });
+      onPressed: () async {
+        final preference = await SharedPreferences.getInstance();
+        await preference.setBool(Preferences.isLoggedIn, false);
+        if (!mounted) return;
+        Navigator.of(context).pushReplacementNamed(Routes.login);
       },
       icon: Icon(
         Icons.power_settings_new,
@@ -83,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _buildLanguageDialog() {
+  void _buildLanguageDialog() {
     _showDialog<String>(
       context: context,
       child: AlertDialog(
@@ -129,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _showDialog<T>({required BuildContext context, required Widget child}) {
+  void _showDialog<T>({required BuildContext context, required Widget child}) {
     showDialog<T>(
       context: context,
       builder: (BuildContext context) => child,

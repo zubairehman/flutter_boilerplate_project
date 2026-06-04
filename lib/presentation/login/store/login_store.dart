@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/core/stores/form/form_store.dart';
 import 'package:boilerplate/domain/usecase/user/is_logged_in_usecase.dart';
@@ -77,19 +79,18 @@ abstract class _UserStore with Store {
     await future.then((value) async {
       if (value != null) {
         await _saveLoginStatusUseCase.call(params: true);
-        this.isLoggedIn = true;
-        this.success = true;
+        isLoggedIn = true;
+        success = true;
       }
     }).catchError((e) {
-      print(e);
-      this.isLoggedIn = false;
-      this.success = false;
+      isLoggedIn = false;
+      success = false;
       throw e;
     });
   }
 
-  logout() async {
-    this.isLoggedIn = false;
+  Future<void> logout() async {
+    isLoggedIn = false;
     await _saveLoginStatusUseCase.call(params: false);
   }
 

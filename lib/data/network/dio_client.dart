@@ -9,12 +9,12 @@ class DioClient {
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(
-      String uri, {
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String uri, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       final Response response = await _dio.get(
         uri,
@@ -24,22 +24,21 @@ class DioClient {
         onReceiveProgress: onReceiveProgress,
       );
       return response.data;
-    } catch (e) {
-      print(e.toString());
-      throw e;
+    } catch (_) {
+      rethrow;
     }
   }
 
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(
-      String uri, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       final Response response = await _dio.post(
         uri,
@@ -52,20 +51,20 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   // Put:-----------------------------------------------------------------------
   Future<dynamic> put(
-      String uri, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       final Response response = await _dio.put(
         uri,
@@ -78,20 +77,20 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   // Delete:--------------------------------------------------------------------
   Future<dynamic> delete(
-      String uri, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       final Response response = await _dio.delete(
         uri,
@@ -102,7 +101,7 @@ class DioClient {
       );
       return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

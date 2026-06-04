@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
   final LanguageStore _languageStore = getIt<LanguageStore>();
   final UserStore _userStore = getIt<UserStore>();
 
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Observer(

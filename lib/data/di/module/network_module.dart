@@ -21,7 +21,8 @@ class NetworkModule {
     getIt.registerSingleton<ErrorInterceptor>(ErrorInterceptor(getIt()));
     getIt.registerSingleton<AuthInterceptor>(
       AuthInterceptor(
-        accessToken: () async => await getIt<SharedPreferenceHelper>().authToken,
+        accessToken: () async =>
+            await getIt<SharedPreferenceHelper>().authToken,
       ),
     );
 
@@ -33,7 +34,7 @@ class NetworkModule {
       const DioConfigs(
         baseUrl: Endpoints.baseUrl,
         connectionTimeout: Endpoints.connectionTimeout,
-        receiveTimeout:Endpoints.receiveTimeout,
+        receiveTimeout: Endpoints.receiveTimeout,
       ),
     );
     getIt.registerSingleton<DioClient>(
@@ -48,6 +49,6 @@ class NetworkModule {
     );
 
     // api's:-------------------------------------------------------------------
-    getIt.registerSingleton(PostApi(getIt<DioClient>(), getIt<RestClient>()));
+    getIt.registerSingleton(PostApi(getIt<DioClient>()));
   }
 }

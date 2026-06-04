@@ -19,14 +19,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../di/service_locator.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   //text controllers:-----------------------------------------------------------
-  TextEditingController _userEmailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _userEmailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   //stores:---------------------------------------------------------------------
   final ThemeStore _themeStore = getIt<ThemeStore>();
@@ -197,10 +199,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget navigate(BuildContext context) {
     SharedPreferences.getInstance().then((prefs) {
-      prefs.setBool(Preferences.is_logged_in, true);
+      prefs.setBool(Preferences.isLoggedIn, true);
     });
 
-    Future.delayed(Duration(milliseconds: 0), () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.home, (Route<dynamic> route) => false);
     });
@@ -209,15 +212,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // General Methods:-----------------------------------------------------------
-  _showErrorMessage(String message) {
+  SizedBox _showErrorMessage(String message) {
     if (message.isNotEmpty) {
-      Future.delayed(Duration(milliseconds: 0), () {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
         if (message.isNotEmpty) {
           FlushbarHelper.createError(
             message: message,
             title: AppLocalizations.of(context).translate('home_tv_error'),
             duration: Duration(seconds: 3),
-          )..show(context);
+          ).show(context);
         }
       });
     }

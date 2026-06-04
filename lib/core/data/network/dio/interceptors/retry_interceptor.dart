@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:dio/dio.dart';
 
@@ -34,8 +35,10 @@ class RetryInterceptor extends Interceptor {
       ..addAll(extra.toExtra());
 
     if (shouldLog) {
-      print(
-          '[${err.requestOptions.uri}] An error occurred during request, trying a again (remaining tries: ${extra.retries}, error: ${err.error})');
+      developer.log(
+        '[${err.requestOptions.uri}] An error occurred during request, trying again (remaining tries: ${extra.retries}, error: ${err.error})',
+        name: 'RetryInterceptor',
+      );
     }
     // We retry with the updated options
     await dio

@@ -64,6 +64,8 @@ dependencies:
   # Y
   # Z
 
+  path: ^1.9.1
+  json_annotation: ^4.12.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -76,6 +78,7 @@ dev_dependencies:
   mobx_codegen: ^2.2.0
   build_runner: ^2.3.3
   analyzer: ^12.1.0
+  flutter_lints: ^6.0.0
 
 flutter_icons:
   image_path: "assets/icons/ic_launcher.png"

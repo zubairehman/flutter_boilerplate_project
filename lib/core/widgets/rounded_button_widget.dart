@@ -12,7 +12,7 @@ class RoundedButtonWidget extends StatelessWidget {
   final ShapeBorder shape;
 
   const RoundedButtonWidget({
-    Key? key,
+    super.key,
     this.buttonText,
     this.buttonColor,
     this.textColor = Colors.white,
@@ -22,13 +22,13 @@ class RoundedButtonWidget extends StatelessWidget {
     this.shape = const StadiumBorder(),
     this.buttonTextSize = 14.0,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       height: height,
-      key: this.key,
+      key: key,
       color: buttonColor,
       shape: borderColor != null
           ? StadiumBorder(side: BorderSide(color: borderColor!))

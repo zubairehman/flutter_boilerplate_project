@@ -7,7 +7,7 @@ import 'package:sembast/sembast.dart';
 class PostDataSource {
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are Flogs objects converted to Map
-  final _postsStore = intMapStoreFactory.store(DBConstants.STORE_NAME);
+  final _postsStore = intMapStoreFactory.store(DBConstants.storeName);
 
   // Private getter to shorten the amount of code needed to get the
   // singleton instance of an opened database.
@@ -32,7 +32,7 @@ class PostDataSource {
     //creating finder
     final finder = Finder(
         filter: filters != null ? Filter.and(filters) : null,
-        sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
+        sortOrders: [SortOrder(DBConstants.fieldId)]);
 
     final recordSnapshots = await _postsStore.find(
       _sembastClient.database,
@@ -49,29 +49,20 @@ class PostDataSource {
   }
 
   Future<PostList> getPostsFromDb() async {
-
-    print('Loading from database');
-
-    // post list
-    var postsList;
-
     // fetching data
     final recordSnapshots = await _postsStore.find(
       _sembastClient.database,
     );
 
     // Making a List<Post> out of List<RecordSnapshot>
-    if(recordSnapshots.length > 0) {
-      postsList = PostList(
-          posts: recordSnapshots.map((snapshot) {
-            final post = Post.fromMap(snapshot.value);
-            // An ID is a key of a record from the database.
-            post.id = snapshot.key;
-            return post;
-          }).toList());
-    }
-
-    return postsList;
+    return PostList(
+      posts: recordSnapshots.map((snapshot) {
+        final post = Post.fromMap(snapshot.value);
+        // An ID is a key of a record from the database.
+        post.id = snapshot.key;
+        return post;
+      }).toList(),
+    );
   }
 
   Future<int> update(Post post) async {
@@ -98,5 +89,4 @@ class PostDataSource {
       _sembastClient.database,
     );
   }
-
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:mobx/mobx.dart';
 
 part 'error_store.g.dart';
@@ -5,7 +7,6 @@ part 'error_store.g.dart';
 class ErrorStore = _ErrorStore with _$ErrorStore;
 
 abstract class _ErrorStore with Store {
-
   // disposers
   late List<ReactionDisposer> _disposers;
 
@@ -20,11 +21,10 @@ abstract class _ErrorStore with Store {
   @observable
   String errorMessage = '';
 
-
   // actions:-------------------------------------------------------------------
   @action
   void setErrorMessage(String message) {
-    this.errorMessage = message;
+    errorMessage = message;
   }
 
   @action
@@ -34,7 +34,7 @@ abstract class _ErrorStore with Store {
 
   // dispose:-------------------------------------------------------------------
   @action
-  dispose() {
+  void dispose() {
     for (final disposer in _disposers) {
       disposer();
     }

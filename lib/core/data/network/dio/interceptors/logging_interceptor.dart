@@ -1,4 +1,4 @@
-library dio_logging_interceptor;
+library;
 
 import 'dart:convert';
 

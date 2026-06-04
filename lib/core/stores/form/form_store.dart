@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
@@ -43,7 +45,9 @@ abstract class _FormStore with Store {
 
   @computed
   bool get canLogin =>
-      !formErrorStore.hasErrorsInLogin && userEmail.isNotEmpty && password.isNotEmpty;
+      !formErrorStore.hasErrorsInLogin &&
+      userEmail.isNotEmpty &&
+      password.isNotEmpty;
 
   @computed
   bool get canRegister =>

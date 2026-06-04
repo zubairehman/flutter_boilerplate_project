@@ -36,7 +36,7 @@ class PostRepositoryImpl extends PostRepository {
     List<Filter> filters = [];
 
     //check to see if dataLogsType is not null
-    Filter dataLogTypeFilter = Filter.equals(DBConstants.FIELD_ID, id);
+    Filter dataLogTypeFilter = Filter.equals(DBConstants.fieldId, id);
     filters.add(dataLogTypeFilter);
 
     //making db call

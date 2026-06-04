@@ -24,5 +24,4 @@ class Post {
         "title": title,
         "body": body,
       };
-  
 }

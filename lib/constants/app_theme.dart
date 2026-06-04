@@ -18,6 +18,8 @@
 /// In order to use this newly created setting or even the colours in it, you would just
 /// `import` this file in your project, anywhere you needed it.
 /// `import 'path/to/setting.dart';`
+library;
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,11 +27,11 @@ class AppThemeData {
   static const _lightFillColor = Colors.black;
   static const _darkFillColor = Colors.white;
 
-  static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
-  static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
+  static final Color _lightFocusColor = Colors.black.withValues(alpha: 0.12);
+  static final Color _darkFocusColor = Colors.white.withValues(alpha: 0.12);
 
   static ThemeData lightThemeData =
-  themeData(lightColorScheme, _lightFocusColor);
+      themeData(lightColorScheme, _lightFocusColor);
   static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
 
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
@@ -51,7 +53,7 @@ class AppThemeData {
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Color.alphaBlend(
-          _lightFillColor.withOpacity(0.80),
+          _lightFillColor.withValues(alpha: 0.80),
           _darkFillColor,
         ),
         contentTextStyle: _textTheme.titleMedium!.apply(color: _darkFillColor),

@@ -2,11 +2,11 @@ class DBConstants {
   DBConstants._();
 
   // Store Name
-  static const String STORE_NAME = 'demo';
+  static const String storeName = 'demo';
 
   // DB Name
-  static const DB_NAME = 'demo.db';
+  static const dbName = 'demo.db';
 
   // Fields
-  static const FIELD_ID = 'id';
+  static const fieldId = 'id';
 }

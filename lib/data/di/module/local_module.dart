@@ -23,7 +23,7 @@ class LocalModule {
 
     getIt.registerSingletonAsync<SembastClient>(
       () async => SembastClient.provideDatabase(
-        databaseName: DBConstants.DB_NAME,
+        databaseName: DBConstants.dbName,
         databasePath: kIsWeb
             ? "/assets/db"
             : (await getApplicationDocumentsDirectory()).path,

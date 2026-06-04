@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/domain/entity/post/post_list.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
