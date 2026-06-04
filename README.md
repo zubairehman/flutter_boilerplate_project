@@ -73,6 +73,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Provider (State Management)
 * Encryption
 * Validation
+* JWT utility example
 * Code Generation
 * User Notifications
 * Logging
@@ -98,7 +99,40 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Notifications](https://github.com/AndreHaueisen/flushbar)
 * [Flutter Animate](https://pub.dev/packages/flutter_animate)
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
+* [Dart JSON Web Token](https://pub.dev/packages/dart_jsonwebtoken)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
+
+### JWT Utility Example
+
+The project includes a standalone JWT helper at `lib/utils/jwt/jwt_helper.dart`.
+It is not wired into the login flow, shared preferences, or Dio interceptors.
+Use it as a starting point when your app needs to sign, verify, or inspect JWT claims.
+
+```dart
+import 'package:boilerplate/utils/jwt/jwt_helper.dart';
+
+const secret = 'replace-with-your-secret';
+
+final token = JwtHelper.sign(
+  {'userId': 42, 'role': 'tester'},
+  secret: secret,
+  issuer: 'boilerplate',
+  audience: 'boilerplate-example',
+  expiresIn: Duration(hours: 1),
+);
+
+final claims = JwtHelper.tryVerify(
+  token,
+  secret: secret,
+  issuer: 'boilerplate',
+  audience: 'boilerplate-example',
+);
+
+final decodedClaims = JwtHelper.tryDecode(token);
+```
+
+Use `tryVerify` for trusted claims. `tryDecode` does not verify the signature,
+so only use it to inspect token contents.
 
 ### Folder Structure
 Here is the core folder structure which flutter provides.

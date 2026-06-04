@@ -25,6 +25,7 @@ dependencies:
   # C
   cupertino_icons: ^1.0.5
   # D
+  dart_jsonwebtoken: ^3.4.1
   dio: ^5.1.1
   # E
   event_bus: ^2.0.0
