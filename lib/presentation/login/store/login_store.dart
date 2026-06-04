@@ -24,11 +24,6 @@ abstract class _UserStore with Store {
   ) {
     // setting up disposers
     _setupDisposers();
-
-    // checking if user is logged in
-    _isLoggedInUseCase.call(params: null).then((value) async {
-      isLoggedIn = value;
-    });
   }
 
   // use cases:-----------------------------------------------------------------
@@ -57,7 +52,11 @@ abstract class _UserStore with Store {
       ObservableFuture.value(null);
 
   // store variables:-----------------------------------------------------------
+  @observable
   bool isLoggedIn = false;
+
+  @observable
+  bool isAuthBootstrapped = false;
 
   @observable
   bool success = false;
@@ -69,6 +68,12 @@ abstract class _UserStore with Store {
   bool get isLoading => loginFuture.status == FutureStatus.pending;
 
   // actions:-------------------------------------------------------------------
+  @action
+  Future<void> bootstrapAuth() async {
+    isLoggedIn = await _isLoggedInUseCase.call(params: null);
+    isAuthBootstrapped = true;
+  }
+
   @action
   Future login(String email, String password) async {
     final LoginParams loginParams =

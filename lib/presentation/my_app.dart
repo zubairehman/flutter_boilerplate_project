@@ -13,20 +13,35 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../di/service_locator.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
-  // Create your store as a final variable in a base Widget. This works better
-  // with Hot Reload than creating it directly in the `build` function.
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final ThemeStore _themeStore = getIt<ThemeStore>();
   final LanguageStore _languageStore = getIt<LanguageStore>();
   final UserStore _userStore = getIt<UserStore>();
 
-  MyApp({super.key});
+  @override
+  void initState() {
+    super.initState();
+    _userStore.bootstrapAuth();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
+        if (!_userStore.isAuthBootstrapped) {
+          return const MaterialApp(
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
+          );
+        }
+
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: Strings.appName,

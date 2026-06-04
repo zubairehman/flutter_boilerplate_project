@@ -16,6 +16,38 @@ mixin _$UserStore on _UserStore, Store {
           Computed<bool>(() => super.isLoading, name: '_UserStore.isLoading'))
       .value;
 
+  late final _$isLoggedInAtom =
+      Atom(name: '_UserStore.isLoggedIn', context: context);
+
+  @override
+  bool get isLoggedIn {
+    _$isLoggedInAtom.reportRead();
+    return super.isLoggedIn;
+  }
+
+  @override
+  set isLoggedIn(bool value) {
+    _$isLoggedInAtom.reportWrite(value, super.isLoggedIn, () {
+      super.isLoggedIn = value;
+    });
+  }
+
+  late final _$isAuthBootstrappedAtom =
+      Atom(name: '_UserStore.isAuthBootstrapped', context: context);
+
+  @override
+  bool get isAuthBootstrapped {
+    _$isAuthBootstrappedAtom.reportRead();
+    return super.isAuthBootstrapped;
+  }
+
+  @override
+  set isAuthBootstrapped(bool value) {
+    _$isAuthBootstrappedAtom.reportWrite(value, super.isAuthBootstrapped, () {
+      super.isAuthBootstrapped = value;
+    });
+  }
+
   late final _$successAtom = Atom(name: '_UserStore.success', context: context);
 
   @override
@@ -47,6 +79,14 @@ mixin _$UserStore on _UserStore, Store {
     });
   }
 
+  late final _$bootstrapAuthAsyncAction =
+      AsyncAction('_UserStore.bootstrapAuth', context: context);
+
+  @override
+  Future<void> bootstrapAuth() {
+    return _$bootstrapAuthAsyncAction.run(() => super.bootstrapAuth());
+  }
+
   late final _$loginAsyncAction =
       AsyncAction('_UserStore.login', context: context);
 
@@ -58,6 +98,8 @@ mixin _$UserStore on _UserStore, Store {
   @override
   String toString() {
     return '''
+isLoggedIn: ${isLoggedIn},
+isAuthBootstrapped: ${isAuthBootstrapped},
 success: ${success},
 loginFuture: ${loginFuture},
 isLoading: ${isLoading}
