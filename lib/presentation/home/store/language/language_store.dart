@@ -38,6 +38,11 @@ abstract class _LanguageStore with Store {
   // actions:-------------------------------------------------------------------
   @action
   void changeLanguage(String value) {
+    final index = supportedLanguages.indexWhere((language) => language.locale == value);
+    if (index == -1) {
+      errorStore.errorMessage = 'Unsupported language: $value';
+      return;
+    }
     _locale = value;
     _repository.changeLanguage(value).then((_) {
       // write additional logic here
@@ -53,9 +58,9 @@ abstract class _LanguageStore with Store {
 
   @action
   String? getLanguage() {
-    return supportedLanguages[supportedLanguages
-            .indexWhere((language) => language.locale == _locale)]
-        .language;
+    final idx = supportedLanguages.indexWhere((language) => language.locale == _locale);
+    if (idx == -1) return null;
+    return supportedLanguages[idx].language;
   }
 
   // general:-------------------------------------------------------------------
