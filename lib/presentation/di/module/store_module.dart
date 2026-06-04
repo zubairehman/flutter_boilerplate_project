@@ -34,8 +34,8 @@ class StoreModule {
       ),
     );
 
-    getIt.registerSingleton<PostStore>(
-      PostStore(
+    getIt.registerFactory<PostStore>(
+      () => PostStore(
         getIt<GetPostUseCase>(),
         getIt<ErrorStore>(),
       ),
