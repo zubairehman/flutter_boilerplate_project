@@ -78,66 +78,55 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildLanguageButton() {
     return IconButton(
       onPressed: () {
-        _buildLanguageDialog();
+        showLanguageDialog(
+          context: context,
+          themeStore: _themeStore,
+          languageStore: _languageStore,
+        );
       },
       icon: Icon(
         Icons.language,
       ),
     );
   }
+}
 
-  void _buildLanguageDialog() {
-    _showDialog<String>(
-      context: context,
-      child: AlertDialog(
-        // borderRadius: 5.0,
-        // enableFullWidth: true,
+// Top-level helpers:----------------------------------------------------------
 
-        title: Text(
-          AppLocalizations.of(context).translate('home_tv_choose_language'),
-        ),
-        // headerColor: Theme.of(context).primaryColor,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        // closeButtonColor: Colors.white,
-        // enableCloseButton: true,
-        // enableBackButton: false,
-        // onCloseButtonClicked: () {
-        //   Navigator.of(context).pop();
-        // },
-        actions: _languageStore.supportedLanguages
-            // children: _languageStore.supportedLanguages
-            .map(
-              (object) => ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.all(0.0),
-                title: Text(
-                  object.language,
-                  style: TextStyle(
-                    color: _languageStore.locale == object.locale
-                        ? Theme.of(context).primaryColor
-                        : _themeStore.darkMode
-                            ? Colors.white
-                            : Colors.black,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  // change user language based on selected locale
-                  _languageStore.changeLanguage(object.locale);
-                },
-              ),
-            )
-            .toList(),
+void showLanguageDialog({
+  required BuildContext context,
+  required ThemeStore themeStore,
+  required LanguageStore languageStore,
+}) {
+  showDialog<String>(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: Text(
+        AppLocalizations.of(context).translate('home_tv_choose_language'),
       ),
-    );
-  }
-
-  void _showDialog<T>({required BuildContext context, required Widget child}) {
-    showDialog<T>(
-      context: context,
-      builder: (BuildContext context) => child,
-    ).then<void>((T? value) {
-      // The value passed to Navigator.pop() or null.
-    });
-  }
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      actions: languageStore.supportedLanguages
+          .map(
+            (object) => ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.all(0.0),
+              title: Text(
+                object.language,
+                style: TextStyle(
+                  color: languageStore.locale == object.locale
+                      ? Theme.of(context).primaryColor
+                      : themeStore.darkMode
+                          ? Colors.white
+                          : Colors.black,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                languageStore.changeLanguage(object.locale);
+              },
+            ),
+          )
+          .toList(),
+    ),
+  );
 }
