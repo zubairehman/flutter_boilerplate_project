@@ -1,5 +1,7 @@
 import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
+import 'package:boilerplate/data/mapper/post_mapper.dart';
+import 'package:boilerplate/data/network/dto/post_dto.dart';
 import 'package:boilerplate/domain/entity/post/post.dart';
 import 'package:boilerplate/domain/entity/post/post_list.dart';
 import 'package:sembast/sembast.dart';
@@ -11,7 +13,7 @@ class PostDataSource {
 
   // Private getter to shorten the amount of code needed to get the
   // singleton instance of an opened database.
-//  Future<Database> get _db async => await AppDatabase.instance.database;
+  //  Future<Database> get _db async => await AppDatabase.instance.database;
 
   // database instance
   final SembastClient _sembastClient;
@@ -21,7 +23,7 @@ class PostDataSource {
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
-    return await _postsStore.add(_sembastClient.database, post.toMap());
+    return await _postsStore.add(_sembastClient.database, post.toDto().toJson());
   }
 
   Future<int> count() async {
@@ -41,10 +43,8 @@ class PostDataSource {
 
     // Making a List<Post> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
-      final post = Post.fromMap(snapshot.value);
-      // An ID is a key of a record from the database.
-      post.id = snapshot.key;
-      return post;
+      final dto = PostDto.fromJson(snapshot.value);
+      return dto.toDomain();
     }).toList();
   }
 
@@ -57,10 +57,8 @@ class PostDataSource {
     // Making a List<Post> out of List<RecordSnapshot>
     return PostList(
       posts: recordSnapshots.map((snapshot) {
-        final post = Post.fromMap(snapshot.value);
-        // An ID is a key of a record from the database.
-        post.id = snapshot.key;
-        return post;
+        final dto = PostDto.fromJson(snapshot.value);
+        return dto.toDomain();
       }).toList(),
     );
   }
@@ -71,7 +69,7 @@ class PostDataSource {
     final finder = Finder(filter: Filter.byKey(post.id));
     return await _postsStore.update(
       _sembastClient.database,
-      post.toMap(),
+      post.toDto().toJson(),
       finder: finder,
     );
   }

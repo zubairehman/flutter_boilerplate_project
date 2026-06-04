@@ -22,7 +22,7 @@ class PostRepositoryImpl extends PostRepository {
   @override
   Future<PostList> getPosts() async {
     return await _postApi.getPosts().then((postsList) {
-      postsList.posts?.forEach((post) {
+      postsList.posts.forEach((post) {
         _postDataSource.insert(post);
       });
 

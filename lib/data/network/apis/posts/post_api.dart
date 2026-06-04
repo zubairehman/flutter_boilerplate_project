@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:boilerplate/core/data/network/dio/dio_client.dart';
+import 'package:boilerplate/data/mapper/post_mapper.dart';
 import 'package:boilerplate/data/network/constants/endpoints.dart';
+import 'package:boilerplate/data/network/dto/post_dto.dart';
 import 'package:boilerplate/domain/entity/post/post_list.dart';
 
 class PostApi {
@@ -14,21 +16,25 @@ class PostApi {
   /// Returns list of post in response
   Future<PostList> getPosts() async {
     try {
-      final res = await _dioClient.dio.get(Endpoints.getPosts);
-      return PostList.fromJson(res.data);
+      final res = await _dioClient.dio.get<List<dynamic>>(Endpoints.getPosts);
+      final dtos = (res.data ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map(PostDto.fromJson)
+          .toList();
+      return PostList(posts: dtos.map((d) => d.toDomain()).toList());
     } catch (_) {
       rethrow;
     }
   }
 
   /// sample api call with default rest client
-//   Future<PostList> getPosts() async {
-//     try {
-//       final res = await _restClient.get(Endpoints.getPosts);
-//       return PostList.fromJson(res.data);
-//     } catch (e) {
-//       print(e.toString());
-//       throw e;
-//     }
-//   }
+  //   Future<PostList> getPosts() async {
+  //     try {
+  //       final res = await _restClient.get(Endpoints.getPosts);
+  //       return PostList.fromJson(res.data);
+  //     } catch (e) {
+  //       print(e.toString());
+  //       throw e;
+  //     }
+  //   }
 }

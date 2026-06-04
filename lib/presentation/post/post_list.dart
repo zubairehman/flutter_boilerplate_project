@@ -55,7 +55,7 @@ class _PostListScreenState extends State<PostListScreen> {
   Widget _buildListView() {
     return _postStore.postList != null
         ? ListView.separated(
-            itemCount: _postStore.postList!.posts!.length,
+            itemCount: _postStore.postList!.posts.length,
             separatorBuilder: (context, position) {
               return Divider();
             },
@@ -75,14 +75,14 @@ class _PostListScreenState extends State<PostListScreen> {
       dense: true,
       leading: Icon(Icons.cloud_circle),
       title: Text(
-        '${_postStore.postList?.posts?[position].title}',
+        '${_postStore.postList?.posts[position].title}',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
         style: Theme.of(context).textTheme.titleMedium,
       ),
       subtitle: Text(
-        '${_postStore.postList?.posts?[position].body}',
+        '${_postStore.postList?.posts[position].body}',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
