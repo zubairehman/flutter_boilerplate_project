@@ -23,6 +23,7 @@ dependencies:
   another_flushbar: ^2.2.4
   # B
   # C
+  crypto: ^3.0.6
   cupertino_icons: ^1.0.5
   # D
   dart_jsonwebtoken: ^3.4.1

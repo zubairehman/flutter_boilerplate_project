@@ -97,6 +97,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [MobX](https://github.com/mobxjs/mobx.dart) (to connect the reactive data of your application with the UI)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
 * [Encryption](https://github.com/xxtea/xxtea-dart)
+* [Crypto](https://pub.dev/packages/crypto)
 * [Validation](https://github.com/dart-league/validators)
 * [Logging](https://github.com/zubairehman/Flogs)
 * [Notifications](https://github.com/AndreHaueisen/flushbar)
@@ -151,6 +152,48 @@ the native Sembast database. During data-layer dependency injection,
 On native platforms, the database is stored under the application documents
 directory. On web, the app uses Sembast's web database factory instead, so it
 does not need a device file-system path.
+
+### Crypto Service Integration
+
+The project uses `crypto` package to provide cryptographic operations including
+AES-256 encryption/decryption, SHA-256 hashing, and HMAC authentication.
+
+**Service location:** `lib/core/data/local/crypto_service.dart`
+
+**Registration:** Registered as a singleton in `LocalModule.configureLocalModuleInjection()`.
+
+**Usage:**
+
+```dart
+import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/core/data/local/crypto_service.dart';
+
+final crypto = getIt<CryptoService>();
+
+// Encrypt data
+final encrypted = crypto.encrypt('sensitive data');
+
+// Decrypt data
+final decrypted = crypto.decrypt(encrypted);
+
+// Compute HMAC
+final hmac = crypto.computeHmac('message');
+
+// Verify HMAC
+final isValid = crypto.verifyHmac('message', hmac);
+
+// SHA-256 hash
+final hash = crypto.hashSha256('input');
+```
+
+**Security Note:** Change the default secret key in `LocalModule.configureLocalModuleInjection()`
+to a production-appropriate value. The key should be stored securely (e.g., environment variable
+or secure storage) rather than hardcoded.
+
+### Encryption
+
+The project uses `xxtea` package for database-level encryption via Sembast codec.
+See `lib/core/data/local/encryption/xxtea.dart` for the XXTEA encryption implementation.
 
 ### Secure Storage Integration
 
