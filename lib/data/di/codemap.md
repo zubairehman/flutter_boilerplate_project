@@ -5,7 +5,7 @@ Root of data-layer dependency injection. `DataLayerInjection.configureDataLayerI
 
 ## Design Patterns
 - **Facade pattern**: Single static method hides the three-module registration sequence.
-- **Ordered initialization**: Local → Network → Repository, ensuring dependencies are available before dependents register.
+- **Ordered initialization**: Local → Network → Repository, ensuring dependencies (including `SecureStorageHelper`, `DeviceInfoService`, `ConnectivityService`) are available before dependents register.
 
 ## Data & Control Flow
 `DataLayerInjection.configureDataLayerInjection()` → `LocalModule.configureLocalModuleInjection()` → `NetworkModule.configureNetworkModuleInjection()` → `RepositoryModule.configureRepositoryModuleInjection()`.

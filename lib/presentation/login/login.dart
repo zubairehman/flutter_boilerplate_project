@@ -189,8 +189,8 @@ class _LoginScreenState extends State<LoginScreen> {
       onPressed: () async {
         if (_formStore.canLogin) {
           DeviceUtils.hideKeyboard(context);
-          unawaited(
-              _userStore.login(_userEmailController.text, _passwordController.text));
+          unawaited(_userStore.login(
+              _userEmailController.text, _passwordController.text));
         } else {
           _showErrorMessage('Please fill in all fields');
         }

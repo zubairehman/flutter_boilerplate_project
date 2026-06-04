@@ -4,7 +4,7 @@
 Manages the app's dark/light theme state. `ThemeStore` exposes `darkMode` observable and `changeBrightnessToDark(bool)` action. Persists preference via `SettingRepository`.
 
 ## Design Patterns
-- **MobX store**: `_ThemeStore` (abstract) → `ThemeStore = _ThemeStore with _$ThemeStore` (code-generated mixin). Uses `@observable`, `@action`, `@computed`.
+- **MobX store**: `_ThemeStore` (abstract) → `ThemeStore = _ThemeStore with _$ThemeStore` (code-generated mixin). Uses `@observable` and `@action`. `darkMode` is a plain getter (not `@computed`).
 - **Repository pattern**: Reads/writes theme preference through `SettingRepository`, not directly via `SharedPreferences`.
 - **Constructor initialization**: `init()` called in constructor to sync `_darkMode` from `SettingRepository.isDarkMode`.
 

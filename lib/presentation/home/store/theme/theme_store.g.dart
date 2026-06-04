@@ -29,7 +29,7 @@ mixin _$ThemeStore on _ThemeStore, Store {
       AsyncAction('_ThemeStore.changeBrightnessToDark', context: context);
 
   @override
-  Future<dynamic> changeBrightnessToDark(bool value) {
+  Future<void> changeBrightnessToDark(bool value) {
     return _$changeBrightnessToDarkAsyncAction
         .run(() => super.changeBrightnessToDark(value));
   }

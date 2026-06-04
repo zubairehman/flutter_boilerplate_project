@@ -17,5 +17,6 @@ Handles all remote data communication. Houses HTTP client wrappers (`DioClient`,
 ## Integration Points
 - **Core**: `lib/core/data/network/dio/` — `DioClient`, `DioConfigs`, `AuthInterceptor`, `LoggingInterceptor`.
 - **Domain**: `lib/domain/entity/` — entity classes used as return types from API calls.
+- **Secure storage**: `AuthInterceptor` reads auth tokens from `SecureStorageHelper` (via `getIt`).
 - **DI**: `NetworkModule` registers all components.
 - **External**: `dio` package, `http` package, `event_bus` package.

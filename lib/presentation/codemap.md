@@ -1,7 +1,7 @@
 # lib/presentation/
 
 ## Responsibility
-Root of the presentation layer. Owns the `MyApp` widget — the Flutter `MaterialApp` entry point that configures routing, theming, locale, and the initial route based on authentication state. Orchestrates the three feature modules (home, login, post) and the DI wiring module.
+Root of the presentation layer. Owns the `MyApp` widget — the Flutter `MaterialApp` entry point that configures routing, theming, locale, and the initial route based on authentication state. `MyApp` directly renders `HomeScreen` or `LoginScreen`; `PostListScreen` is nested inside `HomeScreen`. The DI wiring module lives in `di/`.
 
 ## Design Patterns
 - **Feature-first folder structure**: `home/`, `login/`, `post/`, `di/` — each feature bundles its own screens and MobX stores.
@@ -9,7 +9,7 @@ Root of the presentation layer. Owns the `MyApp` widget — the Flutter `Materia
 - **Service Locator (get_it)**: Stores resolved at widget-creation time via `getIt<T>()` from the global service locator; all store registrations happen in `di/`.
 
 ## Data & Control Flow
-1. `MyApp.build()` reads `UserStore.isLoggedIn` inside an `Observer` to choose `HomeScreen` vs `LoginScreen` as the initial route.
+1. `MyApp.build()` reads `UserStore.isLoggedIn` (from `login/store/`) inside an `Observer` to choose `HomeScreen` vs `LoginScreen` as the `home` widget.
 2. `ThemeStore.darkMode` drives `MaterialApp.theme` (light/dark switch).
 3. `LanguageStore.locale` + `supportedLanguages` drive `MaterialApp.locale` and `supportedLocales`.
 4. `Routes.routes` (from `utils/routes/`) supplies the named-route table.

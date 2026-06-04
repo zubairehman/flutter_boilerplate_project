@@ -23,7 +23,8 @@ class PostDataSource {
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
-    return await _postsStore.add(_sembastClient.database, post.toDto().toJson());
+    return await _postsStore.add(
+        _sembastClient.database, post.toDto().toJson());
   }
 
   Future<void> upsert(Post post) async {
@@ -36,9 +37,9 @@ class PostDataSource {
       await insert(post);
     } else {
       await _postsStore.record(existing.key).update(
-        _sembastClient.database,
-        post.toDto().toJson(),
-      );
+            _sembastClient.database,
+            post.toDto().toJson(),
+          );
     }
   }
 

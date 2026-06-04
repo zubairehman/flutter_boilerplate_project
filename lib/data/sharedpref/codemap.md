@@ -16,6 +16,6 @@ Provides `SharedPreferenceHelper` — a typed wrapper over `SharedPreferences` f
 - `lib/data/sharedpref/constants/preferences.dart` — key name constants.
 - `lib/data/repository/setting/setting_repository_impl.dart` — delegates theme/language operations.
 - `lib/data/repository/user/user_repository_impl.dart` — delegates login state operations.
-- `lib/data/di/module/network_module.dart` — reads `authToken` for `AuthInterceptor`.
 - `lib/data/di/module/local_module.dart` — initializes and registers `SharedPreferenceHelper`.
 - **External**: `shared_preferences` package.
+- **Note**: Auth token storage has migrated to `SecureStorageHelper` (`lib/data/secure_storage/`). `SharedPreferenceHelper` still retains `authToken`/`saveAuthToken`/`removeAuthToken` methods for backward compatibility, but `AuthInterceptor` now reads tokens from `SecureStorageHelper` instead.

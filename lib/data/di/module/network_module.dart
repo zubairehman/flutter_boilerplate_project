@@ -17,8 +17,7 @@ class NetworkModule {
     }
     getIt.registerSingleton<AuthInterceptor>(
       AuthInterceptor(
-        accessToken: () async =>
-            await getIt<SecureStorageHelper>().authToken,
+        accessToken: () async => await getIt<SecureStorageHelper>().authToken,
       ),
     );
 

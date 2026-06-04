@@ -43,22 +43,22 @@ class RetryInterceptor extends Interceptor {
     // We retry with the updated options
     await dio
         .request<dynamic>(
-          err.requestOptions.path,
-          cancelToken: err.requestOptions.cancelToken,
-          data: err.requestOptions.data,
-          onReceiveProgress: err.requestOptions.onReceiveProgress,
-          onSendProgress: err.requestOptions.onSendProgress,
-          queryParameters: err.requestOptions.queryParameters,
-          options: err.requestOptions.toOptions(),
-        )
-        .then((value) => handler.resolve(value),
-            onError: (Object error) {
-              if (error is DioException) {
-                handler.reject(error);
-              } else {
-                handler.reject(DioException(requestOptions: err.requestOptions, error: error));
-              }
-            });
+      err.requestOptions.path,
+      cancelToken: err.requestOptions.cancelToken,
+      data: err.requestOptions.data,
+      onReceiveProgress: err.requestOptions.onReceiveProgress,
+      onSendProgress: err.requestOptions.onSendProgress,
+      queryParameters: err.requestOptions.queryParameters,
+      options: err.requestOptions.toOptions(),
+    )
+        .then((value) => handler.resolve(value), onError: (Object error) {
+      if (error is DioException) {
+        handler.reject(error);
+      } else {
+        handler.reject(
+            DioException(requestOptions: err.requestOptions, error: error));
+      }
+    });
   }
 }
 

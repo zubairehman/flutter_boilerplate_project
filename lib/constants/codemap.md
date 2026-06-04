@@ -6,7 +6,7 @@ Declares app-wide static configuration values: theme data, color palettes, dimen
 
 ## Design Patterns
 
-- **Static-only utility classes**: Every class uses `ClassName._()` to prevent instantiation; all members are `static const`.
+- **Static-only utility classes**: Constant-holder classes use `ClassName._()` to prevent instantiation; theme classes expose static `ThemeData`, `ColorScheme`, and `TextTheme` members.
 - **Material Theme composition**: `AppThemeData` builds `ThemeData` from `ColorScheme` + `TextTheme`, supporting light and dark modes.
 - **Google Fonts**: `AppThemeData._textTheme` uses `GoogleFonts.montserrat()` and `GoogleFonts.oswald()` instead of bundled font files.
 - **Material color swatch pattern**: `AppColors.orange` provides a `Map<int, Color>` shade palette (50–900).

@@ -2,7 +2,7 @@
 
 ## Responsibility
 
-Top-level application shell and architectural root. Owns `main.dart` (app entry point), delegates to `di/` for dependency injection, `constants/` for static configuration, and `utils/` for shared utilities. Orchestrates startup: initializes bindings, configures orientations, registers DI, and launches the Flutter widget tree.
+Top-level application shell and architectural root. Owns `main.dart` (app entry point), delegates to `di/` for dependency injection, `constants/` for static configuration, and `utils/` for shared utilities such as Dio, localization, routes, and JWT helpers. Orchestrates startup: initializes bindings, configures orientations, registers DI, and launches the Flutter widget tree.
 
 ## Design Patterns
 
@@ -22,7 +22,7 @@ Top-level application shell and architectural root. Owns `main.dart` (app entry 
 
 - [di/codemap.md](di/codemap.md) — dependency injection registry and GetIt configuration
 - [constants/codemap.md](constants/codemap.md) — theme, colors, dimensions, assets, strings, fonts
-- [utils/codemap.md](utils/codemap.md) — device helpers, Dio interceptors, localization, routing
+- [utils/codemap.md](utils/codemap.md) — device helpers, Dio interceptors, JWT helpers, localization, routing
 - `presentation/` — widget tree root (`MyApp`), receives DI via `getIt`
-- `data/` — network/repository layer, provides `DataLayerInjection`
+- `data/` — network/repository/storage/service layer, provides `DataLayerInjection`
 - `domain/` — business logic layer, provides `DomainLayerInjection`

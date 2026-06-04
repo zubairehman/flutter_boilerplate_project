@@ -6,7 +6,8 @@ Defines the `Language` entity — domain model for locale/language settings incl
 
 ## Design Patterns
 
-- **Immutable value object**: `Language` has `required` final fields (`code`, `locale`, `language`) plus an optional `dictionary` map for localized strings.
+- **Value object (mutable)**: `Language` has `required` fields (`code`, `locale`, `language`) and an optional `dictionary` map. Fields are mutable (not `final`), allowing in-place updates.
+- **Per-feature file**: `language.dart` (renamed from `Language.dart` to follow lowercase file convention per Dart style guide).
 
 ## Data & Control Flow
 

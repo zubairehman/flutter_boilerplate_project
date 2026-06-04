@@ -10,8 +10,12 @@ void main() {
 
     for (final file in files) {
       final content = file.readAsStringSync();
-      expect(content, isNot(contains('package:shared_preferences/shared_preferences.dart')), reason: file.path);
-      expect(content, isNot(contains('data/sharedpref/constants/preferences.dart')), reason: file.path);
+      expect(content,
+          isNot(contains('package:shared_preferences/shared_preferences.dart')),
+          reason: file.path);
+      expect(content,
+          isNot(contains('data/sharedpref/constants/preferences.dart')),
+          reason: file.path);
     }
   });
 }

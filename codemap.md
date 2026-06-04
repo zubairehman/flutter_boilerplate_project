@@ -2,7 +2,7 @@
 
 ## Project Responsibility
 
-A Flutter clean-architecture boilerplate application built around MobX state management, Provider-compatible dependency registration through GetIt, Dio HTTP clients, Sembast local persistence, SharedPreferences settings, and generated platform shells for Android, iOS, and Web.
+A Flutter clean-architecture boilerplate application built around MobX state management, Provider-compatible dependency registration through GetIt, Dio HTTP clients, Sembast local persistence, secure storage, SharedPreferences settings, connectivity/device services, JWT helpers, and generated platform shells for Android, iOS, and Web.
 
 ## System Entry Points
 
@@ -17,7 +17,7 @@ A Flutter clean-architecture boilerplate application built around MobX state man
 
 - **Dependency direction**: `presentation/` and `data/` depend on `domain/`; `domain/` defines entities, repository contracts, and use cases.
 - **State management**: MobX stores (`ThemeStore`, `LanguageStore`, `UserStore`, `PostStore`, `FormStore`, `ErrorStore`) expose observable state to Flutter widgets through `Observer`.
-- **Data access**: Repository implementations coordinate remote APIs (`PostApi`, Dio clients), local Sembast data sources, and SharedPreferences helpers.
+- **Data access**: Repository implementations coordinate remote APIs (`PostApi`, Dio clients), local Sembast data sources, secure storage, SharedPreferences helpers, connectivity checks, and device metadata helpers.
 - **Composition**: Layer-specific injection modules register services, repositories, use cases, and stores into the global GetIt service locator.
 - **Localization and routing**: JSON translations load through `AppLocalizations`; named route constants map to login/home/post screens.
 
@@ -25,11 +25,11 @@ A Flutter clean-architecture boilerplate application built around MobX state man
 
 | Asset | Responsibility |
 |---|---|
-| `pubspec.yaml` | Declares Flutter SDK constraints, MobX/Dio/GetIt/Sembast/SharedPreferences dependencies, assets, fonts, and launcher-icon configuration. |
+| `pubspec.yaml` | Declares Flutter SDK constraints, MobX/Dio/GetIt/Sembast/SharedPreferences/secure-storage/connectivity/device-info/JWT dependencies, assets, fonts, and launcher-icon/native-splash configuration. |
 | `analysis_options.yaml` | Enables Flutter lint rules and centralizes analyzer behavior. |
 | `android/` | Android Gradle project and native FlutterActivity host. |
 | `ios/` | iOS Xcode/CocoaPods project and Runner host application. |
-| `web/` | Flutter web HTML shell and PWA manifest. |
+| `web/` | Flutter web HTML shell, PWA manifest, and generated native-splash markup. |
 | `assets/` | Runtime images, icons, fonts, and translation JSON referenced from `pubspec.yaml` (translations excluded from codemap scope). |
 | `test/` | Flutter tests excluded from this codemap by workflow rule. |
 
@@ -40,16 +40,16 @@ A Flutter clean-architecture boilerplate application built around MobX state man
 | `android/` | Android platform shell for the Flutter boilerplate app. Houses the Gradle build system, project-wide configuration, and the native Android app module that hosts the Flutter engine at… | [View Map](android/codemap.md) |
 | `ios/` | iOS platform shell for the Flutter boilerplate app. Contains the Xcode project, CocoaPods dependency management, Flutter build configuration (xcconfig files), and the Runner application… | [View Map](ios/codemap.md) |
 | `lib/` | Top-level application shell and architectural root. Owns `main.dart` (app entry point), delegates to `di/` for dependency injection, `constants/` for static configuration, and `utils/` for… | [View Map](lib/codemap.md) |
-| `web/` | Web platform target for the Flutter boilerplate app. Contains the HTML entrypoint (`index.html`), PWA manifest (`manifest.json`), and static assets (favicon, icons). The Flutter engine is… | [View Map](web/codemap.md) |
+| `web/` | Web platform target for the Flutter boilerplate app. Contains the HTML entrypoint (`index.html`), PWA manifest (`manifest.json`), native splash markup/assets, and static assets. The Flutter engine is… | [View Map](web/codemap.md) |
 | `android/app/` | The sole Android application module. Defines the APK/AAB build configuration, links the Flutter engine, declares the native `MainActivity` entrypoint, and provides per-build-type Android… | [View Map](android/app/codemap.md) |
 | `ios/Runner/` | iOS application target containing the native entrypoint (`AppDelegate.swift`), app configuration (`Info.plist`), UI storyboards, bridging header, and asset catalogs. This is the minimal… | [View Map](ios/Runner/codemap.md) |
 | `lib/constants/` | Declares app-wide static configuration values: theme data, color palettes, dimension spacing, asset paths, font family names, and string literals. All classes are non-instantiable (private… | [View Map](lib/constants/codemap.md) |
-| `lib/core/` | Shared infrastructure layer for the entire app: domain models, use-case abstraction, data access (network + local persistence + shared prefs), MobX reactive stores, common widgets, and Dart… | [View Map](lib/core/codemap.md) |
-| `lib/data/` | Data layer of the clean architecture — implements domain repository abstractions by coordinating remote APIs, local databases, and shared preferences. Owns all concrete data sources,… | [View Map](lib/data/codemap.md) |
+| `lib/core/` | Shared infrastructure layer for the entire app: domain models, use-case abstraction, data access (network + local persistence + shared prefs + crypto), MobX reactive stores, common widgets, and Dart… | [View Map](lib/core/codemap.md) |
+| `lib/data/` | Data layer of the clean architecture — implements domain repository abstractions by coordinating remote APIs, local databases, shared preferences, secure storage, connectivity, and device services. Owns… | [View Map](lib/data/codemap.md) |
 | `lib/di/` | Centralizes dependency injection configuration for the entire app. Orchestrates layer-by-layer registration of services, repositories, and presentation dependencies into the GetIt service… | [View Map](lib/di/codemap.md) |
 | `lib/domain/` | Domain layer of the Clean Architecture stack. Owns all business entities, repository contracts, use case orchestration, and domain-layer DI wiring. Contains zero data-source or UI code;… | [View Map](lib/domain/codemap.md) |
 | `lib/presentation/` | Root of the presentation layer. Owns the `MyApp` widget — the Flutter `MaterialApp` entry point that configures routing, theming, locale, and the initial route based on authentication… | [View Map](lib/presentation/codemap.md) |
-| `lib/utils/` | Aggregates shared utility modules: device dimension helpers, Dio HTTP error handling and retry logic, i18n localization, and named route definitions. Each subfolder encapsulates a distinct… | [View Map](lib/utils/codemap.md) |
+| `lib/utils/` | Aggregates shared utility modules: device dimension helpers, Dio HTTP error handling/retry logic, JWT sign/verify/decode helpers, i18n localization, and named route definitions.… | [View Map](lib/utils/codemap.md) |
 | `android/app/src/` | Android source set root, partitioned into build-type directories (`main/`, `debug/`, `profile/`) that follow the standard Android Gradle source-set merge convention. | [View Map](android/app/src/codemap.md) |
 | `lib/core/data/` | Infrastructure layer for data access: network HTTP client (Dio), local NoSQL database (Sembast), encryption codec (XXTEA), and shared preferences abstraction. Houses the concrete… | [View Map](lib/core/data/codemap.md) |
 | `lib/core/domain/` | Pure domain layer containing business entity models and the abstract use-case contract. Has no dependency on Flutter or infrastructure packages. | [View Map](lib/core/domain/codemap.md) |
@@ -71,6 +71,7 @@ A Flutter clean-architecture boilerplate application built around MobX state man
 | `lib/presentation/post/` | Post list feature screen. `PostListScreen` is a `StatefulWidget` that fetches and displays a `ListView` of posts from `PostStore`. Loaded in the body of `HomeScreen`. | [View Map](lib/presentation/post/codemap.md) |
 | `lib/utils/device/` | Provides device and screen dimension utility methods for responsive layout calculations and keyboard management. | [View Map](lib/utils/device/codemap.md) |
 | `lib/utils/dio/` | Provides Dio HTTP client utilities: human-readable error message mapping and automatic request retry with configurable retry count, interval, and evaluator. | [View Map](lib/utils/dio/codemap.md) |
+| `lib/utils/jwt/` | Provides `JwtHelper`, a safe-by-default wrapper around `dart_jsonwebtoken` for signing, verifying, and decoding JWT payloads. | [View Map](lib/utils/jwt/codemap.md) |
 | `lib/utils/locale/` | Implements runtime i18n by loading locale-specific JSON string files from assets and providing translation lookups to the widget tree via Flutter's `Localizations` framework. | [View Map](lib/utils/locale/codemap.md) |
 | `lib/utils/routes/` | Defines named route path constants and a static route-to-`WidgetBuilder` map for Flutter's `Navigator` 1.0 API. | [View Map](lib/utils/routes/codemap.md) |
 | `android/app/src/debug/` | Debug-specific Android manifest overlay that declares the `INTERNET` permission required by the Flutter tooling for hot-reload, breakpoint debugging, and DevTools communication during… | [View Map](android/app/src/debug/codemap.md) |
@@ -84,6 +85,8 @@ A Flutter clean-architecture boilerplate application built around MobX state man
 | `lib/core/stores/error/` | MobX store for displaying transient error messages. Auto-clears `errorMessage` 200ms after being set via a MobX reaction. | [View Map](lib/core/stores/error/codemap.md) |
 | `lib/core/stores/form/` | MobX stores for form field state and validation: `FormStore` manages email/password/confirm-password inputs and computed readiness flags; `FormErrorStore` tracks per-field validation error… | [View Map](lib/core/stores/form/codemap.md) |
 | `lib/data/di/module/` | Contains three DI module classes that register data-layer singletons into the global `getIt` service locator: `LocalModule`, `NetworkModule`, `RepositoryModule`. | [View Map](lib/data/di/module/codemap.md) |
+| `lib/data/connectivity/` | Provides `ConnectivityService`, a facade over `connectivity_plus` for connection status, connection type, and connectivity change streams. | [View Map](lib/data/connectivity/codemap.md) |
+| `lib/data/device_info/` | Provides `DeviceInfoService`, a platform-dispatch facade over `device_info_plus` for device metadata, device name, operating system, and device identifier access. | [View Map](lib/data/device_info/codemap.md) |
 | `lib/data/local/constants/` | Defines `DBConstants` — static constants for Sembast database name, store name, and field keys used across local data sources. | [View Map](lib/data/local/constants/codemap.md) |
 | `lib/data/local/datasources/` | Parent directory for local data source classes. Each subfolder contains a data source that performs CRUD operations against the Sembast local database for a specific domain entity. | [View Map](lib/data/local/datasources/codemap.md) |
 | `lib/data/network/apis/` | Parent directory for API classes organized by domain resource. Each subfolder contains an API class that makes HTTP calls for that resource using `DioClient` and/or `RestClient`. | [View Map](lib/data/network/apis/codemap.md) |
@@ -93,6 +96,8 @@ A Flutter clean-architecture boilerplate application built around MobX state man
 | `lib/data/repository/post/` | `PostRepositoryImpl` implements `PostRepository` from the domain layer. Coordinates both remote (`PostApi`) and local (`PostDataSource`) data sources — fetches posts from the API with… | [View Map](lib/data/repository/post/codemap.md) |
 | `lib/data/repository/setting/` | `SettingRepositoryImpl` implements `SettingRepository` from the domain layer. Manages app settings (dark mode toggle, language selection) by delegating all operations to… | [View Map](lib/data/repository/setting/codemap.md) |
 | `lib/data/repository/user/` | `UserRepositoryImpl` implements `UserRepository` from the domain layer. Handles user login (currently simulated) and login-state persistence via `SharedPreferenceHelper`. | [View Map](lib/data/repository/user/codemap.md) |
+| `lib/data/secure_storage/` | Provides `SecureStorageHelper`, an async facade over `flutter_secure_storage` for auth token CRUD backed by platform encryption options. | [View Map](lib/data/secure_storage/codemap.md) |
+| `lib/data/secure_storage/constants/` | Defines `SecureStorageKeys`, the key namespace for secure-storage values such as `authToken`. | [View Map](lib/data/secure_storage/constants/codemap.md) |
 | `lib/data/sharedpref/constants/` | Defines `Preferences` — static string constants for SharedPreferences key names used by `SharedPreferenceHelper`. | [View Map](lib/data/sharedpref/constants/codemap.md) |
 | `lib/domain/di/module/` | `UseCaseModule` registers all domain use cases as singletons in the GetIt service locator, resolving their repository dependencies from already-registered repository implementations. | [View Map](lib/domain/di/module/codemap.md) |
 | `lib/domain/entity/language/` | Defines the `Language` entity — domain model for locale/language settings including country code, locale code, display name, and an optional industry-specific dictionary map. | [View Map](lib/domain/entity/language/codemap.md) |
