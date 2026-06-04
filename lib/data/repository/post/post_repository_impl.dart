@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/network/apis/posts/post_api.dart';
@@ -21,13 +19,17 @@ class PostRepositoryImpl extends PostRepository {
   // Post: ---------------------------------------------------------------------
   @override
   Future<PostList> getPosts() async {
-    return await _postApi.getPosts().then((postsList) {
-      postsList.posts.forEach((post) {
-        _postDataSource.insert(post);
-      });
-
+    try {
+      final postsList = await _postApi.getPosts();
+      for (final post in postsList.posts) {
+        await _postDataSource.upsert(post);
+      }
       return postsList;
-    }).catchError((error) => throw error);
+    } catch (_) {
+      final cached = await _postDataSource.getPostsFromDb();
+      if (cached.posts.isNotEmpty) return cached;
+      rethrow;
+    }
   }
 
   @override

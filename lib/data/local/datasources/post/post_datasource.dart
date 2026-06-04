@@ -26,6 +26,22 @@ class PostDataSource {
     return await _postsStore.add(_sembastClient.database, post.toDto().toJson());
   }
 
+  Future<void> upsert(Post post) async {
+    final finder = Finder(filter: Filter.equals(DBConstants.fieldId, post.id));
+    final existing = await _postsStore.findFirst(
+      _sembastClient.database,
+      finder: finder,
+    );
+    if (existing == null) {
+      await insert(post);
+    } else {
+      await _postsStore.record(existing.key).update(
+        _sembastClient.database,
+        post.toDto().toJson(),
+      );
+    }
+  }
+
   Future<int> count() async {
     return await _postsStore.count(_sembastClient.database);
   }
