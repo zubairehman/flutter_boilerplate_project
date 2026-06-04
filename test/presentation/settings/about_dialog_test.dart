@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:boilerplate/presentation/settings/about_dialog.dart';
 import 'package:boilerplate/presentation/settings/store/settings_store.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
@@ -26,11 +24,10 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('renders loading then info after loadAboutInfo resolves',
+  testWidgets('shows loading then info after loadAboutInfo resolves',
       (tester) async {
     final store = SettingsStore.withSources(
       packageInfoLoader: () async {
-        // Yield a microtask so the UI can render the loading state first.
         await Future<void>.delayed(Duration.zero);
         return _packageInfo();
       },
@@ -40,27 +37,29 @@ void main() {
       },
     );
 
-    await tester.pumpWidget(_wrap(AboutDialog(settingsStore: store)));
-    // Trigger load.
-    unawaited(store.loadAboutInfo());
-    // Loading state.
+    await tester.pumpWidget(_wrap(AppAboutDialog(settingsStore: store)));
+    // Loading state should be visible on first frame.
     await tester.pump();
     expect(find.text('Loading…'), findsOneWidget);
     // After both futures resolve, info renders.
     await tester.pumpAndSettle();
     expect(find.text('Loading…'), findsNothing);
-    expect(find.textContaining('Boilerplate'), findsOneWidget);
+    expect(find.textContaining('App: Boilerplate'), findsOneWidget);
     expect(find.textContaining('Pixel 6'), findsOneWidget);
+
+    // Flush any pending microtasks to ensure MobX reactions are fully disposed
+    // before the next test run.
+    await tester.idle();
   });
 
-  testWidgets('renders error text when loadAboutInfo throws', (tester) async {
+  testWidgets('shows error text when loadAboutInfo throws',
+      (tester) async {
     final store = SettingsStore.withSources(
       packageInfoLoader: () async => throw Exception('platform boom'),
       deviceInfoLoader: () async => _androidDeviceInfo(),
     );
 
-    await tester.pumpWidget(_wrap(AboutDialog(settingsStore: store)));
-    unawaited(store.loadAboutInfo());
+    await tester.pumpWidget(_wrap(AppAboutDialog(settingsStore: store)));
     await tester.pumpAndSettle();
 
     expect(find.text('Unable to load device info.'), findsOneWidget);

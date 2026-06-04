@@ -92,7 +92,7 @@ class SettingsDialog extends StatelessWidget {
       trailing: const Icon(Icons.chevron_right),
       onTap: () {
         Navigator.of(context).pop();
-        showAboutDialog(
+        showAppAboutDialog(
           context: context,
           settingsStore: settingsStore,
         );

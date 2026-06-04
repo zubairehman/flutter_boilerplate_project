@@ -45,7 +45,7 @@ abstract class _SettingsStore with Store {
   // actions:-------------------------------------------------------------------
   @action
   Future<void> loadAboutInfo() async {
-    if (_aboutInfo != null) return;
+    if (_aboutInfo != null || _errorMessage != null) return;
     _loading = true;
     _errorMessage = null;
     try {
