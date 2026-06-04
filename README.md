@@ -83,6 +83,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Dark Theme Support (new)
 * Multilingual Support (new)
 * Provider example (new)
+* Device Information (device_info_plus)
 
 ### Up-Coming Features:
 
@@ -104,7 +105,40 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Dart JSON Web Token](https://pub.dev/packages/dart_jsonwebtoken)
 * [Path Provider](https://pub.dev/packages/path_provider)
 * [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage)
+* [Device Info Plus](https://pub.dev/packages/device_info_plus)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
+* [Device Info Plus](https://pub.dev/packages/device_info_plus) (cross-platform device information)
+
+### Device Information Integration
+
+The project uses `device_info_plus` to provide device and operating system information. `DeviceInfoService` wraps the plugin and provides a simplified interface for common device properties.
+
+**Service location:** `lib/data/device_info/device_info_service.dart`
+
+**Registration:** Registered as a singleton in `LocalModule.configureLocalModuleInjection()`.
+
+**Usage:**
+
+```dart
+import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/data/device_info/device_info_service.dart';
+
+final deviceInfo = getIt<DeviceInfoService>();
+
+// Get full device info
+final info = await deviceInfo.deviceInfo;
+
+// Get human-readable device name
+final name = await deviceInfo.deviceName; // e.g., "Samsung Galaxy S21"
+
+// Get operating system
+final os = await deviceInfo.operatingSystem; // e.g., "Android 12"
+
+// Get device identifier
+final id = await deviceInfo.deviceId;
+```
+
+The service automatically handles platform detection and returns the appropriate info type (AndroidDeviceInfo, IosDeviceInfo, WebBrowserInfo, etc.) through a unified interface.
 
 ### Path Provider Integration
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
+import 'package:boilerplate/data/device_info/device_info_service.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/secure_storage/secure_storage_helper.dart';
@@ -24,6 +25,9 @@ class LocalModule {
     getIt.registerSingleton<SecureStorageHelper>(
       SecureStorageHelper(getIt<FlutterSecureStorage>()),
     );
+
+    // device info:--------------------------------------------------------------
+    getIt.registerSingleton<DeviceInfoService>(DeviceInfoService());
 
     // preference manager:------------------------------------------------------
     getIt.registerSingletonAsync<SharedPreferences>(

@@ -27,6 +27,7 @@ dependencies:
   # D
   dart_jsonwebtoken: ^3.4.1
   dio: ^5.1.1
+  device_info_plus: ^11.3.3
   # E
   event_bus: ^2.0.0
   # F
