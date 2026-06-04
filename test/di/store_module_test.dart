@@ -14,6 +14,7 @@ import 'package:boilerplate/presentation/home/store/language/language_store.dart
 import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
 import 'package:boilerplate/presentation/login/store/login_store.dart';
 import 'package:boilerplate/presentation/post/store/post_store.dart';
+import 'package:boilerplate/presentation/settings/store/settings_store.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -59,6 +60,7 @@ void main() {
     expect(identical(getIt<ThemeStore>(), getIt<ThemeStore>()), isTrue);
     expect(identical(getIt<LanguageStore>(), getIt<LanguageStore>()), isTrue);
     expect(identical(getIt<UserStore>(), getIt<UserStore>()), isTrue);
+    expect(identical(getIt<SettingsStore>(), getIt<SettingsStore>()), isTrue);
   });
 }
 

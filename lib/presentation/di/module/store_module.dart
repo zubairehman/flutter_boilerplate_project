@@ -11,6 +11,7 @@ import 'package:boilerplate/presentation/home/store/language/language_store.dart
 import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
 import 'package:boilerplate/presentation/login/store/login_store.dart';
 import 'package:boilerplate/presentation/post/store/post_store.dart';
+import 'package:boilerplate/presentation/settings/store/settings_store.dart';
 
 import '../../../di/service_locator.dart';
 
@@ -54,5 +55,7 @@ class StoreModule {
         getIt<ErrorStore>(),
       ),
     );
+
+    getIt.registerSingleton<SettingsStore>(SettingsStore());
   }
 }
