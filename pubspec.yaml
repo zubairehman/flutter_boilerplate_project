@@ -27,6 +27,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   # D
   dart_jsonwebtoken: ^3.4.1
+  device_info_plus: ^10.0.0
   dio: ^5.1.1
   # F
   flutter_animate: ^4.5.2
@@ -44,6 +45,7 @@ dependencies:
   # N
   # O
   # P
+  package_info_plus: ^8.0.0
   path_provider: ^2.0.14
   # Q
   # R
