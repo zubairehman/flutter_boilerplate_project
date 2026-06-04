@@ -87,7 +87,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 
 ### Up-Coming Features:
 
-* Connectivity Support
+* Connectivity Support (connectivity_plus)
 * Background Fetch Support
 
 ### Libraries & Tools Used
@@ -108,6 +108,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage)
 * [Device Info Plus](https://pub.dev/packages/device_info_plus)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
+* [Connectivity Plus](https://pub.dev/packages/connectivity_plus)
 * [Device Info Plus](https://pub.dev/packages/device_info_plus) (cross-platform device information)
 
 ### Device Information Integration
@@ -140,6 +141,39 @@ final id = await deviceInfo.deviceId;
 ```
 
 The service automatically handles platform detection and returns the appropriate info type (AndroidDeviceInfo, IosDeviceInfo, WebBrowserInfo, etc.) through a unified interface.
+
+### Connectivity Integration
+
+The project uses `connectivity_plus` to monitor network connectivity status. `ConnectivityService` wraps the plugin and provides a simplified interface for checking connection status and type.
+
+**Service location:** `lib/data/connectivity/connectivity_service.dart`
+
+**Registration:** Registered as a singleton in `LocalModule.configureLocalModuleInjection()`.
+
+**Usage:**
+
+```dart
+import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/data/connectivity/connectivity_service.dart';
+
+final connectivity = getIt<ConnectivityService>();
+
+// Check if connected
+final isConnected = await connectivity.isConnected; // true/false
+
+// Get connection type
+final type = await connectivity.connectionType; // "WiFi", "Mobile", "Ethernet", etc.
+
+// Get all connectivity results
+final results = await connectivity.connectivityResults; // List<ConnectivityResult>
+
+// Listen to connectivity changes
+connectivity.onConnectivityChanged.listen((List<ConnectivityResult> results) {
+  // Handle connectivity change
+});
+```
+
+The service automatically handles multiple simultaneous connection types and provides a human-readable connection type string.
 
 ### Path Provider Integration
 

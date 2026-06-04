@@ -23,6 +23,7 @@ dependencies:
   another_flushbar: ^2.2.4
   # B
   # C
+  connectivity_plus: ^6.1.4
   crypto: ^3.0.6
   cupertino_icons: ^1.0.5
   # D

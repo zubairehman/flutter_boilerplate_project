@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:boilerplate/core/data/local/crypto_service.dart';
 import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
+import 'package:boilerplate/data/connectivity/connectivity_service.dart';
 import 'package:boilerplate/data/device_info/device_info_service.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
@@ -29,6 +30,9 @@ class LocalModule {
 
     // device info:--------------------------------------------------------------
     getIt.registerSingleton<DeviceInfoService>(DeviceInfoService());
+
+    // connectivity:-------------------------------------------------------------
+    getIt.registerSingleton<ConnectivityService>(ConnectivityService());
 
     // crypto service:------------------------------------------------------------
     getIt.registerSingleton<CryptoService>(
