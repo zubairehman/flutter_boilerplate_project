@@ -26,7 +26,7 @@ class RetryInterceptor extends Interceptor {
     }
 
     if (extra.retryInterval.inMilliseconds > 0) {
-      await Future.delayed(extra.retryInterval);
+      await Future<void>.delayed(extra.retryInterval);
     }
 
     // Update options to decrease retry count before new try
@@ -42,7 +42,7 @@ class RetryInterceptor extends Interceptor {
     }
     // We retry with the updated options
     await dio
-        .request(
+        .request<dynamic>(
           err.requestOptions.path,
           cancelToken: err.requestOptions.cancelToken,
           data: err.requestOptions.data,
@@ -52,7 +52,13 @@ class RetryInterceptor extends Interceptor {
           options: err.requestOptions.toOptions(),
         )
         .then((value) => handler.resolve(value),
-            onError: (error) => handler.reject(error));
+            onError: (Object error) {
+              if (error is DioException) {
+                handler.reject(error);
+              } else {
+                handler.reject(DioException(requestOptions: err.requestOptions, error: error));
+              }
+            });
   }
 }
 
@@ -122,7 +128,8 @@ class RetryOptions {
 
   factory RetryOptions.fromExtra(
       RequestOptions request, RetryOptions defaultOptions) {
-    return request.extra[extraKey] ?? defaultOptions;
+    final value = request.extra[extraKey];
+    return value is RetryOptions ? value : defaultOptions;
   }
 
   RetryOptions copyWith({

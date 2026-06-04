@@ -28,11 +28,12 @@ class AppLocalizations {
     // Load the language JSON file from the "lang" folder
     String jsonString =
         await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
-    Map<String, dynamic> jsonMap = json.decode(jsonString);
+    Map<String, dynamic> jsonMap =
+        json.decode(jsonString) as Map<String, dynamic>;
 
     localizedStrings = jsonMap.map((key, value) {
       return MapEntry(
-          key, value.toString().replaceAll(r"\'", "'").replaceAll(r"\t", " "));
+          key, value.toString().replaceAll(r"\'", "'").replaceAll(r'\t', ' '));
     });
 
     return true;
@@ -49,7 +50,7 @@ class AppLocalizations {
 class _AppLocalizationsDelegate
     extends LocalizationsDelegate<AppLocalizations> {
   // ignore: non_constant_identifier_names
-  final String TAG = "AppLocalizations";
+  final String TAG = 'AppLocalizations';
 
   // This delegate instance will never change (it doesn't even have fields!)
   // It can provide a constant constructor.

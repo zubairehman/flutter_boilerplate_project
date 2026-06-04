@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:boilerplate/di/service_locator.dart';
 import 'package:boilerplate/presentation/home/store/language/language_store.dart';
 import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
@@ -65,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onPressed: () async {
         await _userStore.logout();
         if (!mounted) return;
-        Navigator.of(context).pushReplacementNamed(Routes.login);
+        unawaited(Navigator.of(context).pushReplacementNamed(Routes.login));
       },
       icon: Icon(
         Icons.power_settings_new,

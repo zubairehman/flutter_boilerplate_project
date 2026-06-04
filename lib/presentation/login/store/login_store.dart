@@ -75,7 +75,7 @@ abstract class _UserStore with Store {
   }
 
   @action
-  Future login(String email, String password) async {
+  Future<void> login(String email, String password) async {
     final LoginParams loginParams =
         LoginParams(username: email, password: password);
     final future = _loginUseCase.call(params: loginParams);
@@ -87,7 +87,7 @@ abstract class _UserStore with Store {
         isLoggedIn = true;
         success = true;
       }
-    }).catchError((e) {
+    }).catchError((Object e) {
       isLoggedIn = false;
       success = false;
       throw e;

@@ -148,7 +148,7 @@ class LoggingInterceptor extends Interceptor {
 
   @override
   void onResponse(
-    Response response,
+    Response<dynamic> response,
     ResponseInterceptorHandler handler,
   ) {
     if (level == Level.none) {

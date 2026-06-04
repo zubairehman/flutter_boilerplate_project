@@ -12,8 +12,8 @@ class TextFieldWidget extends StatelessWidget {
   final Color hintColor;
   final Color iconColor;
   final FocusNode? focusNode;
-  final ValueChanged? onFieldSubmitted;
-  final ValueChanged? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<String>? onChanged;
   final bool autoFocus;
   final TextInputAction? inputAction;
 

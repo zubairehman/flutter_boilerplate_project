@@ -45,24 +45,24 @@ class PostRepositoryImpl extends PostRepository {
     return _postDataSource
         .getAllSortedByFilter(filters: filters)
         .then((posts) => posts)
-        .catchError((error) => throw error);
+        .catchError((Object error) => throw error);
   }
 
   @override
   Future<int> insert(Post post) => _postDataSource
       .insert(post)
       .then((id) => id)
-      .catchError((error) => throw error);
+      .catchError((Object error) => throw error);
 
   @override
   Future<int> update(Post post) => _postDataSource
       .update(post)
       .then((id) => id)
-      .catchError((error) => throw error);
+      .catchError((Object error) => throw error);
 
   @override
   Future<int> delete(Post post) => _postDataSource
       .delete(post)
       .then((id) => id)
-      .catchError((error) => throw error);
+      .catchError((Object error) => throw error);
 }

@@ -58,7 +58,7 @@ class _FakePostDataSource implements PostDataSource {
   @override
   Future<int> delete(Post post) async => 1;
   @override
-  Future deleteAll() async {}
+  Future<void> deleteAll() async {}
 }
 
 void main() {

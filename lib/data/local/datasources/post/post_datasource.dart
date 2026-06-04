@@ -98,7 +98,7 @@ class PostDataSource {
     );
   }
 
-  Future deleteAll() async {
+  Future<void> deleteAll() async {
     await _postsStore.drop(
       _sembastClient.database,
     );

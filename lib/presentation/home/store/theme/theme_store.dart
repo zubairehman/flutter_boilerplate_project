@@ -30,13 +30,13 @@ abstract class _ThemeStore with Store {
 
   // actions:-------------------------------------------------------------------
   @action
-  Future changeBrightnessToDark(bool value) async {
+  Future<void> changeBrightnessToDark(bool value) async {
     _darkMode = value;
     await _repository.changeBrightnessToDark(value);
   }
 
   // general methods:-----------------------------------------------------------
-  Future init() async {
+  Future<void> init() async {
     _darkMode = _repository.isDarkMode;
   }
 
