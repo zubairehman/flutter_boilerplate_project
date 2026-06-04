@@ -1,11 +1,11 @@
 {
     "schema_version": 1,
-    "commit": "57fc2cf65c36df40f1e17415a84a04321eef2792",
-    "indexed_at": "2026-06-04T14:42:17Z",
+    "commit": "35d273525b41bdeaf5a74b1e0e6978241e1ae6d7",
+    "indexed_at": "2026-06-04T20:48:49Z",
     "project": "Volumes-Hoarder-dev-kelado-projects-flutter_templates-flutter_boilerplate",
-    "nodes": 1757,
-    "edges": 2220,
-    "original_size": 5177344,
-    "compressed_size": 522485,
+    "nodes": 1827,
+    "edges": 2199,
+    "original_size": 5701632,
+    "compressed_size": 572123,
     "compression_level": 3
 }
