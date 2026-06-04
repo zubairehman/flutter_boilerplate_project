@@ -69,6 +69,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Theme
 * Dio
 * Database
+* Platform-specific local database path resolution
 * MobX (to connect the reactive data of your application with the UI)
 * Provider (State Management)
 * Encryption
@@ -100,7 +101,20 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Flutter Animate](https://pub.dev/packages/flutter_animate)
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
 * [Dart JSON Web Token](https://pub.dev/packages/dart_jsonwebtoken)
+* [Path Provider](https://pub.dev/packages/path_provider)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
+
+### Path Provider Integration
+
+The project uses `path_provider` to resolve a safe local storage directory for
+the native Sembast database. During data-layer dependency injection,
+`LocalModule.configureLocalModuleInjection()` calls
+`getApplicationDocumentsDirectory()` and passes that path to
+`SembastClient.provideDatabase()`.
+
+On native platforms, the database is stored under the application documents
+directory. On web, the app uses Sembast's web database factory instead, so it
+does not need a device file-system path.
 
 ### JWT Utility Example
 
