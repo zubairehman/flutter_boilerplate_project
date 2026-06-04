@@ -85,6 +85,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Multilingual Support (new)
 * Provider example (new)
 * Device Information (device_info_plus)
+* SVG Support (flutter_svg)
 
 ### Up-Coming Features:
 
@@ -138,10 +139,7 @@ The generated splash screens will be placed in:
 * [Dart JSON Web Token](https://pub.dev/packages/dart_jsonwebtoken)
 * [Path Provider](https://pub.dev/packages/path_provider)
 * [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage)
-* [Device Info Plus](https://pub.dev/packages/device_info_plus)
-* [Dependency Injection](https://github.com/fluttercommunity/get_it)
-* [Flutter Native Splash](https://pub.dev/packages/flutter_native_splash) (Native splash screen generation)
-* [Connectivity Plus](https://pub.dev/packages/connectivity_plus)
+* [Flutter SVG](https://pub.dev/packages/flutter_svg)
 * [Device Info Plus](https://pub.dev/packages/device_info_plus) (cross-platform device information)
 
 ### Device Information Integration
