@@ -1,17 +1,17 @@
 import 'dart:async';
 
 import 'package:boilerplate/domain/repository/user/user_repository.dart';
+import 'package:boilerplate/data/secure_storage/secure_storage_helper.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 
 import '../../../domain/entity/user/user.dart';
 import '../../../domain/usecase/user/login_usecase.dart';
 
 class UserRepositoryImpl extends UserRepository {
-  // shared pref object
   final SharedPreferenceHelper _sharedPrefsHelper;
+  final SecureStorageHelper _secureStorageHelper;
 
-  // constructor
-  UserRepositoryImpl(this._sharedPrefsHelper);
+  UserRepositoryImpl(this._sharedPrefsHelper, this._secureStorageHelper);
 
   // Login:---------------------------------------------------------------------
   @override

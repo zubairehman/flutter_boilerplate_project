@@ -6,7 +6,7 @@ import 'package:boilerplate/data/network/apis/posts/post_api.dart';
 import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:boilerplate/data/network/interceptors/error_interceptor.dart';
 import 'package:boilerplate/data/network/rest_client.dart';
-import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
+import 'package:boilerplate/data/secure_storage/secure_storage_helper.dart';
 import 'package:event_bus/event_bus.dart';
 
 import '../../../di/service_locator.dart';
@@ -22,7 +22,7 @@ class NetworkModule {
     getIt.registerSingleton<AuthInterceptor>(
       AuthInterceptor(
         accessToken: () async =>
-            await getIt<SharedPreferenceHelper>().authToken,
+            await getIt<SecureStorageHelper>().authToken,
       ),
     );
 

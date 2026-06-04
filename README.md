@@ -73,6 +73,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * MobX (to connect the reactive data of your application with the UI)
 * Provider (State Management)
 * Encryption
+* Secure storage (auth token encryption)
 * Validation
 * JWT utility example
 * Code Generation
@@ -102,6 +103,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
 * [Dart JSON Web Token](https://pub.dev/packages/dart_jsonwebtoken)
 * [Path Provider](https://pub.dev/packages/path_provider)
+* [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
 
 ### Path Provider Integration
@@ -115,6 +117,19 @@ the native Sembast database. During data-layer dependency injection,
 On native platforms, the database is stored under the application documents
 directory. On web, the app uses Sembast's web database factory instead, so it
 does not need a device file-system path.
+
+### Secure Storage Integration
+
+The project uses `flutter_secure_storage` to store the auth token in encrypted
+platform-native storage. Sensitive data (auth token) uses Keychain (iOS) or
+EncryptedSharedPreferences (Android) instead of plain `SharedPreferences`.
+
+`SecureStorageHelper` wraps `flutter_secure_storage` and is registered as a
+singleton in `LocalModule`. `SharedPreferenceHelper` continues to manage
+non-sensitive preferences (login state, theme, language) unchanged.
+
+`AuthInterceptor` reads the token from `SecureStorageHelper` to inject it into
+API requests. The token is never stored in plaintext.
 
 ### JWT Utility Example
 

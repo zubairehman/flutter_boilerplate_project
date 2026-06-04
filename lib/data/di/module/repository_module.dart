@@ -5,6 +5,7 @@ import 'package:boilerplate/data/network/apis/posts/post_api.dart';
 import 'package:boilerplate/data/repository/post/post_repository_impl.dart';
 import 'package:boilerplate/data/repository/setting/setting_repository_impl.dart';
 import 'package:boilerplate/data/repository/user/user_repository_impl.dart';
+import 'package:boilerplate/data/secure_storage/secure_storage_helper.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/domain/repository/post/post_repository.dart';
 import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
@@ -21,6 +22,7 @@ class RepositoryModule {
 
     getIt.registerSingleton<UserRepository>(UserRepositoryImpl(
       getIt<SharedPreferenceHelper>(),
+      getIt<SecureStorageHelper>(),
     ));
 
     getIt.registerSingleton<PostRepository>(PostRepositoryImpl(
