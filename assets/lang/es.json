@@ -12,5 +12,18 @@
   "home_tv_error": "Error",
   "home_tv_no_post_found": "No se han encontrado publicaciones",
   "home_tv_choose_language": "Elige lengua",
-  "home_end": "-------------------------------------------------------------------------------------"
+  "home_tv_settings": "Ajustes",
+  "home_tv_about": "Acerca de",
+  "home_end": "-------------------------------------------------------------------------------------",
+
+  "settings_start": "Below are list of strings for settings es",
+  "settings_et_app_name": "Boilerplate",
+  "settings_et_about_description": "Un boilerplate de Flutter que muestra arquitectura en capas, MobX e inyección de dependencias.",
+  "settings_btn_close": "Cerrar",
+  "settings_tv_loading": "Cargando…",
+  "settings_tv_theme": "Tema",
+  "settings_tv_theme_dark": "Oscuro",
+  "settings_tv_theme_light": "Claro",
+  "settings_tv_error_loading_info": "No se pudo cargar la información del dispositivo.",
+  "settings_end": "-------------------------------------------------------------------------------------"
 }

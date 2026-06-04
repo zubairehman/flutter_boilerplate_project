@@ -12,6 +12,18 @@
   "home_tv_error": "Fejl",
   "home_tv_no_post_found": "Ingen indlæg fundet",
   "home_tv_choose_language": "Vælg sprog",
-  "home_end": "-------------------------------------------------------------------------------------"
+  "home_tv_settings": "Indstillinger",
+  "home_tv_about": "Om",
+  "home_end": "-------------------------------------------------------------------------------------",
 
+  "settings_start": "Below are list of strings for settings da",
+  "settings_et_app_name": "Boilerplate",
+  "settings_et_about_description": "En Flutter-skabelon der demonstrerer lagdelt arkitektur, MobX og dependency injection.",
+  "settings_btn_close": "Luk",
+  "settings_tv_loading": "Indlæser…",
+  "settings_tv_theme": "Tema",
+  "settings_tv_theme_dark": "Mørk",
+  "settings_tv_theme_light": "Lys",
+  "settings_tv_error_loading_info": "Kunne ikke indlæse enhedsoplysninger.",
+  "settings_end": "-------------------------------------------------------------------------------------"
 }

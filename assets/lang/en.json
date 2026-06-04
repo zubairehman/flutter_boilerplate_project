@@ -12,6 +12,18 @@
   "home_tv_error": "Error",
   "home_tv_no_post_found": "No posts found",
   "home_tv_choose_language": "Choose Language",
-  "home_end": "-------------------------------------------------------------------------------------"
+  "home_tv_settings": "Settings",
+  "home_tv_about": "About",
+  "home_end": "-------------------------------------------------------------------------------------",
 
+  "settings_start": "Below are list of strings for settings",
+  "settings_et_app_name": "Boilerplate",
+  "settings_et_about_description": "A Flutter boilerplate showcasing layered architecture, MobX, and dependency injection.",
+  "settings_btn_close": "Close",
+  "settings_tv_loading": "Loading…",
+  "settings_tv_theme": "Theme",
+  "settings_tv_theme_dark": "Dark",
+  "settings_tv_theme_light": "Light",
+  "settings_tv_error_loading_info": "Unable to load device info.",
+  "settings_end": "-------------------------------------------------------------------------------------"
 }
