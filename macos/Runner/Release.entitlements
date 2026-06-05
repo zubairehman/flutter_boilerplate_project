@@ -6,7 +6,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>net.pyxlr.flutterBoilerplateProject</string>
+		<string>$(AppIdentifierPrefix)net.pyxlr.flutterBoilerplateProject</string>
 	</array>
 </dict>
 </plist>

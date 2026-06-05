@@ -19,3 +19,24 @@ The signing config is per-developer and lives in
 (`xcuserdata/`, `*.xcuserstate`), so this step does not need to be
 re-done by anyone else who clones the repo. They will see the same
 "select a Team" prompt on first open.
+
+## `keychain-access-groups` must use `$(AppIdentifierPrefix)`
+
+The `keychain-access-groups` array entry in `macos/Runner/*.entitlements`
+must start with `$(AppIdentifierPrefix)`, not the bare bundle ID:
+
+```xml
+<key>keychain-access-groups</key>
+<array>
+    <string>$(AppIdentifierPrefix)net.pyxlr.flutterBoilerplateProject</string>
+</array>
+```
+
+Xcode expands `$(AppIdentifierPrefix)` to `<TeamID>.<bundleID>` at build
+time. The provisioning profile also uses the `<TeamID>.<bundleID>` format
+internally, so the two match. A literal bundle ID without the prefix
+causes Xcode to fail with:
+
+> Provisioning profile "Mac Team Provisioning Profile: <bundleID>"
+> doesn't match the entitlements file's value for the
+> keychain-access-groups entitlement.
