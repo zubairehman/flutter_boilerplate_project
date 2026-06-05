@@ -24,9 +24,10 @@ Widget _wrap(Widget child) {
 }
 
 void main() {
-  testWidgets('shows loading then info after loadAboutInfo resolves',
+  testWidgets('AboutDialog renders loading, info, and error states',
       (tester) async {
-    final store = SettingsStore.withSources(
+    // First state: loading -> info
+    final okStore = SettingsStore.withSources(
       packageInfoLoader: () async {
         await Future<void>.delayed(Duration.zero);
         return _packageInfo();
@@ -37,29 +38,27 @@ void main() {
       },
     );
 
-    await tester.pumpWidget(_wrap(AppAboutDialog(settingsStore: store)));
-    // Loading state should be visible on first frame.
+    await tester.pumpWidget(_wrap(AppAboutDialog(
+      key: const ValueKey('ok'),
+      settingsStore: okStore,
+    )));
     await tester.pump();
     expect(find.text('Loading…'), findsOneWidget);
-    // After both futures resolve, info renders.
     await tester.pumpAndSettle();
     expect(find.text('Loading…'), findsNothing);
     expect(find.textContaining('App: Boilerplate'), findsOneWidget);
     expect(find.textContaining('Pixel 6'), findsOneWidget);
 
-    // Flush any pending microtasks to ensure MobX reactions are fully disposed
-    // before the next test run.
-    await tester.idle();
-  });
-
-  testWidgets('shows error text when loadAboutInfo throws',
-      (tester) async {
-    final store = SettingsStore.withSources(
+    // Second state: error — use a different key to force a new State/initState
+    final errorStore = SettingsStore.withSources(
       packageInfoLoader: () async => throw Exception('platform boom'),
       deviceInfoLoader: () async => _androidDeviceInfo(),
     );
 
-    await tester.pumpWidget(_wrap(AppAboutDialog(settingsStore: store)));
+    await tester.pumpWidget(_wrap(AppAboutDialog(
+      key: const ValueKey('error'),
+      settingsStore: errorStore,
+    )));
     await tester.pumpAndSettle();
 
     expect(find.text('Unable to load device info.'), findsOneWidget);
