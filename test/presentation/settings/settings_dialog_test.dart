@@ -89,13 +89,10 @@ Future<void> _setUpGetIt({bool darkMode = false}) async {
 }
 
 void main() {
-  tearDown(() async {
-    await getIt.reset();
-  });
-
-  testWidgets('renders all three rows with default values', (tester) async {
+  testWidgets('SettingsDialog renders rows and toggles theme', (tester) async {
     await _setUpGetIt();
 
+    // --- Verify initial rendering ---
     await tester.pumpWidget(_wrap(SettingsDialog(
       themeStore: getIt<ThemeStore>(),
       languageStore: getIt<LanguageStore>(),
@@ -108,22 +105,12 @@ void main() {
     expect(find.text('Light'), findsOneWidget);
     expect(find.text('About'), findsOneWidget);
     expect(find.text('Close'), findsOneWidget);
-  });
 
-  testWidgets('theme row toggles ThemeStore', (tester) async {
-    await _setUpGetIt();
+    // --- Verify theme toggle ---
     final themeStore = getIt<ThemeStore>();
     expect(themeStore.darkMode, isFalse);
 
-    await tester.pumpWidget(_wrap(SettingsDialog(
-      themeStore: themeStore,
-      languageStore: getIt<LanguageStore>(),
-      settingsStore: getIt<SettingsStore>(),
-    )));
-    await tester.pumpAndSettle();
-
-    // The theme row is the ListTile whose title is "Theme".
-    final themeRow = find.widgetWithText(ListTile, 'Theme');
+    final themeRow = find.ancestor(of: find.text('Theme'), matching: find.byType(ListTile));
     expect(themeRow, findsOneWidget);
     await tester.tap(themeRow);
     await tester.pumpAndSettle();
