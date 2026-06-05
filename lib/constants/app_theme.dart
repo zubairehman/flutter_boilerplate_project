@@ -21,7 +21,6 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeData {
   static const _lightFillColor = Colors.black;
@@ -96,15 +95,15 @@ class AppThemeData {
   static const _bold = FontWeight.w700;
 
   static final TextTheme _textTheme = TextTheme(
-    headlineMedium: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0),
-    bodySmall: GoogleFonts.oswald(fontWeight: _semiBold, fontSize: 16.0),
-    headlineSmall: GoogleFonts.oswald(fontWeight: _medium, fontSize: 16.0),
-    titleMedium: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 16.0),
-    labelSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 12.0),
-    bodyLarge: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 14.0),
-    titleSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 14.0),
-    bodyMedium: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 16.0),
-    titleLarge: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0),
-    labelLarge: GoogleFonts.montserrat(fontWeight: _semiBold, fontSize: 14.0),
+    headlineMedium: TextStyle(fontFamily: 'Montserrat', fontWeight: _bold, fontSize: 20.0),
+    bodySmall: TextStyle(fontFamily: 'Oswald', fontWeight: _semiBold, fontSize: 16.0),
+    headlineSmall: TextStyle(fontFamily: 'Oswald', fontWeight: _medium, fontSize: 16.0),
+    titleMedium: TextStyle(fontFamily: 'Montserrat', fontWeight: _medium, fontSize: 16.0),
+    labelSmall: TextStyle(fontFamily: 'Montserrat', fontWeight: _medium, fontSize: 12.0),
+    bodyLarge: TextStyle(fontFamily: 'Montserrat', fontWeight: _regular, fontSize: 14.0),
+    titleSmall: TextStyle(fontFamily: 'Montserrat', fontWeight: _medium, fontSize: 14.0),
+    bodyMedium: TextStyle(fontFamily: 'Montserrat', fontWeight: _regular, fontSize: 16.0),
+    titleLarge: TextStyle(fontFamily: 'Montserrat', fontWeight: _bold, fontSize: 16.0),
+    labelLarge: TextStyle(fontFamily: 'Montserrat', fontWeight: _semiBold, fontSize: 14.0),
   );
 }

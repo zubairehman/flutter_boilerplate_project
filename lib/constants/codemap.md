@@ -8,7 +8,7 @@ Declares app-wide static configuration values: theme data, color palettes, dimen
 
 - **Static-only utility classes**: Constant-holder classes use `ClassName._()` to prevent instantiation; theme classes expose static `ThemeData`, `ColorScheme`, and `TextTheme` members.
 - **Material Theme composition**: `AppThemeData` builds `ThemeData` from `ColorScheme` + `TextTheme`, supporting light and dark modes.
-- **Google Fonts**: `AppThemeData._textTheme` uses `GoogleFonts.montserrat()` and `GoogleFonts.oswald()` instead of bundled font files.
+- **Bundled fonts**: `AppThemeData._textTheme` uses `TextStyle(fontFamily: 'Montserrat' | 'Oswald', ...)` referencing TTFs declared in `pubspec.yaml` under `flutter.fonts`. No network calls at runtime.
 - **Material color swatch pattern**: `AppColors.orange` provides a `Map<int, Color>` shade palette (50–900).
 
 ## Data & Control Flow
@@ -22,7 +22,7 @@ Declares app-wide static configuration values: theme data, color palettes, dimen
 
 ## Integration Points
 
-- `app_theme.dart` → depends on `package:flutter/material.dart`, `package:google_fonts/google_fonts.dart`
+- `app_theme.dart` → depends on `package:flutter/material.dart` only
 - `assets.dart` → purely string constants; consumed by presentation widgets
 - `colors.dart` → depends on `package:flutter/material.dart` for `Color` type
 - `dimens.dart`, `font_family.dart`, `strings.dart` → zero external dependencies; pure Dart constants

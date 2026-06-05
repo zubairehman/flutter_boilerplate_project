@@ -34,7 +34,6 @@ dependencies:
   flutter_mobx: ^2.0.6+5
   # G
   get_it: ^9.2.1
-  google_fonts: ^8.1.0
   # I
   intl: ^0.20.2
   # J
@@ -112,3 +111,19 @@ flutter:
           style: italic
         - asset: assets/fonts/Product-Sans-Bold.ttf
           weight: 700
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+          weight: 700
+    - family: Oswald
+      fonts:
+        - asset: assets/fonts/oswald/Oswald-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/oswald/Oswald-SemiBold.ttf
+          weight: 600
