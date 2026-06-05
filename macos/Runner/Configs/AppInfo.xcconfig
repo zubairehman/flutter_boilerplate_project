@@ -8,7 +8,7 @@
 PRODUCT_NAME = flutter_boilerplate_project
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.iotecksolutions.flutterBoilerplateProject
+PRODUCT_BUNDLE_IDENTIFIER = net.pyxlr.flutterBoilerplateProject
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.iotecksolutions. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 net.pyxlr. All rights reserved.
